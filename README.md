@@ -1,10 +1,10 @@
 # CG 2023/2024
 
 ## Group T0xG0y
-| Name             | Number    | E-Mail             |
-| ---------------- | --------- | ------------------ |
-| John Doe         | 201901010 | ...                |
-| Jane Doe         | 201901011 | ...                |
+| Name                                       | Number    | E-Mail                   |
+| ----------------                           | --------- | ------------------       |
+| Florentia-Styliani Diamantopoulou          | 202311353 | up202311353@edu.fe.up.pt | 
+| Maria Mitkou                               | 202311354 | up202311354@edu.fe.up.pt | 
 
 ----
 
