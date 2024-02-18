@@ -1,6 +1,6 @@
 # CG 2023/2024
 
-## Group T0xG0y
+## Group T01G08
 | Name                                       | Number    | E-Mail                   |
 | ----------------                           | --------- | ------------------       |
 | Florentia-Styliani Diamantopoulou          | 202311353 | up202311353@edu.fe.up.pt | 
