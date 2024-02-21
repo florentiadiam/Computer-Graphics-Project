@@ -1,4 +1,4 @@
-import {CGFinterface, dat} from '../lib/CGF.js';
+import { CGFinterface, dat } from '../lib/CGF.js';
 
 /**
 * MyInterface
@@ -19,6 +19,12 @@ export class MyInterface extends CGFinterface {
 
         //Checkbox element in GUI
         this.gui.add(this.scene, 'displayAxis').name('Display Axis');
+        
+        //Checkbox elemment for diamond
+        this.gui.add(this.scene, 'MyDiamond').name('Display Diamond');
+
+        //Checkbox elemment for triangle
+        this.gui.add(this.scene, 'MyTriangle').name('Display Triangle');
 
         //Slider element in GUI
         this.gui.add(this.scene, 'scaleFactor', 0.1, 5).name('Scale Factor');
