@@ -8,7 +8,6 @@ export class MyParallelogram extends CGFobject {
 	constructor(scene) {
 		super(scene);
 		this.initBuffers();
-        //this.initBuffers2();
 	}
 	
 	initBuffers() {
