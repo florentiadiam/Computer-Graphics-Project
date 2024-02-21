@@ -1,6 +1,6 @@
 # CG 2023/2024
 
-## Group T0xG0y
+## Group T01G08
 
 ## TP 1 Notes
 
