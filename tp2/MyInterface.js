@@ -35,6 +35,9 @@ export class MyInterface extends CGFinterface {
         //Checkbox elemment for parallelogram
         this.gui.add(this.scene, 'MyTriangleBig').name('Display Triangle B');
 
+         //Checkbox elemment for Unit Cube
+         this.gui.add(this.scene, 'MyUnitCube').name('Display Unit cube');
+
         //Slider element in GUI
         this.gui.add(this.scene, 'scaleFactor', 0.1, 5).name('Scale Factor');
 
