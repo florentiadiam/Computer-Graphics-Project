@@ -110,7 +110,7 @@ export class MyScene extends CGFscene {
     
     this.multMatrix(sca);
 
-    this.pushMatrix();
+   /* this.pushMatrix();
     this.rotate(-Math.PI/2,1,0,0);
     this.translate(2.5,-5,0);
     this.tangram.display();
@@ -123,7 +123,7 @@ export class MyScene extends CGFscene {
     this.popMatrix();
     this.popMatrix();
     this.popMatrix
-
+*/
 
 
     // ---- BEGIN Primitive drawing section
@@ -132,8 +132,10 @@ export class MyScene extends CGFscene {
     //if (this.MyParallelogram) this.parallelogram.display();
     //if (this.MyTriangleSmall) this.trianglesmall.display();
     //if (this.MyTriangleBig) this.trianglebig.display();    
+    if (this.MyUnitCube) this.unitcube.display();
+    if (this.MyUnitCubeQuad) this.cube.display();    
     //this.quad.display();
-    //this.cube.display();
+
     // ---- END Primitive drawing section
   }
 }
