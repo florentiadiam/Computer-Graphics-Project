@@ -18,10 +18,14 @@ export class MyTangram extends CGFobject {
     this.parallelogram= new MyParallelogram(this.scene);
     this.trianglesmall= new MyTriangleSmall(this.scene);
     this.trianglebig= new MyTriangleBig(this.scene);
+
+
+  
 	}
   
 
 	display() {
+
     var DiamondScale=[
         1, 0, 0, 0,
         0, 1, 0, 0,
@@ -44,7 +48,8 @@ export class MyTangram extends CGFobject {
     this.scene.popMatrix();
     
 
-    //blue triangle
+    //blue 
+
     this.scene.pushMatrix();
     this.scene.rotate(-3*Math.PI/4,0,0,1);
     this.scene.trianglebig.display();
