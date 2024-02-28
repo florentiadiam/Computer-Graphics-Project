@@ -110,19 +110,25 @@ export class MyScene extends CGFscene {
     
     this.multMatrix(sca);
 
-    this.pushMatrix();
-    this.rotate(-Math.PI/2,1,0,0);
-    this.translate(2.5,-5,0);
+    
     this.tangram.display();
+    
+    
+    
+    
+    // this.pushMatrix();
+    // this.rotate(-Math.PI/2,1,0,0);
+    // this.translate(2.5,-5,0);
+    // this.tangram.display();
 
-    this.pushMatrix();
-    this.translate(1,0,-0.6);
-    this.scale(7,10,1)
-    this.setItPink();
-    this.unitcube.display();
-    this.popMatrix();
-    this.popMatrix();
-    this.popMatrix
+    // this.pushMatrix();
+    // this.translate(1,0,-0.6);
+    // this.scale(7,10,1)
+    // this.setItPink();
+    // this.unitcube.display();
+    // this.popMatrix();
+    // this.popMatrix();
+    // this.popMatrix
 
 
 
