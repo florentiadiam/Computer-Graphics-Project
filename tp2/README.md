@@ -2,9 +2,10 @@
 
 ## Group T01G08
 
-## TP 1 Notes
+## TP 2 Notes Tangram
 
-- In the exercises we learned the basic environment of WebGL such as drawing shapes, the axis, changing their size and the checkboxes.
+- In the exercises we learned how to use matrix multiplication operations such as scaling, rotation, tranforming and placing multiple objects at the same plane to create our own tangram. 
+-We had some difficulties with the geometry of the tangram.
 
-![Screenshot 1](screenshots/cg-t01g08-tp1-1.png)
-![Screenshot 2](screenshots/cg-t01g08-tp1-2.png)
+![Screenshot 1](screenshots/cg-t01g08-tp2-1.png)
+
