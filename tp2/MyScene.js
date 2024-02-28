@@ -79,6 +79,12 @@ export class MyScene extends CGFscene {
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
   }
+  setItPink(){
+    this.setAmbient(1.0, 0.75, 0.8, 1.0);
+    this.setDiffuse(1.0, 0.75, 0.8, 1.0);
+    this.setSpecular(0.2, 0.4, 0.8, 1.0);
+    this.setShininess(10.0);
+  }
   display() {
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene
@@ -102,13 +108,22 @@ export class MyScene extends CGFscene {
       0.0, 0.0, 0.0             , 1.0,
     ];
     
-    
     this.multMatrix(sca);
 
-    
- 
+    this.pushMatrix();
+    this.rotate(-Math.PI/2,1,0,0);
+    this.translate(2.5,-5,0);
+    this.tangram.display();
 
-    //this.tangram.display();
+    this.pushMatrix();
+    this.translate(1,0,-0.6);
+    this.scale(7,10,1)
+    this.setItPink();
+    this.unitcube.display();
+    this.popMatrix();
+    this.popMatrix();
+    this.popMatrix
+
 
 
     // ---- BEGIN Primitive drawing section
@@ -116,11 +131,9 @@ export class MyScene extends CGFscene {
     //if (this.MyTriangle) this.triangle.display();
     //if (this.MyParallelogram) this.parallelogram.display();
     //if (this.MyTriangleSmall) this.trianglesmall.display();
-    //if (this.MyTriangleBig) this.trianglebig.display();
-     if (this.MyUnitCube) this.unitcube.display();
-     if (this.MyUnitCubeQuad) this.cube.display();
+    //if (this.MyTriangleBig) this.trianglebig.display();    
     //this.quad.display();
-   
+    //this.cube.display();
     // ---- END Primitive drawing section
   }
 }
