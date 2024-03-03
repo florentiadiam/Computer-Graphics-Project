@@ -12,20 +12,14 @@ import { MyTriangleSmall } from './MyTriangleSmall.js';
 export class MyTangram extends CGFobject {
 	constructor(scene) {
 		super(scene);
-    this.initBuffers();
     this.diamond = new MyDiamond(this.scene);
     this.triangle = new MyTriangle(this.scene);
     this.parallelogram= new MyParallelogram(this.scene);
     this.trianglesmall= new MyTriangleSmall(this.scene);
     this.trianglebig= new MyTriangleBig(this.scene);
-
-
-  
 	}
-  
 
 	display() {
-
     var DiamondScale=[
         1, 0, 0, 0,
         0, 1, 0, 0,
@@ -48,7 +42,7 @@ export class MyTangram extends CGFobject {
     this.scene.popMatrix();
     
 
-    //blue 
+    //blue triangle
 
     this.scene.pushMatrix();
     this.scene.rotate(-3*Math.PI/4,0,0,1);
@@ -91,7 +85,6 @@ export class MyTangram extends CGFobject {
     
     this.scene.parallelogram.display();
     this.scene.popMatrix();
+    }
 
-        this.initGLBuffers();
-        }
-      }
+}

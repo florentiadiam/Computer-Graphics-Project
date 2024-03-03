@@ -18,9 +18,6 @@ export class MyTangram extends CGFobject {
     this.parallelogram= new MyParallelogram(this.scene);
     this.trianglesmall= new MyTriangleSmall(this.scene);
     this.trianglebig= new MyTriangleBig(this.scene);
-
-
-  
 	}
   
 
