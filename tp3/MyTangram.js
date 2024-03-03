@@ -19,11 +19,18 @@ export class MyTangram extends CGFobject {
     this.trianglesmall= new MyTriangleSmall(this.scene);
     this.trianglebig= new MyTriangleBig(this.scene);
 
+    this.currentColor = [1.0, 1.0, 1.0, 1.0];
+
+    setColor(r, g, b, a) {
+      this.currentColor = [r, g, b, a];
+      this.scene.setDiffuse(this.currentColor[0], this.currentColor[1], this.currentColor[2], this.currentColor[3]);
+      this.scene.setAmbient(this.currentColor[0], this.currentColor[1], this.currentColor[2], this.currentColor[3]);
+  }
 
   
 	}
-  
 
+ 
 	display() {
 
     var DiamondScale=[
@@ -44,6 +51,7 @@ export class MyTangram extends CGFobject {
     this.scene.pushMatrix();
     this.scene.multMatrix(DiamondTran);
     this.scene.multMatrix(DiamondScale);
+    this.setColor(1.0, 0.0, 0.0, 1.0);
     this.scene.diamond.display();
     this.scene.popMatrix();
     

@@ -1,4 +1,4 @@
-import { CGFscene, CGFcamera, CGFaxis, CGFappearance } from "../lib/CGF.js";
+/*import { CGFscene, CGFcamera, CGFaxis, CGFappearance } from "../lib/CGF.js";
 import { MyPyramid } from "./MyPyramid.js";
 import { MyCone } from "./MyCone.js";
 import { MyPlane } from "./MyPlane.js";
@@ -7,6 +7,7 @@ import { MyPlane } from "./MyPlane.js";
 * MyScene
 * @constructor
 */
+/*
 export class MyScene extends CGFscene {
     constructor() {
         super();
@@ -177,3 +178,4 @@ export class MyScene extends CGFscene {
         // ---- END Primitive drawing section
     }
 }
+*/
