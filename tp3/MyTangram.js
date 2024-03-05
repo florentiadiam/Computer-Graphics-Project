@@ -21,6 +21,9 @@ export class MyTangram extends CGFobject {
 
  
 	display() {
+
+    debugger 
+
     var DiamondScale=[
         1, 0, 0, 0,
         0, 1, 0, 0,
@@ -39,8 +42,8 @@ export class MyTangram extends CGFobject {
     this.scene.pushMatrix();
     this.scene.multMatrix(DiamondTran);
     this.scene.multMatrix(DiamondScale);
-    this.setColor(1.0, 0.0, 0.0, 1.0);
-    this.scene.diamond.display();
+   // this.setColor(1.0, 0.0, 0.0, 1.0);
+    this.diamond.display();
     this.scene.popMatrix();
     
 
@@ -48,35 +51,35 @@ export class MyTangram extends CGFobject {
 
     this.scene.pushMatrix();
     this.scene.rotate(-3*Math.PI/4,0,0,1);
-    this.scene.trianglebig.display();
+    this.trianglebig.display();
     this.scene.popMatrix();
     
     //orange triangle
     this.scene.pushMatrix();
     this.scene.translate(Math.sqrt(2),Math.sqrt(2),0);
     this.scene.rotate(Math.PI/4,0,0,1);
-    this.scene.trianglebig.display();
+    this.trianglebig.display();
     this.scene.popMatrix();
     
     //pink triangle
     this.scene.pushMatrix();
     this.scene.translate(Math.sqrt(2), -Math.sqrt(2) ,0.0);
     this.scene.rotate(3*Math.PI/4,0,0,1);
-    this.scene.triangle.display();
+    this.triangle.display();
     this.scene.popMatrix();
     
     //Red Triangle
     this.scene.pushMatrix();
     this.scene.translate(1.8,-3.45,0);
     this.scene.rotate(Math.PI/2,0,0,1);
-    this.scene.trianglesmall.display();
+    this.trianglesmall.display();
     this.scene.popMatrix();
     
     //Purple triangle
     this.scene.pushMatrix();
     this.scene.translate(-Math.sqrt(2), -2.12,0.0);
     this.scene.rotate(Math.PI/4,0,0,1);
-    this.scene.trianglesmall.display();
+    this.trianglesmall.display();
     this.scene.popMatrix();
     
     //Paralilogramo
@@ -85,7 +88,7 @@ export class MyTangram extends CGFobject {
     this.scene.scale(-1,1,1);
     this.scene.translate(2, 0, 0 );
     
-    this.scene.parallelogram.display();
+    this.parallelogram.display();
     this.scene.popMatrix();
     }
 

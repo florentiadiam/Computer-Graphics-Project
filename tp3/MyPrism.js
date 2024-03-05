@@ -21,32 +21,28 @@ export class MyPrism extends CGFobject {
         var step = 2*Math.PI/this.slices;
 
         var height = 1.0; // Adjust the height of the prism as needed
+        var stacksheight= height/this.stacks;
 
-        for (var i = 0; i < 6; i++) {
-            // Vertices on the top face
-            this.vertices.push(Math.cos(ang), Math.sin(ang), height / 2);
-            
-            // Vertices on the bottom face
-            this.vertices.push(Math.cos(ang), Math.sin(ang), -height / 2);
+        for (var i = 0; i < this.slices; i++) {
+                // Vertices on the top face
+                this.vertices.push(Math.cos(ang), Math.sin(ang), height/2);
+                
+                // Vertices on the bottom face
+                this.vertices.push(Math.cos(ang), Math.sin(ang),- height/2);
+                this.indices.push((2 * i + 1) % (2 * this.slices), (2 * i + 3) % (2 * this.slices), (2 * i + 2) % (2 * this.slices));
         
-            // Indices for the side faces
-            this.indices.push(2 * i, (2 * i + 1) % (2 * this.slices), (2 * i + 2) % (2 * this.slices));
-            this.indices.push((2 * i + 1) % (2 * this.slices), (2 * i + 3) % (2 * this.slices), (2 * i + 2) % (2 * this.slices));
-   
-            // Normals for the side faces (assuming a regular prism)
-            var normalX1 = Math.cos(ang+Math.PI/6);
-            var normalY1 =  Math.cos(ang+Math.PI/6);
-            var normalZ = 0;
-
-            // Top face normal
-            this.normals.push(normalX1, normalY1, normalZ);
-            // Bottom face normal
-            this.normals.push(normalX1, normalY1, normalZ);
-
-      
-            ang += step;
-            this.primitiveType = this.scene.gl.TRIANGLES;
-            this.initGLBuffers();
+                // Normals for the side faces (assuming a regular prism)
+                var normalX1 = Math.cos(ang);
+                var normalY1 = Math.sin(ang);
+                var normalZ = 0;
+        
+                // Top face normal
+                this.normals.push(normalX1, normalY1, normalZ);
+                // Bottom face normal
+                this.normals.push(normalX1, normalY1, normalZ);
+        
+                ang += step;
+            
         }
     }
          /**
