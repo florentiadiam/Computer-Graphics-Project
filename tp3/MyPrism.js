@@ -24,25 +24,32 @@ export class MyPrism extends CGFobject {
         var stacksheight= height/this.stacks;
 
         for (var i = 0; i < this.slices; i++) {
-                // Vertices on the top face
-                this.vertices.push(Math.cos(ang), Math.sin(ang), height/2);
-                
-                // Vertices on the bottom face
-                this.vertices.push(Math.cos(ang), Math.sin(ang),- height/2);
-                this.indices.push((2 * i + 1) % (2 * this.slices), (2 * i + 3) % (2 * this.slices), (2 * i + 2) % (2 * this.slices));
-        
-                // Normals for the side faces (assuming a regular prism)
-                var normalX1 = Math.cos(ang);
-                var normalY1 = Math.sin(ang);
-                var normalZ = 0;
-        
-                // Top face normal
-                this.normals.push(normalX1, normalY1, normalZ);
-                // Bottom face normal
-                this.normals.push(normalX1, normalY1, normalZ);
-        
-                ang += step;
+            // Vertices on the top face
+            this.vertices.push(Math.cos(ang), Math.sin(ang), height / 2);
             
+            // Vertices on the bottom face
+            this.vertices.push(Math.cos(ang), Math.sin(ang), -height / 2);
+        
+            // Indices for the side faces
+            for(var j=0; j<1; j++){
+                this.indices.push(2 * i, (2 * i + 1) % (2 * this.slices), (2 * i + 2) % (2 * this.slices));
+                this.indices.push((2 * i + 1) % (2 * this.slices), (2 * i + 3) % (2 * this.slices), (2 * i + 2) % (2 * this.slices));    
+            }
+              
+            // Normals for the side faces (assuming a regular prism)
+            var normalX1 = Math.cos(Math.PI/2-ang);
+            var normalY1 = 0
+            var normalZ = 0;
+
+            // Top face normal
+            this.normals.push(normalX1, normalY1, normalZ);
+            // Bottom face normal
+            this.normals.push(normalX1, normalY1, normalZ);
+
+      
+            ang += step;
+            this.primitiveType = this.scene.gl.TRIANGLES;
+            this.initGLBuffers();
         }
     }
          /**
