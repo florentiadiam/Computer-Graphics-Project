@@ -2,8 +2,9 @@
 
 ## Group T01G08
 
-## TP 2 Notes Composite Geometry - Cube composed of Planes
+## TP 3 Notes Composite Geometry - Exercise 1
 
-- In this exercise we learned how to create a 3d object (cube) by using planes to define the faces.
+- This exercise was a nice introduction to how to implement materials and to normas.
 
-![Screenshot 1](screenshots/cg-t01g08-tp2-3.png)
+![Screenshot 1](screenshots/cg-t01g08-tp3-1.png)
+![Screenshot 2](screenshots/cg-t01g08-tp3-2.png)
