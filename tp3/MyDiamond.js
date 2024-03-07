@@ -12,10 +12,10 @@ export class MyDiamond extends CGFobject {
 	
 	initBuffers() {
 		this.vertices = [
-			-1, 0, 0,	//0
-			0, -1, 0,	//1
-			0, 1, 0,	//2
-			1, 0, 0		//3
+			-1, 0, 0,	//Bf (0)
+			0, -1, 0,	//Df (1)
+			0, 1, 0,	//Af (2)
+			1, 0, 0		//Cf (3)
 		];
 
 		//Counter-clockwise reference of vertices
@@ -23,6 +23,13 @@ export class MyDiamond extends CGFobject {
 			0, 1, 2,
 			1, 3, 2
 		];
+
+		this.normals=[
+			0, 1, 0,
+            0, 1, 0,
+            0, 1, 0,
+            0, 1, 0
+		]
 
 		//The defined indices (and corresponding vertices)
 		//will be read in groups of three to draw triangles

@@ -41,7 +41,7 @@ export class MyScene extends CGFscene {
         this.objectIDs = { 'Plane': 0 , 'Pyramid': 1, 'Cone': 2, 'Tangram': 3, "Cube": 4};
 
         //Other variables connected to MyInterface
-        this.selectedObject = 2;
+        this.selectedObject = 3;
         this.selectedMaterial = 0;
         this.displayAxis = true;
         this.displayNormals = false;
@@ -186,6 +186,7 @@ export class MyScene extends CGFscene {
         
         this.objects[this.selectedObject].display();
         this.popMatrix();
+        //this.tangram.display();
         // ---- END Primitive drawing section
     }
 }
