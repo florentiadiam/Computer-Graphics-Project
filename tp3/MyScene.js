@@ -186,7 +186,6 @@ export class MyScene extends CGFscene {
         
         this.objects[this.selectedObject].display();
         this.popMatrix();
-        //this.tangram.display();
         // ---- END Primitive drawing section
     }
 }
