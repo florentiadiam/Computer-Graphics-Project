@@ -2,9 +2,8 @@
 
 ## Group T01G08
 
-## TP 3 Notes Composite Geometry - Exercise 1
+## TP 3 Notes Lighting and Materials - Exercise 2
 
-- This exercise was a nice introduction to how to implement materials and to normas.
+- At this exercice we learned how to implement two normals at the same point and also creating different stacks.
 
-![Screenshot 1](screenshots/cg-t01g08-tp3-1.png)
-![Screenshot 2](screenshots/cg-t01g08-tp3-2.png)
+![Screenshot 1](screenshots/cg-t01g08-tp3-3.png)
