@@ -22,61 +22,39 @@ export class MyPrism extends CGFobject {
 
         var height = 1.0; // Adjust the height of the prism as needed
         var stacksheight= height/this.stacks; // 0.05
+        var startStack = 0;
 
-    var startStack = height /  2
-    for(var j=0; j<this.stacks;j++){
+  
+    while(startStack<height){
         for (var i = 0; i < this.slices; i++) {
-            // Vertices on the top face
+            //vertices for the top face
             this.vertices.push(Math.cos(ang) *0.5 , Math.sin(ang) *0.5, startStack);
+            this.vertices.push(Math.cos(ang+step) *0.5 , Math.sin(ang+step) *0.5, startStack);
+            //vertices forthe bottom face
+            this.vertices.push(Math.cos(ang+step) *0.5 , Math.sin(ang+step) *0.5, startStack+stacksheight);
+            this.vertices.push(Math.cos(ang) *0.5 , Math.sin(ang) *0.5, startStack+stacksheight);
             
-            // Vertices on the bottom face
-            this.vertices.push(Math.cos(ang) *0.5, Math.sin(ang)*0.5, -stacksheight +startStack);
-        
-            // Indices for the side faces
-            this.indices.push(2 * i, (2 * i + 1) % (2 * this.slices), (2 * i + 2) % (2 * this.slices));
-            this.indices.push((2 * i + 1) % (2 * this.slices), (2 * i + 3) % (2 * this.slices), (2 * i + 2) % (2 * this.slices));    
-              
             // Normals for the side faces (assuming a regular prism)
             var normalX1 = Math.cos(ang+ step/2);
             var normalY1 = Math.sin(ang+ step/2);
             var normalZ = 0;
-
-            // Top face normal
-            this.normals.push(normalX1, normalY1, normalZ);
-            // Bottom face normal
-            this.normals.push(normalX1, normalY1, normalZ);
-
-      
-            ang += step;
-        }
-        for (var i = 0; i < this.slices; i++) {
-            // Vertices on the top face
-            this.vertices.push(Math.cos(ang)*0.5, Math.sin(ang)*0.5,  startStack);
-            
-            // Vertices on the bottom face
-            this.vertices.push(Math.cos(ang)*0.5, Math.sin(ang)*0.5,  -stacksheight + startStack);
         
-            // Indices for the side faces
-            this.indices.push(2 * i, (2 * i + 1) % (2 * this.slices), (2 * i + 2) % (2 * this.slices));
-            this.indices.push((2 * i + 1) % (2 * this.slices), (2 * i + 3) % (2 * this.slices), (2 * i + 2) % (2 * this.slices));    
-              
-            // Normals for the side faces (assuming a regular prism)
-            var normalX1 = Math.cos(ang- step/2);
-            var normalY1 = Math.sin(ang- step/2);
-            var normalZ = 0;
-
-            // Top face normal
-            this.normals.push(normalX1, normalY1, normalZ);
-            // Bottom face normal
-            this.normals.push(normalX1, normalY1, normalZ);
-
-      
+            for(var l=0;l<4;l++){
+                this.normals.push(normalX1, normalY1, normalZ);
+            }
             ang += step;
-        
-        }
-        startStack += stacksheight
+        }  
+    startStack += stacksheight 
     }
-        
+
+    for(let k=0;k<this.stacks;k++){
+        var count=this.slices*4*k;
+             for(let j=0;j<this.slices*4;j+=4){
+            // Indices for the side faces
+                this.indices.push(count+j, count+j+1,count+j+2);
+                this.indices.push(count+j+2,count+j+3,count+j);    
+               }
+    }
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }
