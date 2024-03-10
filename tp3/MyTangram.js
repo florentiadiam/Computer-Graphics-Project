@@ -76,6 +76,9 @@ export class MyTangram extends CGFobject {
 
 
 	display() {
+
+    debugger 
+
     var DiamondScale=[
         1, 0, 0, 0,
         0, 1, 0, 0,
