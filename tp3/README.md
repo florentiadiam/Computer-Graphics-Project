@@ -2,8 +2,8 @@
 
 ## Group T01G08
 
-## TP 3 Notes Lighting and Materials - Exercise 2
+## TP 3 Notes  Cylindrical Surface - Application of Gouraud shading - Exercise 3
 
-- At this exercice we learned how to implement two normals at the same point and also creating different stacks.
+- At this exercice we learned how to simplify normals and vertices for them to be on one point.
 
-![Screenshot 1](screenshots/cg-t01g08-tp3-3.png)
+![Screenshot 1](screenshots/cg-t01g08-tp3-4.png)
