@@ -25,7 +25,7 @@ export class MyScene extends CGFscene {
 
         this.gl.clearDepth(100.0);
         this.gl.enable(this.gl.DEPTH_TEST);
-        this.gl.enable(this.gl.CULL_FACE);
+        // this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
 
         //Initialize scene objects
@@ -46,7 +46,7 @@ export class MyScene extends CGFscene {
 
         //Other variables connected to MyInterface
         this.selectedObject = 6;
-        this.selectedMaterial = 0;
+        this.selectedMaterial = 4;
         this.displayAxis = true;
         this.displayNormals = false;
         this.objectComplexity = 0.5;
@@ -61,14 +61,14 @@ export class MyScene extends CGFscene {
         this.lights[0].setPosition(2.0, 2.0, -1.0, 1.0);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
-        this.lights[0].disable();
+        this.lights[0].enable();
         this.lights[0].setVisible(true);
         this.lights[0].update();
 
         this.lights[1].setPosition(0.0, -1.0, 2.0, 1.0);
         this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[1].setSpecular(1.0, 1.0, 0.0, 1.0);
-        this.lights[1].disable();
+        this.lights[1].enable();
         this.lights[1].setVisible(true);
         this.lights[1].update();
     }
@@ -188,7 +188,7 @@ export class MyScene extends CGFscene {
             this.objects[this.selectedObject].enableNormalViz();
         else
             this.objects[this.selectedObject].disableNormalViz();
-            console.log(this.selectedObject);
+            // console.log(this.selectedObject);
         this.objects[this.selectedObject].display();
         this.popMatrix();
         // ---- END Primitive drawing section
