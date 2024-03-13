@@ -29,7 +29,7 @@ export class MyCylinder extends CGFobject {
         for (let i = 0; i < this.slices; i++) {
 
             //vertices for the top face
-            this.vertices.push(Math.cos(ang) , Math.sin(ang) , startStack);
+            this.vertices.push(Math.cos(ang)*0.5 , Math.sin(ang)*0.5 , startStack);
    
             // Normals for the side faces (assuming a regular prism)
             var normalX1 = Math.cos(ang);
@@ -42,7 +42,7 @@ export class MyCylinder extends CGFobject {
             
             ang += step;
         }  
-        startStack += stacksheight  
+            startStack += stacksheight  
     }
 
     for(let k=0;k<this.stacks;k++){
