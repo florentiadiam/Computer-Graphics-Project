@@ -17,40 +17,40 @@ export class MyCylinder extends CGFobject {
         this.vertices = [];
         this.indices = [];
         this.normals = [];
-        var ang = 0;
-        var step = 2*Math.PI/this.slices;
+        let ang = 0;
+        const step = 2*Math.PI/this.slices;
 
-        var height = 1.0; // Adjust the height of the prism as needed
-        var stacksheight= height/this.stacks; // 0.05
-        var startStack = 0;
+        const height = 1.0; // Adjust the height of the prism as needed
+        const stacksheight= height/this.stacks; // 0.05
+        let startStack = 0;
 
   
-    while(startStack<height){
-        for (var i = 0; i < this.slices; i++) {
+    for(let j=0;j<this.stacks+2;j++){
+        for (let i = 0; i < this.slices; i++) {
+
             //vertices for the top face
-            this.vertices.push(Math.cos(ang) *0.5 , Math.sin(ang) *0.5, startStack);
-            this.vertices.push(Math.cos(ang) *0.5 , Math.sin(ang) *0.5, startStack+stacksheight);
-            
+            this.vertices.push(Math.cos(ang)*0.5 , Math.sin(ang)*0.5 , startStack);
+   
             // Normals for the side faces (assuming a regular prism)
             var normalX1 = Math.cos(ang);
             var normalY1 = Math.sin(ang);
             var normalZ = 0;
         
-        
-                this.normals.push(normalX1, normalY1, normalZ);
-                this.normals.push(normalX1, normalY1, normalZ);
+          
+            this.normals.push(normalX1, normalY1, normalZ);
+            
             
             ang += step;
         }  
-    startStack += stacksheight 
+            startStack += stacksheight  
     }
 
     for(let k=0;k<this.stacks;k++){
-        var count=this.slices*4*k;
-             for(let j=0;j<this.slices*4;j+=4){
+        const count=this.slices*k;
+             for(let j=0;j<this.slices;j++){
             // Indices for the side faces
-                this.indices.push(count+j, count+j+1,count+j+2);
-                this.indices.push(count+j+2,count+j+3,count+j);    
+                this.indices.push(count+j, count+j+1,count+j+this.slices);
+                this.indices.push(count+j+1,count+j+this.slices+1,count+j+this.slices);    
                }
     }
         this.primitiveType = this.scene.gl.TRIANGLES;

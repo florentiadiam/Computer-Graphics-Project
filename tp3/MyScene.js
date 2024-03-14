@@ -25,7 +25,7 @@ export class MyScene extends CGFscene {
 
         this.gl.clearDepth(100.0);
         this.gl.enable(this.gl.DEPTH_TEST);
-        this.gl.enable(this.gl.CULL_FACE);
+        // this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
 
         //Initialize scene objects
@@ -45,7 +45,7 @@ export class MyScene extends CGFscene {
         this.objectIDs = { 'Plane': 0 , 'Pyramid': 1, 'Cone': 2, 'Tangram': 3, "Cube": 4, 'Prism': 5, 'Cylinder':6};
 
         //Other variables connected to MyInterface
-        this.selectedObject = 6;
+        this.selectedObject = 0;
         this.selectedMaterial = 0;
         this.displayAxis = true;
         this.displayNormals = false;
@@ -188,7 +188,7 @@ export class MyScene extends CGFscene {
             this.objects[this.selectedObject].enableNormalViz();
         else
             this.objects[this.selectedObject].disableNormalViz();
-            console.log(this.selectedObject);
+            // console.log(this.selectedObject);
         this.objects[this.selectedObject].display();
         this.popMatrix();
         // ---- END Primitive drawing section
