@@ -4,4 +4,4 @@
 
 ## TP 4 Notes  Applying textures to Tangram - Exercise 1
 
-![Screenshot 1](screenshots/cg-t01g08-tp4-1.png)
+![Screenshot 1](screenshots/cg-t01g08-tp4-2.png)
