@@ -109,14 +109,14 @@ export class MyScene extends CGFscene {
     ];
   
     
-    //if (this.MyUnitCubeQuad) this.cube.display();
+    if (this.MyUnitCubeQuad) this.cube.display();
 
     // this.multMatrix(sca);
 
     // this.pushMatrix();
     // this.rotate(-Math.PI/2,1,0,0);
     // this.translate(2.5,-5,0);
-    this.tangram.display();
+    //this.tangram.display();
 
     // this.pushMatrix();
     // this.translate(1,0,-0.6);
