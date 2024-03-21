@@ -72,7 +72,7 @@ export class ShaderScene extends CGFscene {
 		this.appearance.setShininess(120);
 		debugger
 		this.texture = new CGFtexture(this, "textures/texture.jpg");
-		this.appearance.loadTexture("textures/texture.jpg");
+		this.appearance.setTexture(this.texture);
 		this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
 		this.texture2 = new CGFtexture(this, "textures/FEUP.jpg");
