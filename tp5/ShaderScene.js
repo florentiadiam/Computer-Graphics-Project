@@ -1,6 +1,6 @@
-import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture, CGFshader } from "../lib/CGF.js";
-import { Teapot } from "./Teapot.js";
+import { CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFshader, CGFtexture } from "../lib/CGF.js";
 import { MyPlane } from "./MyPlane.js";
+import { Teapot } from "./Teapot.js";
 
 /**
  * getStringFromUrl(url)
@@ -70,9 +70,9 @@ export class ShaderScene extends CGFscene {
 		this.appearance.setDiffuse(0.7, 0.7, 0.7, 1);
 		this.appearance.setSpecular(0.0, 0.0, 0.0, 1);
 		this.appearance.setShininess(120);
-
+		debugger
 		this.texture = new CGFtexture(this, "textures/texture.jpg");
-		this.appearance.setTexture(this.texture);
+		this.appearance.loadTexture("textures/texture.jpg");
 		this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
 		this.texture2 = new CGFtexture(this, "textures/FEUP.jpg");
