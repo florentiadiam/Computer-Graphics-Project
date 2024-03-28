@@ -2,6 +2,8 @@
 precision highp float;
 #endif
 
+varying vec4 colorver;
+
 struct lightProperties {
     vec4 position;
     vec4 ambient;
@@ -21,5 +23,11 @@ struct lightProperties {
 uniform lightProperties uLight[NUMBER_OF_LIGHTS];
 
 void main() {
-		gl_FragColor =  vec4(0.6,0.6,0.9, 1.0) * uLight[0].diffuse;
+    if(colorver.y >= 0.5) {
+        //yellow
+        gl_FragColor =  vec4(1.0, 1.0, 0.0, 1.0) * uLight[0].diffuse;
+    } else {
+        //blue
+        gl_FragColor =  vec4(0.0, 0.0, 1.0, 1.0) * uLight[0].diffuse;
+    }
 }
