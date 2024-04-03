@@ -11,7 +11,7 @@ uniform float time;
 varying vec4 colorver;
 
 void main() {
-	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition.x + norm*sin(time), aVertexPosition.y, aVertexPosition.z, 1.0);
+	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition.x + norm + sin(time), aVertexPosition.y, aVertexPosition.z, 1.0);
     colorver = gl_Position;
 }
 
