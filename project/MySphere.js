@@ -25,15 +25,11 @@ export class MySphere extends CGFobject {
         for (var i = 0; i < this.slices; i++) {
             
             // Normals for the side faces 
-            var normalX1 = Math.cos(i*step)*Math.cos(j*ang);
-            var normalY1 = Math.sin(j*ang);
-            var normalZ = Math.sin(i*step)*Math.cos(j*ang);
-        
-            for(var l=0;l<4;l++){
-                this.normals.push(normalX1, normalY1, normalZ);
-            }
-        }  
-   
+            var X1 = Math.cos(i*step)*Math.cos(j*ang);
+            var Y1 = Math.sin(j*ang);
+            var Z1 = Math.sin(i*step)*Math.cos(j*ang);
+            this.vertices.push(X1,Y1,Z1)
+        }
     }
 var count=0;
     for(let k=0;k<this.stacks*2;k++){
