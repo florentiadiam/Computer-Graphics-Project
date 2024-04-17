@@ -1,7 +1,6 @@
 import { CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFtexture } from "../lib/CGF.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
-import { MySphere } from "./MySphere.js";
 /**
  * MyScene
  * @constructor
@@ -25,13 +24,13 @@ export class MyScene extends CGFscene {
     this.gl.depthFunc(this.gl.LEQUAL);
 
     this.enableTextures(true);
-    this.texturePanorama = new CGFtexture(this, 'images/panorama4.jpg');
+this.texturePanorama = new CGFtexture(this, 'images/panorama4.jpg');
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
     this.panorama=new MyPanorama(this,this.texturePanorama);
-    this.sphere=new MySphere(this,50,50);
+    //this.sphere=new MySphere(this,50,50,false);
 
    // this.spherematerial = new CGFappearance(this);
 
@@ -40,6 +39,7 @@ export class MyScene extends CGFscene {
 
     //Objects connected to MyInterface
     this.displayAxis = true;
+    this.displayNormals = false;
     this.scaleFactor = 1;
 
    
@@ -48,6 +48,11 @@ this.texture = new CGFtexture(this, "images/terrain.jpg");
 this.appearance = new CGFappearance(this);
 this.appearance.setTexture(this.texture);
 this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+
+this.texture1 = new CGFtexture(this, "images/earth.png");
+this.appearance1 = new CGFappearance(this);
+this.appearance1.setTexture(this.texture1);
+this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
 
   }
   initLights() {
@@ -85,6 +90,8 @@ this.appearance.setTextureWrap('REPEAT', 'REPEAT');
     // Draw axis
     if (this.displayAxis) this.axis.display();
 
+    
+
     // ---- BEGIN Primitive drawing section
 
    /* this.pushMatrix();
@@ -95,8 +102,13 @@ this.appearance.setTextureWrap('REPEAT', 'REPEAT');
     this.plane.display();
     this.popMatrix();
  this.sphere.display();
- */
- this.panorama.display();
     // ---- END Primitive drawing section
+    */
+   this.pushMatrix();
+   this.scale(400,400,400);
+   this.panorama.display();
+   this.popMatrix();
+   
+   
   }
 }
