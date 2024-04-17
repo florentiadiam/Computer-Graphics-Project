@@ -17,18 +17,28 @@ export class MySphere extends CGFobject {
         this.vertices = [];
         this.indices = [];
         this.normals = [];
+        this.texCoords = [];
         var ang = (Math.PI/2)/this.stacks;
         var step = 2*Math.PI/this.slices;
 
   
     for(var j=-this.stacks;j<=this.stacks;j++){
         for (var i = 0; i < this.slices; i++) {
-            
-            // Normals for the side faces 
+
+            // Vertices
             var X1 = Math.cos(i*step)*Math.cos(j*ang);
             var Y1 = Math.sin(j*ang);
             var Z1 = Math.sin(i*step)*Math.cos(j*ang);
             this.vertices.push(X1,Y1,Z1)
+
+            // Normal
+            this.normals.push(-X1, -Y1, -Z1);
+           
+
+            // Texture coordinates
+            var s = i / this.slices; // Horizontal (s) coordinate
+            var t = (j + this.stacks) / (2 * this.stacks); // Vertical (t) coordinate
+            this.texCoords.push(-s, -t);
         }
     }
 var count=0;

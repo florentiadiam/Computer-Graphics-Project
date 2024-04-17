@@ -22,11 +22,8 @@ export class MyStem extends CGFobject {
 
         for(let j=0; j<this.stacks;j++){
             height= Math.sin(angle_stacks);
-
-
             angle_stacks =+ angle_stacks;
         }
-  
     
 
     
