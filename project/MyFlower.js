@@ -41,21 +41,21 @@ export class MyFlower extends CGFobject {
         // Green material for diamond
         this.petalMaterial = new CGFappearance(this.scene);
         this.petalMaterial.setAmbient(this.petal_c1, this.petal_c2, this.petal_c3, 1.0);
-        this.petalMaterial.setDiffuse(0, 1, 0, 1.0);
+        this.petalMaterial.setDiffuse(0.1, 0.1, 0.1, 1.0);
         this.petalMaterial.setSpecular(0.1, 0.1, 0.1, 1.0);
-        this.petalMaterial.setShininess(10.0);
+        this.petalMaterial.setShininess(5.0);
 
         this.stemMaterial = new CGFappearance(this.scene);
         this.stemMaterial.setAmbient(this.stem_c1, this.stem_c2, this.stem_c3, 1.0);
-        this.stemMaterial.setDiffuse(0, 1, 0, 1.0);
+        this.stemMaterial.setDiffuse(0.1, 0.1, 0.1, 1.0);
         this.stemMaterial.setSpecular(0.1, 0.1, 0.1, 1.0);
-        this.stemMaterial.setShininess(10.0);
+        this.stemMaterial.setShininess(5.0);
         
         this.circleMaterial = new CGFappearance(this.scene);
         this.circleMaterial.setAmbient(this.circle_c1, this.circle_c2, this.circle_c3, 1.0);
-        this.circleMaterial.setDiffuse(0, 1, 0, 1.0);
+        this.circleMaterial.setDiffuse(0.1, 0.1, 0.1, 1.0);
         this.circleMaterial.setSpecular(0.1, 0.1, 0.1, 1.0);
-        this.circleMaterial.setShininess(10.0);
+        this.circleMaterial.setShininess(5.0);
     }
 	
 	display() {
