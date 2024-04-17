@@ -111,7 +111,7 @@ export class MyScene extends CGFscene {
     // this.appearance1.apply();
     // this.sphere.display();
     
-    //this.flower.display();
+    this.flower.display();
     // if (this.displayNormals)
     //         this.flower.enableNormalViz();
     //     else
@@ -119,7 +119,7 @@ export class MyScene extends CGFscene {
 
     //this.petal.display();
 
-    this.leaf.display();
+    //this.leaf.display();
 
 
     // ---- END Primitive drawing section

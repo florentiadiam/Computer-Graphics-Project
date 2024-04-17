@@ -26,8 +26,6 @@ export class MyLeaf extends CGFobject {
         this.leafMaterial.setShininess(10.0);
     }
 	
-    
-
 	
 	display(){
 		this.scene.pushMatrix();
