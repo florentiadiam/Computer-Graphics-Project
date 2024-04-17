@@ -79,7 +79,7 @@ export class MyFlower extends CGFobject {
             this.scene.pushMatrix();
             this.scene.scale(this.petal_r/4,this.petal_r/4,1);
             this.scene.rotate(i,0,0,1);
-            this.scene.translate(0,-0.5*this.petal_r ,0)
+            this.scene.translate(0,-(this.petal_r/2) / (this.petal_r / 5) ,0)
             this.petalMaterial.apply();
             this.petal.display();
             this.scene.popMatrix();
