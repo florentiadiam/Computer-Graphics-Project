@@ -5,10 +5,16 @@ export class MyPanorama extends CGFobject {
 
     constructor(scene, texture) {
         super(scene)
+        this.texture=texture;
+        this.initBuffers();
+    }
+
+    initBuffers(){
         this.sphere = new MySphere(this.scene, 200, 200,false)
         this.material = new CGFappearance(this.scene)
        // this.material.setEmission(1, 1, 1, 1)
-        this.material.setTexture(texture)
+        this.material.setTexture(this.texture)
+   
     }
 
     display() {
@@ -22,4 +28,12 @@ export class MyPanorama extends CGFobject {
         //this.sphere.setLineMode();
         this.scene.popMatrix()
     }
+  
+   updateBuffers(complexity){
+       
+
+       // reinitialize buffers
+       this.initBuffers();
+       this.initNormalVizBuffers();
+   }
 }

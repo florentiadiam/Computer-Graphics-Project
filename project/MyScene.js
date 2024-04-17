@@ -1,6 +1,8 @@
 import { CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFtexture } from "../lib/CGF.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
+import { MySphere } from "./MySphere.js";
+
 /**
  * MyScene
  * @constructor
@@ -30,14 +32,14 @@ this.texturePanorama = new CGFtexture(this, 'images/panorama4.jpg');
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
     this.panorama=new MyPanorama(this,this.texturePanorama);
-    //this.sphere=new MySphere(this,50,50,false);
+    this.sphere=new MySphere(this,50,50,false);
+    this.objects = [this.axis,this.panorama, this.sphere];
+    this.objectIDs = { 'Axis': 0 , 'Panorama': 1, 'Sphere': 2};
 
-   // this.spherematerial = new CGFappearance(this);
 
-    //this.spherematerial.loadTexture('images/earth.png');
-    //this.spherematerial.setTextureWrap('REPEAT', 'REPEAT');
 
     //Objects connected to MyInterface
+    this.selectedObject = 1;
     this.displayAxis = true;
     this.displayNormals = false;
     this.scaleFactor = 1;
@@ -76,6 +78,11 @@ this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
   }
+
+  updateObjectComplexity(){
+    this.objects[this.selectedObject].updateBuffers(this.objectComplexity);
+}
+
   display() {
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene
@@ -90,6 +97,21 @@ this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
     // Draw axis
     if (this.displayAxis) this.axis.display();
 
+      this.pushMatrix();
+
+      this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
+
+   /* if (this.displayNormals)
+    this.objects[this.selectedObject].enableNormalViz();
+else
+    this.objects[this.selectedObject].disableNormalViz();
+    // console.log(this.selectedObject);
+this.objects[this.selectedObject].display();
+*/
+this.popMatrix();
+
+
+
     
 
     // ---- BEGIN Primitive drawing section
@@ -101,13 +123,23 @@ this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
     this.rotate(-Math.PI/2.0,1,0,0);
     this.plane.display();
     this.popMatrix();
- this.sphere.display();
-    // ---- END Primitive drawing section
     */
+ if(this.objects[this.selectedObject]==this.sphere){
+
    this.pushMatrix();
-   this.scale(400,400,400);
+   this.appearance1.apply();
+   this.scale(10,10,10);
+ this.sphere.display();
+ this.popMatrix();
+    }
+    // ---- END Primitive drawing section
+    
+if(this.objects[this.selectedObject]==this.panorama){
+   this.pushMatrix();
+   this.scale(200,200,200);
    this.panorama.display();
    this.popMatrix();
+}
    
    
   }

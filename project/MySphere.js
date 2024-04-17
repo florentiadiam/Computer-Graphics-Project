@@ -23,7 +23,7 @@ export class MySphere extends CGFobject {
     
         var step = 2 * Math.PI / this.slices;
     
-        for (var j = -Math.PI / 2; j <= Math.PI / 2; j += ang) {
+        for (var j = -Math.PI/2; j <= Math.PI; j += ang) {
             for (var i = 0; i < this.slices; i++) {
     
                 // Vertices
@@ -56,5 +56,6 @@ export class MySphere extends CGFobject {
         }
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
+        this.initNormalVizBuffers();
     }
 }
