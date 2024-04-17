@@ -1,33 +1,27 @@
 import { CGFobject } from '../lib/CGF.js';
+import { MyTriangle } from './MyTriangle.js';
 /**
  * MyPetal
  * @constructor
  * @param scene - Reference to MyScene object
  */
 export class MyPetal extends CGFobject {
-	constructor(scene) {
-		super(scene);
-		this.initBuffers();
+	constructor(scene,angle) {
+		super(scene,angle);
+		this.triangle1 = new MyTriangle(this.scene);
+		this.triangle2 = new MyTriangle(this.scene);
+		this.angle = angle;
 	}
 	
-	initBuffers() {
-		this.vertices = [
-			0, 2, 0,	//0
-			-1, 0, 0,	//1
-			1, 0, 0,    //2
-            0, -2, 0
-		];
+	display(){
+		this.scene.pushMatrix();
+        this.triangle1.display();
+        this.scene.popMatrix();
 
-		//Counter-clockwise reference of vertices
-		this.indices = [
-			0, 1, 2,
-            3, 2, 1
-		];
-
-		//The defined indices (and corresponding vertices)
-		//will be read in groups of three to draw triangles
-		this.primitiveType = this.scene.gl.TRIANGLES;
-
-		this.initGLBuffers();
+		this.scene.pushMatrix();
+        this.scene.rotate(Math.PI,0,0,1);
+		this.scene.rotate(this.angle,1,0,0);
+        this.triangle2.display();
+        this.scene.popMatrix();
 	}
 }

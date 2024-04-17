@@ -1,6 +1,11 @@
 import { CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFtexture } from "../lib/CGF.js";
+import { MyFlower } from "./MyFlower.js";
+import { MyLeaf } from "./MyLeaf.js";
+import { MyPetal } from "./MyPetal.js";
 import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
+import { MyTriangle } from "./MyTriangle.js";
+
 /**
  * MyScene
  * @constructor
@@ -26,7 +31,11 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
-    this.sphere=new MySphere(this,50,50);
+    this.sphere = new MySphere(this,50,50);
+    this.petal =new MyPetal(this)
+    this.flower = new MyFlower(this, 5, 6, 0.8, 1, 2, 1, 0, 0, 1, 0, 0, 1, 0, 0, -Math.PI/6);
+    this.triangle = new MyTriangle(this);
+    this.leaf = new MyLeaf(this,1,0,0);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -35,15 +44,15 @@ export class MyScene extends CGFscene {
 
     this.enableTextures(true);
 
-this.texture = new CGFtexture(this, "images/terrain.jpg");
-this.appearance = new CGFappearance(this);
-this.appearance.setTexture(this.texture);
-this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+    this.texture = new CGFtexture(this, "images/terrain.jpg");
+    this.appearance = new CGFappearance(this);
+    this.appearance.setTexture(this.texture);
+    this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
-this.texture1 = new CGFtexture(this, "images/earth.png");
-this.appearance1 = new CGFappearance(this);
-this.appearance1.setTexture(this.texture1);
-this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
+    this.texture1 = new CGFtexture(this, "images/earth.png");
+    this.appearance1 = new CGFappearance(this);
+    this.appearance1.setTexture(this.texture1);
+    this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
 
   }
   initLights() {
@@ -85,24 +94,34 @@ this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
 
     // ---- BEGIN Primitive drawing section
 
-    this.pushMatrix();
-    this.appearance.apply();
-    this.translate(0,-100,0);
-    this.scale(400,400,400);
-    this.rotate(-Math.PI/2.0,1,0,0);
-    this.plane.display();
-    this.popMatrix();
+    // this.pushMatrix();
+    // this.appearance.apply();
+    // this.translate(0,-100,0);
+    // this.scale(400,400,400);
+    // this.rotate(-Math.PI/2.0,1,0,0);
+    // this.plane.display();
+    // this.popMatrix();
     
     
-    if (this.displayNormals)
-            this.sphere.enableNormalViz();
-        else
-            this.sphere.disableNormalViz();
+    // if (this.displayNormals)
+    //         this.sphere.enableNormalViz();
+    //     else
+    //         this.sphere.disableNormalViz();
     
-    this.appearance1.apply();
-    this.sphere.display();
+    // this.appearance1.apply();
+    // this.sphere.display();
     
-    
+    //this.flower.display();
+    // if (this.displayNormals)
+    //         this.flower.enableNormalViz();
+    //     else
+    //         this.flower.disableNormalViz();
+
+    //this.petal.display();
+
+    this.leaf.display();
+
+
     // ---- END Primitive drawing section
   }
 }
