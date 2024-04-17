@@ -101,18 +101,9 @@ this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
 
       this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
 
-   /* if (this.displayNormals)
-    this.objects[this.selectedObject].enableNormalViz();
-else
-    this.objects[this.selectedObject].disableNormalViz();
-    // console.log(this.selectedObject);
-this.objects[this.selectedObject].display();
-*/
+  
+
 this.popMatrix();
-
-
-
-    
 
     // ---- BEGIN Primitive drawing section
 
@@ -129,8 +120,16 @@ this.popMatrix();
    this.pushMatrix();
    this.appearance1.apply();
    this.scale(10,10,10);
- this.sphere.display();
- this.popMatrix();
+   this.sphere.display();
+
+  if (this.displayNormals)  
+    this.objects[this.selectedObject].enableNormalViz();
+  else
+      this.objects[this.selectedObject].disableNormalViz();
+    
+  this.objects[this.selectedObject].display();
+
+  this.popMatrix();
     }
     // ---- END Primitive drawing section
     
