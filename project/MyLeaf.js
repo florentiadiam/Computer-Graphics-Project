@@ -19,11 +19,11 @@ export class MyLeaf extends CGFobject {
 
     initMaterials() {
         // Green material for diamond
-        this.leafMaterial = new CGFappearance(this.scene);
-        this.leafMaterial.setAmbient(this.color1, this.color2, this.color3, 1.0);
-        this.leafMaterial.setDiffuse(0, 1, 0, 1.0);
-        this.leafMaterial.setSpecular(0.1, 0.1, 0.1, 1.0);
-        this.leafMaterial.setShininess(10.0);
+        this.circleMaterial = new CGFappearance(this.scene);
+        this.circleMaterial.setAmbient(this.color1, this.color2, this.color3, 1.0);
+        this.circleMaterial.setDiffuse(0.1, 0.1, 0.1, 1.0);
+        this.circleMaterial.setSpecular(0.1, 0.1, 0.1, 1.0);
+        this.circleMaterial.setShininess(5.0);
     }
 	
 	

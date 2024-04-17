@@ -1,4 +1,5 @@
 import { CGFappearance, CGFobject } from '../lib/CGF.js';
+//import { MyLeaf } from './MyLeaf.js';
 import { MyPetal } from './MyPetal.js';
 import { MyReceptacle } from './MyReceptacle.js';
 import { MyStem } from './MyStem.js';
@@ -31,10 +32,8 @@ export class MyFlower extends CGFobject {
         this.petal = new MyPetal(this.scene, this.petal_angle);
         this.stem = new MyStem(this.scene,20,10);
         this.receptacle = new MyReceptacle(this.scene,100,10);
-        //this.leaf = new MyLeaf(this,1,0,0);
+        //this.leaf = new MyLeaf(this, 1, 0, 0);
         this.initMaterials();
-        this.enableNormalViz();
-        this.disableNormalViz();
 	}
 
     initMaterials() {
@@ -87,13 +86,4 @@ export class MyFlower extends CGFobject {
         }
 	}
 
-    enableNormalViz(){
-        //this.petal.enableNormalViz();
-        this.stem.enableNormalViz();
-      }
-  
-      disableNormalViz(){
-        //this.petal.disableNormalViz();
-        this.stem.disableNormalViz();
-      }
 }
