@@ -33,7 +33,7 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this,30);
     this.sphere = new MySphere(this,50,50);
     this.petal =new MyPetal(this)
-    this.flower = new MyFlower(this,2, 6, 0.8, 1, 2, 1, 0, 0, 1, 0, 0, 1, 0, 0, -Math.PI/6);
+    this.flower = new MyFlower(this,10, 6, 0.8, 1, 2, 1, 1, 1, 0, 0, -Math.PI/6);
     this.triangle = new MyTriangle(this);
     this.leaf = new MyLeaf(this,1,0,0);
 
