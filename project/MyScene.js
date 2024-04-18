@@ -1,5 +1,6 @@
 import { CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFtexture } from "../lib/CGF.js";
 import { MyFlower } from "./MyFlower.js";
+import { MyGarden } from "./MyGarden.js";
 import { MyLeaf } from "./MyLeaf.js";
 import { MyPetal } from "./MyPetal.js";
 import { MyPlane } from "./MyPlane.js";
@@ -33,9 +34,10 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this,30);
     this.sphere = new MySphere(this,50,50);
     this.petal =new MyPetal(this)
-    this.flower = new MyFlower(this,10, 6, 0.8, 1, 2, 1, 1, 1, 0, 0, -Math.PI/6);
+    this.flower = new MyFlower(this,10, 6, 0.8, 1, 7, 1, 0, 1, -Math.PI/6,-Math.PI/6, Math.PI/3, 0);
     this.triangle = new MyTriangle(this);
     this.leaf = new MyLeaf(this,1,0,0);
+    this.garden = new MyGarden(this,10);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -111,7 +113,7 @@ export class MyScene extends CGFscene {
     // this.appearance1.apply();
     // this.sphere.display();
     
-    this.flower.display();
+    //this.flower.display();
     // if (this.displayNormals)
     //         this.flower.enableNormalViz();
     //     else
@@ -121,6 +123,7 @@ export class MyScene extends CGFscene {
 
     //this.leaf.display();
 
+    this.garden.display();
 
     // ---- END Primitive drawing section
   }
