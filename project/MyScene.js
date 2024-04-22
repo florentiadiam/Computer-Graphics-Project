@@ -37,7 +37,7 @@ export class MyScene extends CGFscene {
     this.flower = new MyFlower(this,10, 6, 0.8, 1, 7, 1, 0, 1, -Math.PI/6,-Math.PI/6, Math.PI/3, 0);
     this.triangle = new MyTriangle(this);
     this.leaf = new MyLeaf(this,1,0,0);
-    this.garden = new MyGarden(this,10);
+    this.garden = new MyGarden(this,25);
 
     //Objects connected to MyInterface
     this.displayAxis = true;

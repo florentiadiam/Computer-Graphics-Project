@@ -25,9 +25,10 @@ export class MyGarden extends CGFobject {
         this.circleRadius = [];
         this.petalAngle1 = [];
         this.petalAngle2 = [];
+        this.stemSize = [];
         for (let i = 0; i < numofFlowers; i++) {
-            this.pos_x.push(Math.random() * (450 + 450) - 450);
-            this.pos_y.push(Math.random() * (450 + 450) - 450);
+            this.pos_x.push(Math.random() * (45 + 45) - 45);
+            this.pos_y.push(Math.random() * (45 + 45) - 45);
             this.flowerSize.push(Math.random() * (7 -3) + 3);
             this.petalColor.push(Math.floor(Math.random() * 3));
             this.stemColor.push(Math.floor(Math.random() * 3));
@@ -38,6 +39,7 @@ export class MyGarden extends CGFobject {
             this.circleRadius.push(Math.random() * (2 -0.5) +0.5);
             this.petalAngle1.push(Math.random() * (Math.PI/6 + Math.PI/6) - Math.PI/6);
             this.petalAngle2.push(Math.random() * (Math.PI/6 + Math.PI/6) - Math.PI/6);
+            this.stemSize.push(Math.floor(Math.random()* (15 - 1) + 1))
         }
         this.plane = new MyPlane(this.scene,30);
 	}
@@ -45,18 +47,19 @@ export class MyGarden extends CGFobject {
     display(){
         this.scene.pushMatrix();
         this.scene.translate(0, -10, 0);
-        this.scene.scale(100, 100, 100);
+        this.scene.scale(80, 80, 80);
         this.scene.rotate(-Math.PI / 2.0, 1, 0, 0);
         this.plane.display();
         this.scene.popMatrix();
 
         for (let i = 0; i < this.numofFlowers; i++) {
             this.scene.pushMatrix();
+            this.scene.translate(0,-10,0);
             this.scene.scale(0.1, 0.1, 0.1);
-            this.scene.translate(this.pos_x[i], -120, this.pos_y[i]);
             this.scene.scale(this.flowerSize[i], this.flowerSize[i], this.flowerSize[i])
-            this.scene. translate(0,6+this.flowerSize[i],0);
-            this.flower = new MyFlower(this.scene, this.petalRadius[i], this.petalNumber[i], this.circleRadius[i], 1, 1, this.petalColor[i], this.stemColor[i], this.circleColor[i], -Math.PI / 6, this.petalAngle1[i], this.petalAngle2[i], this.leafColor[i]);
+            this.scene.translate(0, this.stemSize[i]+6,0);
+            this.scene.translate(this.pos_x[i], 0, this.pos_y[i]);
+            this.flower = new MyFlower(this.scene, this.petalRadius[i], this.petalNumber[i], this.circleRadius[i], 1, this.stemSize[i], this.petalColor[i], this.stemColor[i], this.circleColor[i], -Math.PI / 6, this.petalAngle1[i], this.petalAngle2[i], this.leafColor[i]);
             this.flower.display();
             this.scene.popMatrix();
         }

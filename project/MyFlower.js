@@ -18,7 +18,7 @@ export class MyFlower extends CGFobject {
         this.petal_num = petal_num;
         this.circle_radius = circle_radius;
         this.stem_radius = stem_radius; //TODO: Must change leafs according to the stem radius
-        this.stem_size = stem_size; //TODO: Must change translation from ground
+        this.stem_size = stem_size; //TODO: Work on the leaves
         this.petal_color = petal_color;
         this.stem_color = stem_color;
         this.circle_color = circle_color;
@@ -86,7 +86,7 @@ export class MyFlower extends CGFobject {
         this.circleMaterial2.setSpecular(0.1, 0.1, 0.1, 1.0);
         this.circleMaterial2.setShininess(5.0);
 
-        this.circleMaterial3 = new CGFappearance(this.scene);
+        this.circleMaterial3 = new CGFappearance(this.scene); // TODO: Look at thr colors something is wromg
         this.circleMaterial3.setAmbient(0.4, 0.96, 0.44, 1.0);
         this.circleMaterial3.setDiffuse(0.1, 0.1, 0.1, 1.0);
         this.circleMaterial3.setSpecular(0.1, 0.1, 0.1, 1.0);
