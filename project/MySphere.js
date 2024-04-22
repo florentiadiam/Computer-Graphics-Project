@@ -24,7 +24,7 @@ export class MySphere extends CGFobject {
         var step = 2 * Math.PI / this.slices;
     
         for (var j = -Math.PI/2; j <= Math.PI; j += ang) {
-            for (var i = 0; i < this.slices; i++) {
+            for (var i = 0; i <= this.slices; i++) {
     
                 // Vertices
                 var X1 = Math.cos(i * step) * Math.cos(j);
