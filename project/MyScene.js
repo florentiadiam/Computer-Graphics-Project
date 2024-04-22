@@ -1,7 +1,9 @@
 import { CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFtexture } from "../lib/CGF.js";
+import { MyBee } from "./MyBee.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
+
 
 /**
  * MyScene
@@ -33,8 +35,9 @@ this.texturePanorama = new CGFtexture(this, 'images/panorama4.jpg');
     this.plane = new MyPlane(this,30);
     this.panorama=new MyPanorama(this,this.texturePanorama);
     this.sphere=new MySphere(this,50,50,false);
-    this.objects = [this.axis,this.panorama, this.sphere];
-    this.objectIDs = { 'Axis': 0 , 'Panorama': 1, 'Sphere': 2};
+    this.bee=new MyBee(this,1,1,1)
+    this.objects = [this.axis,this.panorama, this.sphere,this.bee];
+    this.objectIDs = { 'Axis': 0 , 'Panorama': 1, 'Sphere': 2, 'Bee':3};
 
 
 
@@ -115,31 +118,34 @@ this.popMatrix();
     this.plane.display();
     this.popMatrix();
     */
- if(this.objects[this.selectedObject]==this.sphere){
+//  if(this.objects[this.selectedObject]==this.sphere){
 
-   this.pushMatrix();
-   this.appearance1.apply();
-   this.scale(10,10,10);
-   this.sphere.display();
+//    this.pushMatrix();
+//    this.appearance1.apply();
+//    this.scale(10,10,10);
+//    this.sphere.display();
 
-  if (this.displayNormals)  
-    this.objects[this.selectedObject].enableNormalViz();
-  else
-      this.objects[this.selectedObject].disableNormalViz();
+//   if (this.displayNormals)  
+//     this.objects[this.selectedObject].enableNormalViz();
+//   else
+//       this.objects[this.selectedObject].disableNormalViz();
     
-  this.objects[this.selectedObject].display();
+//   this.objects[this.selectedObject].display();
 
-  this.popMatrix();
-    }
-    // ---- END Primitive drawing section
+//   this.popMatrix();
+//     }
+//     // ---- END Primitive drawing section
     
-if(this.objects[this.selectedObject]==this.panorama){
-   this.pushMatrix();
-   this.scale(200,200,200);
-   this.panorama.display();
-   this.popMatrix();
+// if(this.objects[this.selectedObject]==this.panorama){
+//    this.pushMatrix();
+//    this.scale(200,200,200);
+//    this.panorama.display();
+//    this.popMatrix();
+// }
+// if(this.objects[this.selectedObject]==this.bee){
+//   this.bee.display();
+// }
+   
+  this.bee.display();
 }
-   
-   
-  }
 }
