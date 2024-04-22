@@ -1,6 +1,8 @@
 import { CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFtexture } from "../lib/CGF.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
+import { MyRock } from "./MyRock.js";
+import { MyRockSet } from "./MyRockSet.js";
 import { MySphere } from "./MySphere.js";
 
 /**
@@ -35,7 +37,8 @@ this.texturePanorama = new CGFtexture(this, 'images/panorama4.jpg');
     this.sphere=new MySphere(this,50,50,false);
     this.objects = [this.axis,this.panorama, this.sphere];
     this.objectIDs = { 'Axis': 0 , 'Panorama': 1, 'Sphere': 2};
-
+    this.rock = new MyRock(this,10,10,false);
+    this.rockset = new MyRockSet(this);
 
 
     //Objects connected to MyInterface
@@ -133,13 +136,14 @@ this.popMatrix();
     }
     // ---- END Primitive drawing section
     
-if(this.objects[this.selectedObject]==this.panorama){
-   this.pushMatrix();
-   this.scale(200,200,200);
-   this.panorama.display();
-   this.popMatrix();
-}
-   
+// if(this.objects[this.selectedObject]==this.panorama){
+//    this.pushMatrix();
+//    this.scale(200,200,200);
+//    this.panorama.display();
+//    this.popMatrix();
+// }
+   //this.rock.display();
+   this.rockset.display();
    
   }
 }
