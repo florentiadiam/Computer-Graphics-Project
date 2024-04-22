@@ -23,15 +23,18 @@ export class MySphere extends CGFobject {
     
         var step = 2 * Math.PI / this.slices;
     
-        for (var j = -Math.PI/2; j <= Math.PI; j += ang) {
-            for (var i = 0; i <= this.slices; i++) {
+        for (var j = -this.stacks/2 ; j <=this.stacks/2; j ++) {
+           
+            for (var i = 0; i <=this.slices; i++) {
     
                 // Vertices
-                var X1 = Math.cos(i * step) * Math.cos(j);
-                var Y1 = Math.sin(j);
-                var Z1 = Math.sin(i * step) * Math.cos(j);
+                var X1 = Math.cos(i * step) * Math.cos(a);
+                var Y1 = Math.sin(a);
+                var Z1 = Math.sin(i * step) * Math.cos(a);
+                var a=j*ang;
+
                 this.vertices.push(X1, Y1, Z1)
-    
+                
                 if (this.inside == false) {
                     // Normal
                     this.normals.push(-X1, -Y1, -Z1);
@@ -40,11 +43,13 @@ export class MySphere extends CGFobject {
     
     
                 // Texture coordinates
-                var s = i / this.slices; // Horizontal (s) coordinate
-                var t = (j + Math.PI / 2) / Math.PI; // Vertical (t) coordinate
+                var s = i / this.slices ; // Horizontal (s) coordinate
+                var t = (a+ Math.PI / 2) / Math.PI; // Vertical (t) coordinate
                 this.texCoords.push(-s, -t);
             }
         }
+        
+        
         var count = 0;
         for (let k = 0; k < this.stacks; k++) {
             for (let m = 0; m < this.slices; m++) {
@@ -54,6 +59,8 @@ export class MySphere extends CGFobject {
                 count++;
             }
         }
+
+
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
         this.initNormalVizBuffers();
