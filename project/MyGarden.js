@@ -26,6 +26,7 @@ export class MyGarden extends CGFobject {
         this.petalAngle1 = [];
         this.petalAngle2 = [];
         this.stemSize = [];
+        this.stemRadius =[];
         for (let i = 0; i < numofFlowers; i++) {
             this.pos_x.push(Math.random() * (45 + 45) - 45);
             this.pos_y.push(Math.random() * (45 + 45) - 45);
@@ -40,6 +41,7 @@ export class MyGarden extends CGFobject {
             this.petalAngle1.push(Math.random() * (Math.PI/6 + Math.PI/6) - Math.PI/6);
             this.petalAngle2.push(Math.random() * (Math.PI/6 + Math.PI/6) - Math.PI/6);
             this.stemSize.push(Math.floor(Math.random()* (15 - 1) + 1))
+            this.stemRadius.push(Math.random()* (1.5 - 0.5) + 0.5)
         }
         this.plane = new MyPlane(this.scene,30);
 	}
@@ -59,7 +61,7 @@ export class MyGarden extends CGFobject {
             this.scene.scale(this.flowerSize[i], this.flowerSize[i], this.flowerSize[i])
             this.scene.translate(0, this.stemSize[i]+6,0);
             this.scene.translate(this.pos_x[i], 0, this.pos_y[i]);
-            this.flower = new MyFlower(this.scene, this.petalRadius[i], this.petalNumber[i], this.circleRadius[i], 1, this.stemSize[i], this.petalColor[i], this.stemColor[i], this.circleColor[i], -Math.PI / 6, this.petalAngle1[i], this.petalAngle2[i], this.leafColor[i]);
+            this.flower = new MyFlower(this.scene, this.petalRadius[i], this.petalNumber[i], this.circleRadius[i], this.stemRadius[i], this.stemSize[i], this.petalColor[i], this.stemColor[i], this.circleColor[i], -Math.PI / 6, this.petalAngle1[i], this.petalAngle2[i], this.leafColor[i]);
             this.flower.display();
             this.scene.popMatrix();
         }
