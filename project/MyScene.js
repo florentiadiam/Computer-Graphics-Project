@@ -1,4 +1,5 @@
 import { CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFtexture } from "../lib/CGF.js";
+import { MyBee } from "./MyBee.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
 import { MyRock } from "./MyRock.js";
@@ -39,6 +40,7 @@ this.texturePanorama = new CGFtexture(this, 'images/panorama4.jpg');
     this.objectIDs = { 'Axis': 0 , 'Panorama': 1, 'Sphere': 2};
     this.rock = new MyRock(this,10,10,false);
     this.rockset = new MyRockSet(this);
+    this.bee = new MyBee(this);
 
 
     //Objects connected to MyInterface
@@ -143,7 +145,8 @@ this.popMatrix();
 //    this.popMatrix();
 // }
    //this.rock.display();
-   this.rockset.display();
+  //  this.rockset.display();
+  this.bee.display();
    
   }
 }
