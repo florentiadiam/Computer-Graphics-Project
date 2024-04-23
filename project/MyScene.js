@@ -30,7 +30,7 @@ export class MyScene extends CGFscene {
     this.gl.depthFunc(this.gl.LEQUAL);
 
     this.enableTextures(true);
-this.texturePanorama = new CGFtexture(this, 'images/panorama4.jpg');
+    this.texturePanorama = new CGFtexture(this, 'images/panorama4.jpg');
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
@@ -147,7 +147,10 @@ this.popMatrix();
 // }
    //this.rock.display();
   //  this.rockset.display();
+  this.pushMatrix();
+  this.scale(5,5,5);
   this.bee.display();
+  this.popMatrix();
    
   }
 }

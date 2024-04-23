@@ -35,7 +35,7 @@ export class MySphere extends CGFobject {
 
                 this.vertices.push(X1, Y1, Z1)
                 
-                if (this.inside == false) {
+                if (this.inside == true) {
                     // Normal
                     this.normals.push(-X1, -Y1, -Z1);
                 } else
@@ -45,7 +45,7 @@ export class MySphere extends CGFobject {
                 // Texture coordinates
                 var s = i / this.slices ; // Horizontal (s) coordinate
                 var t = (a+ Math.PI / 2) / Math.PI; // Vertical (t) coordinate
-                this.texCoords.push(-s, -t);
+                this.texCoords.push(s, t);
             }
         }
         
@@ -54,8 +54,15 @@ export class MySphere extends CGFobject {
         for (let k = 0; k < this.stacks; k++) {
             for (let m = 0; m < this.slices; m++) {
                 // Indices for the side faces
+                if(this.inside==true)
+                {
                 this.indices.push(count, count + this.slices + 1, count + this.slices);
                 this.indices.push(count, count + 1, count + this.slices + 1);
+                }
+                else{
+                this.indices.push(count, count+this.slices , count+this.slices +1);
+                this.indices.push(count, count + this.slices+1, count+1);
+                }
                 count++;
             }
         }
@@ -65,4 +72,18 @@ export class MySphere extends CGFobject {
         this.initGLBuffers();
         this.initNormalVizBuffers();
     }
+    display() {
+        // Enable backface culling
+        this.scene.gl.enable(this.scene.gl.CULL_FACE);
+
+        // Set culling mode to back faces
+        this.scene.gl.cullFace(this.scene.gl.BACK);
+
+        // Call the superclass display method
+        super.display();
+
+        // Disable backface culling after rendering
+        this.scene.gl.disable(this.scene.gl.CULL_FACE);
+    }
+
 }
