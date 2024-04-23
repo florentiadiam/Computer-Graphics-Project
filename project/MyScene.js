@@ -1,5 +1,5 @@
 import { CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFtexture } from "../lib/CGF.js";
-import { MyBee } from "./MyBee.js";
+import { MyBee } from "./bee/MyBee.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
 import { MyRock } from "./MyRock.js";
