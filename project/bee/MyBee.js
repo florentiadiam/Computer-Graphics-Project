@@ -67,9 +67,9 @@ export class MyBee extends CGFobject {
 
         //Body
         this.scene.pushMatrix();
+        this.scene.rotate(Math.PI/2,1,0,0)
         this.scene.scale(1,2,0.8);
-        //this.scene.rotate(0,Math.PI/2,0)
-        this.scene.translate(0,0,-1)
+        this.scene.translate(0,-1,0)
         this.appearance.apply();
         this.sphere.display();
         this.scene.popMatrix();
