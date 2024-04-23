@@ -41,9 +41,9 @@ export class MySphere extends CGFobject {
                 } else
                     this.normals.push(X1, Y1, Z1);
     
-    
+              
                 // Texture coordinates
-                var s = i / this.slices ; // Horizontal (s) coordinate
+                var s = i / this.slices; // Horizontal (s) coordinate
                 var t = (a+ Math.PI / 2) / Math.PI; // Vertical (t) coordinate
                 this.texCoords.push(s, t);
             }
