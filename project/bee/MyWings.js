@@ -5,8 +5,8 @@ export class MyWings extends CGFobject {
     constructor(scene) {
         super(scene);
         this.wing = new MyTriangle(this.scene);
-    }
 
+    }
     display(){
         this.scene.pushMatrix();
         this.scene.scale(1.5,1.5,1.5)

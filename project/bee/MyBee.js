@@ -20,15 +20,9 @@ export class MyBee extends CGFobject {
         this.blackcolor.setSpecular(0, 0, 0, 1.0); 
         this.blackcolor.setShininess(5.0); 
 
-        this.yellowcolor = new CGFappearance(this.scene);
-        this.yellowcolor.setAmbient(1, 1, 0, 1.0); 
-        this.yellowcolor.setDiffuse(1, 1, 0, 1.0); 
-        this.yellowcolor.setSpecular(0.1, 0.1, 0.1, 1.0); 
-        this.yellowcolor.setShininess(5.0);
-
         // Set the texture for body
         this.appearance = new CGFappearance(this.scene);
-        this.beebodytexture = new CGFtexture(this.scene, "images/beebody.jpg");
+        this.beebodytexture = new CGFtexture(this.scene, "images/beebody2.jpg");
         this.appearance.setTexture(this.beebodytexture);
         this.appearance.setTextureWrap('REPEAT', 'REPEAT');
         this.appearance.setAmbient(1, 1, 1, 1.0);
@@ -38,7 +32,7 @@ export class MyBee extends CGFobject {
 
         // Set the texture for head
         this.appearance1 = new CGFappearance(this.scene);
-        this.beeheadtexture = new CGFtexture(this.scene, "images/yellowcolor.png");
+        this.beeheadtexture = new CGFtexture(this.scene, "images/head2.png");
         this.appearance1.setTexture(this.beeheadtexture);
         this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
         this.appearance1.setAmbient(1, 1, 1, 1.0);
@@ -55,6 +49,16 @@ export class MyBee extends CGFobject {
          this.appearance2.setDiffuse(1, 1, 1, 1.0);
          this.appearance2.setSpecular(0.1, 0.1, 0.1, 1.0);
          this.appearance2.setShininess(5.0);
+
+         // Set the texture for wings
+         this.appearance3 = new CGFappearance(this.scene);
+         this.beewingstexture = new CGFtexture(this.scene, "images/wingscolor.png");
+         this.appearance3.setTexture(this.beewingstexture);
+         this.appearance3.setTextureWrap('REPEAT', 'REPEAT');
+         this.appearance3.setAmbient(1, 1, 1, 1.0);
+         this.appearance3.setDiffuse(1, 1, 1, 1.0);
+         this.appearance3.setSpecular(0.1, 0.1, 0.1, 1.0);
+         this.appearance3.setShininess(5.0);
      
     }
 
@@ -74,10 +78,12 @@ export class MyBee extends CGFobject {
         this.sphere.display();
         this.scene.popMatrix();
 
-        //Wings
+        //wings
         this.scene.pushMatrix();
+        this.appearance3.apply()
         this.wings.display();
         this.scene.popMatrix();
+    
 
         //Legs1
         this.scene.pushMatrix();
@@ -116,6 +122,7 @@ export class MyBee extends CGFobject {
 
         //Sting
         this.scene.pushMatrix();
+        this.blackcolor.apply()
         this.scene.translate(0,0,-4.2);
         this.scene.scale(0.2,0.2,0.2);
         this.sting.display();
