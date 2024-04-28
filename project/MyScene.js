@@ -150,6 +150,7 @@ this.popMatrix();
   this.pushMatrix();
   this.scale(5,5,5);
   this.bee.display();
+ // this.sphere.display();
   this.popMatrix();
    
   }
