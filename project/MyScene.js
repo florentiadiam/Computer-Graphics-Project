@@ -145,13 +145,14 @@ this.popMatrix();
 //    this.panorama.display();
 //    this.popMatrix();
 // }
+
    //this.rock.display();
   //  this.rockset.display();
-  this.pushMatrix();
-  this.scale(5,5,5);
+  //this.pushMatrix();
+ // this.scale(5,5,5);
   this.bee.display();
  // this.sphere.display();
-  this.popMatrix();
-   
+//  this.popMatrix();
+
   }
 }
