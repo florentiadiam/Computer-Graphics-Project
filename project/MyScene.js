@@ -140,10 +140,10 @@ this.popMatrix();
 //     // ---- END Primitive drawing section
     
 // if(this.objects[this.selectedObject]==this.panorama){
-//    this.pushMatrix();
-//    this.scale(200,200,200);
-//    this.panorama.display();
-//    this.popMatrix();
+   this.pushMatrix();
+   this.scale(200,200,200);
+   this.panorama.display();
+   this.popMatrix();
 // }
 
    //this.rock.display();

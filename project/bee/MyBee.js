@@ -127,10 +127,10 @@ export class MyBee extends CGFobject {
         //wings
         this.scene.pushMatrix();
          //this.appearance3.apply()
-        this.gl.enable(this.gl.BLEND);
-        this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
-        this.gl.colorMask(true, true, true, true); // Enable writing to alpha channel
-         this.gl.uniform4f(uColorLocation, r, g, b, a); // Set color with alpha
+        // this.gl.enable(this.gl.BLEND);
+        // this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
+        // this.gl.colorMask(true, true, true, true); // Enable writing to alpha channel
+        // his.gl.uniform4f(uColorLocation, r, g, b, a); // Set color with alpha
         this.wings.display();
         this.scene.popMatrix();
     }
