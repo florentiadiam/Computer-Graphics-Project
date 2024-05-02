@@ -78,11 +78,7 @@ export class MyBee extends CGFobject {
         this.sphere.display();
         this.scene.popMatrix();
 
-        //wings
-        this.scene.pushMatrix();
-        this.appearance3.apply()
-        this.wings.display();
-        this.scene.popMatrix();
+ 
     
 
         //Legs1
@@ -126,6 +122,16 @@ export class MyBee extends CGFobject {
         this.scene.translate(0,0,-4.2);
         this.scene.scale(0.2,0.2,0.2);
         this.sting.display();
+        this.scene.popMatrix();
+
+        //wings
+        this.scene.pushMatrix();
+         //this.appearance3.apply()
+        this.gl.enable(this.gl.BLEND);
+        this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
+        this.gl.colorMask(true, true, true, true); // Enable writing to alpha channel
+         this.gl.uniform4f(uColorLocation, r, g, b, a); // Set color with alpha
+        this.wings.display();
         this.scene.popMatrix();
     }
 }
