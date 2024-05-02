@@ -1,6 +1,6 @@
-import { CGFobject } from '../lib/CGF.js';
+import { CGFobject } from '../../lib/CGF.js';
+import { MyTriangle } from '../MyTriangle.js';
 import { MyStem } from './MyStem.js';
-import { MyTriangle } from './MyTriangle.js';
 /**
  * MyPetal
  * @constructor
