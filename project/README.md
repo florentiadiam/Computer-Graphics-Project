@@ -1,1 +1,8 @@
-# [COPY FROM PREVIOUS TP AND ADJUST]
+# CG 2023/2024
+
+## Group T01G08
+
+## Project Notes
+
+### Panorama
+![Screenshot 1](Screenshots/project-t01-g08-1.png)

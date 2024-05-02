@@ -39,7 +39,7 @@ this.texturePanorama = new CGFtexture(this, 'images/panorama4.jpg');
 
 
     //Objects connected to MyInterface
-    this.selectedObject = 2;
+    this.selectedObject = 1;
     this.displayAxis = true;
     this.displayNormals = false;
     this.scaleFactor = 1;
