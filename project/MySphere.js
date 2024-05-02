@@ -23,15 +23,20 @@ export class MySphere extends CGFobject {
     
         var step = 2 * Math.PI / this.slices;
     
-        for (var j = -this.stacks/2 ; j <=this.stacks/2; j ++) {
-           
+        for (var j = 0 ; j <=this.stacks; j ++) {
+            var a=j*ang;
+            var x1=Math.sin(a);
+            var y1=Math.cos(a);
             for (var i = 0; i <=this.slices; i++) {
+                var f=i*step;
+                var x2=Math.sin(f);
+                var z1=Math.cos(f);
     
                 // Vertices
-                var X1 = Math.cos(i * step) * Math.cos(a);
-                var Y1 = Math.sin(a);
-                var Z1 = Math.sin(i * step) * Math.cos(a);
-                var a=j*ang;
+                var X1 = z1*x1
+                var Y1 = y1
+                var Z1 = x2*x1
+                
 
                 this.vertices.push(X1, Y1, Z1)
                 
@@ -44,17 +49,17 @@ export class MySphere extends CGFobject {
               
                 // Texture coordinates
                 var s = i / this.slices; // Horizontal (s) coordinate
-                var t = (a+ Math.PI / 2) / Math.PI; // Vertical (t) coordinate
+                var t = 1-j/this.stacks; // Vertical (t) coordinate
                 this.texCoords.push(s, t);
             }
         }
         
         
         var count = 0;
-        for (let k = 0; k < this.stacks; k++) {
-            for (let m = 0; m < this.slices; m++) {
+        for (let k = 0; k <=this.stacks; k++) {
+            for (let m = 0; m <= this.slices; m++) {
                 // Indices for the side faces
-                if(this.inside==true)
+                if(this.inside==false)
                 {
                 this.indices.push(count, count + this.slices + 1, count + this.slices);
                 this.indices.push(count, count + 1, count + this.slices + 1);
