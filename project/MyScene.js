@@ -92,37 +92,6 @@ export class MyScene extends CGFscene {
     // Draw axis
     if (this.displayAxis) this.axis.display();
 
-    
-
-    // ---- BEGIN Primitive drawing section
-
-    // this.pushMatrix();
-    // this.appearance.apply();
-    // this.translate(0,-100,0);
-    // this.scale(400,400,400);
-    // this.rotate(-Math.PI/2.0,1,0,0);
-    // this.plane.display();
-    // this.popMatrix();
-    
-    
-    // if (this.displayNormals)
-    //         this.sphere.enableNormalViz();
-    //     else
-    //         this.sphere.disableNormalViz();
-    
-    // this.appearance1.apply();
-    // this.sphere.display();
-    
-    //this.flower.display();
-    // if (this.displayNormals)
-    //         this.flower.enableNormalViz();
-    //     else
-    //         this.flower.disableNormalViz();
-
-    //this.petal.display();
-
-    //this.leaf.display();
-
     this.garden.display();
 
     // ---- END Primitive drawing section
