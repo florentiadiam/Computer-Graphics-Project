@@ -6,3 +6,6 @@
 
 ### Panorama
 ![Screenshot 1](screenshots/project-t01g08-1.png)
+
+### Flower Garden
+![Screenshot 1](screenshots/project-t01g08-2.png)
