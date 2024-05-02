@@ -79,8 +79,11 @@ this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
     this.setShininess(10.0);
   }
 
-  updateObjectComplexity(){
-    this.objects[this.selectedObject].updateBuffers(this.objectComplexity);
+  updateObjectComplexity() {
+    const selectedObject = this.objects[this.selectedObject];
+    if (selectedObject && typeof selectedObject.updateBuffers === 'function') {
+        selectedObject.updateBuffers(this.objectComplexity);
+    }
 }
 
   display() {
@@ -121,13 +124,16 @@ this.popMatrix();
    this.appearance1.apply();
    this.scale(10,10,10);
    this.sphere.display();
+   
 
   if (this.displayNormals)  
     this.objects[this.selectedObject].enableNormalViz();
   else
       this.objects[this.selectedObject].disableNormalViz();
     
+    
   this.objects[this.selectedObject].display();
+  
 
   this.popMatrix();
     }
@@ -135,7 +141,7 @@ this.popMatrix();
     
 if(this.objects[this.selectedObject]==this.panorama){
    this.pushMatrix();
-   this.scale(200,200,200);
+   this.scale(50,50,50);
    this.panorama.display();
    this.popMatrix();
 }
