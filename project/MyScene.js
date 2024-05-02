@@ -29,6 +29,7 @@ export class MyScene extends CGFscene {
     this.gl.enable(this.gl.CULL_FACE);
     this.gl.depthFunc(this.gl.LEQUAL);
 
+  
     this.enableTextures(true);
     this.texturePanorama = new CGFtexture(this, 'images/panorama4.jpg');
 
@@ -89,11 +90,29 @@ this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
     this.objects[this.selectedObject].updateBuffers(this.objectComplexity);
 }
 
+  checkkeyes(delta){
+    var t1;
+    this.bee.x+=1*delta //+delta=t2-t1
+    this.bee.y=cos(delta) 
+    this.bee.z+=1*detlta
+
+  }
+
+
+  update(t){
+
+    delta  = t - this.previousTime
+    this.checkkeyes(delta);
+    this.previousTime = t
+  }
+
+  
   display() {
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene
     this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
     this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
+
     // Initialize Model-View matrix as identity (no transformation
     this.updateProjectionMatrix();
     this.loadIdentity();
@@ -146,13 +165,19 @@ this.popMatrix();
 //    this.popMatrix();
 // }
 
-   //this.rock.display();
-  //  this.rockset.display();
-  //this.pushMatrix();
- // this.scale(5,5,5);
+  //this.rock.display();
+  //this.rockset.display();
+
+      this.pushMatrix();
+    this.scale(200,200,200);
+    this.panorama.display();
+    this.popMatrix();
+
+  this.pushMatrix();
+  this.scale(5,5,5);
   this.bee.display();
- // this.sphere.display();
-//  this.popMatrix();
+  //this.sphere.display();
+ this.popMatrix();
 
   }
 }

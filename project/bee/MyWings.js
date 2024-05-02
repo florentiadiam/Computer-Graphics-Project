@@ -1,4 +1,4 @@
-import { CGFobject } from '../../lib/CGF.js';
+import { CGFappearance, CGFobject } from '../../lib/CGF.js';
 import { MyTriangle } from '../MyTriangle.js';
 
 export class MyWings extends CGFobject {
@@ -6,8 +6,21 @@ export class MyWings extends CGFobject {
         super(scene);
         this.wing = new MyTriangle(this.scene);
 
+        // Set the texture for wings
+        this.appearance3 = new CGFappearance(this.scene);
+        //  this.beewingstexture = new CGFtexture(this.scene, "images/wingscolor.png");
+        //  this.appearance3.setTexture(this.beewingstexture);
+        //  this.appearance3.setTextureWrap('REPEAT', 'REPEAT');
+         this.appearance3.setAmbient(0, 0, 0, 0.1);
+         this.appearance3.setDiffuse(0.5, 0.5, 0.5, 0.1);
+         this.appearance3.setSpecular(0.1, 0.1, 0.1, 0.1);
+         this.appearance3.setShininess(0);
+         this.appearance3.setEmission(0.0,0.0,0.0,0.0);
+
     }
     display(){
+ 
+        this.appearance3.apply()
         this.scene.pushMatrix();
         this.scene.scale(1.5,1.5,1.5)
         this.scene.scale(-1,-1,-1)
