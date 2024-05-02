@@ -7,6 +7,7 @@ import { CGFinterface, dat } from '../lib/CGF.js';
 export class MyInterface extends CGFinterface {
     constructor() {
         super();
+       
     }
 
     init(application) {
@@ -26,15 +27,19 @@ export class MyInterface extends CGFinterface {
 
         //Slider element in GUI
         this.gui.add(this.scene, 'scaleFactor', 0.1, 5).name('Scale Factor');
+        this.initKeys();
 
         return true;
     }
 
         initKeys() {
+            
         // create reference from the scene to the GUI
-            this.scene.gui=this;
+       this.scene.gui=this;
+
         // disable the processKeyboard function
             this.processKeyboard=function(){};
+          
         // create a named array to store which keys are being pressed
             this.activeKeys={};
         }

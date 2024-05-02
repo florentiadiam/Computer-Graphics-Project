@@ -18,6 +18,7 @@ export class MyScene extends CGFscene {
   init(application) {
     super.init(application);
     
+    
     this.initCameras();
     this.initLights();
 
@@ -90,24 +91,51 @@ this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
     this.objects[this.selectedObject].updateBuffers(this.objectComplexity);
 }
 
+update(t){
+  console.log("t:", t); // Log current time
+  console.log("Previous Time:", this.previousTime); // Log previous time
+  var delta  = t - this.previousTime
+  console.log("Delta:", delta); // Log delta value
+   this.checkkeyes(delta);
+   this.previousTime = t
+ }
+
   checkkeyes(delta){
-    var t1;
-    this.bee.x+=1*delta //+delta=t2-t1
-    this.bee.y=cos(delta) 
-    this.bee.z+=1*detlta
+    //console.log("Delta:", delta);
+    //console.log("Bee before translation - X:", this.bee.x, "Y:", this.bee.y, "Z:", this.bee.z);
+  
+    this.delta=delta;
+   
+    this.bee.y=0 //Math.cos(this.delta) 
+    this.bee.z+=1*this.delta
+
+    var text="Keys pressed: ";
+    var keysPressed=false;
+
+    if (this.gui.isKeyPressed("KeyW")) {
+      text+=" W ";
+      keysPressed=true;
+      this.bee.x+=1*this.delta //+delta=t2-t1
+      
+    }
+
+    if (this.gui.isKeyPressed("KeyS"))        {
+      text+=" S ";
+      keysPressed=true;
+      console.log("Bee Translation with w:", this.bee.x);
+      this.bee.x-=1*this.delta //+delta=t2-t1
+    }
+
+        if (keysPressed)
+        console.log(text);
 
   }
 
-
-  update(t){
-
-    delta  = t - this.previousTime
-    this.checkkeyes(delta);
-    this.previousTime = t
-  }
 
   
   display() {
+    this.update();
+    
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene
     this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
@@ -130,40 +158,7 @@ this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
 
 this.popMatrix();
 
-    // ---- BEGIN Primitive drawing section
 
-   /* this.pushMatrix();
-    this.appearance.apply();
-    this.translate(0,-100,0);
-    this.scale(400,400,400);
-    this.rotate(-Math.PI/2.0,1,0,0);
-    this.plane.display();
-    this.popMatrix();
-    */
-//  if(this.objects[this.selectedObject]==this.sphere){
-
-//    this.pushMatrix();
-//    this.appearance1.apply();
-//    this.scale(10,10,10);
-//    this.sphere.display();
-
-//   if (this.displayNormals)  
-//     this.objects[this.selectedObject].enableNormalViz();
-//   else
-//       this.objects[this.selectedObject].disableNormalViz();
-    
-//   this.objects[this.selectedObject].display();
-
-//   this.popMatrix();
-//     }
-//     // ---- END Primitive drawing section
-    
-// if(this.objects[this.selectedObject]==this.panorama){
-//    this.pushMatrix();
-//    this.scale(200,200,200);
-//    this.panorama.display();
-//    this.popMatrix();
-// }
 
   //this.rock.display();
   //this.rockset.display();
@@ -174,7 +169,10 @@ this.popMatrix();
     this.popMatrix();
 
   this.pushMatrix();
-  this.scale(5,5,5);
+  //this.scale(5,5,5);
+  //console.log("Bee Translation:", this.bee.x, this.bee.y, this.bee.z);
+this.translate(this.bee.x,this.bee.y,this.bee.z)
+
   this.bee.display();
   //this.sphere.display();
  this.popMatrix();

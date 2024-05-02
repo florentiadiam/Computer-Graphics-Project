@@ -57,6 +57,14 @@ export class MyBee extends CGFobject {
     }
 
     display(){
+        
+this.x=0
+this.y=0
+this.z=0
+this.scene.pushMatrix();
+this.scene.translate(this.x,this.y,this.z)
+this.scene.popMatrix();
+
         //Head
         this.scene.pushMatrix();
         this.appearance1.apply();
