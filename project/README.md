@@ -5,4 +5,4 @@
 ## Project Notes
 
 ### Panorama
-![Screenshot 1](screenshots/project-t01-g08-1.png)
+![Screenshot 1](screenshots/project-t01g08-1.png)
