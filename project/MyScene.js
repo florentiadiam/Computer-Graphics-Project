@@ -1,4 +1,5 @@
 import { CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFtexture } from "../lib/CGF.js";
+import { MyGarden } from "./MyGarden.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
@@ -26,17 +27,14 @@ export class MyScene extends CGFscene {
     this.gl.depthFunc(this.gl.LEQUAL);
 
     this.enableTextures(true);
-this.texturePanorama = new CGFtexture(this, 'images/panorama4.jpg');
+    this.texturePanorama = new CGFtexture(this, 'images/panorama4.jpg');
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
+    this.panorama = new MyPanorama(this,this.texturePanorama)
     this.plane = new MyPlane(this,30);
-    this.panorama=new MyPanorama(this,this.texturePanorama);
-    this.sphere=new MySphere(this,50,50,false);
-    this.objects = [this.axis,this.panorama, this.sphere];
-    this.objectIDs = { 'Axis': 0 , 'Panorama': 1, 'Sphere': 2};
-
-
+    this.sphere = new MySphere(this,50,50);
+    this.garden = new MyGarden(this,25);
 
     //Objects connected to MyInterface
     this.selectedObject = 1;
@@ -46,15 +44,15 @@ this.texturePanorama = new CGFtexture(this, 'images/panorama4.jpg');
 
    
 
-this.texture = new CGFtexture(this, "images/terrain.jpg");
-this.appearance = new CGFappearance(this);
-this.appearance.setTexture(this.texture);
-this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+    this.texture = new CGFtexture(this, "images/terrain.jpg");
+    this.appearance = new CGFappearance(this);
+    this.appearance.setTexture(this.texture);
+    this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
-this.texture1 = new CGFtexture(this, "images/earth.png");
-this.appearance1 = new CGFappearance(this);
-this.appearance1.setTexture(this.texture1);
-this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
+    this.texture1 = new CGFtexture(this, "images/earth.png");
+    this.appearance1 = new CGFappearance(this);
+    this.appearance1.setTexture(this.texture1);
+    this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
 
   }
   initLights() {
@@ -105,47 +103,11 @@ this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
       this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
 
   
-
-this.popMatrix();
-
-    // ---- BEGIN Primitive drawing section
-
-   /* this.pushMatrix();
-    this.appearance.apply();
-    this.translate(0,-100,0);
-    this.scale(400,400,400);
-    this.rotate(-Math.PI/2.0,1,0,0);
-    this.plane.display();
+    this.pushMatrix();
+    this.scale(100,100,100);
+    this.panorama.display();
     this.popMatrix();
-    */
- if(this.objects[this.selectedObject]==this.sphere){
 
-   this.pushMatrix();
-   this.appearance1.apply();
-   this.scale(10,10,10);
-   this.sphere.display();
-   
-
-  if (this.displayNormals)  
-    this.objects[this.selectedObject].enableNormalViz();
-  else
-      this.objects[this.selectedObject].disableNormalViz();
-    
-    
-  this.objects[this.selectedObject].display();
-  
-
-  this.popMatrix();
-    }
-    // ---- END Primitive drawing section
-    
-if(this.objects[this.selectedObject]==this.panorama){
-   this.pushMatrix();
-   this.scale(50,50,50);
-   this.panorama.display();
-   this.popMatrix();
-}
-   
-   
+    this.garden.display();
   }
 }
