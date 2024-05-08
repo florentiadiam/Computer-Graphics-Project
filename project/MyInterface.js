@@ -22,11 +22,14 @@ export class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'displayAxis').name('Display Axis');
         this.gui.add(this.scene, 'displayNormals').name("Display normals");
         
-        this.gui.add(this.scene, 'selectedObject', this.scene.objectIDs).name('Selected Object').onChange(this.scene.updateObjectComplexity.bind(this.scene));
+        //this.gui.add(this.scene, 'selectedObject', this.scene.objectIDs).name('Selected Object').onChange(this.scene.updateObjectComplexity.bind(this.scene));
 
 
         //Slider element in GUI
-        this.gui.add(this.scene, 'scaleFactor', 0.1, 5).name('Scale Factor');
+        this.gui.add(this.scene, 'scaleFactor', 0.5, 3).name('Scale Factor');
+
+        this.gui.add(this.scene, 'speedFactor', 0.1, 3).name('Speed Factor')
+        
         this.initKeys();
 
         return true;
