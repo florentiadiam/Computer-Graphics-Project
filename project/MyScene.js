@@ -161,15 +161,19 @@ this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
 
 
 update(t) {
-  
+  const amplitude = 1; 
+  const frequency = 2 * Math.PI / 1000;  //1000ms=1s
+  const phase = Math.PI / 2; 
   this.setUpdatePeriod(16);
   //console.log("t:", t); // Log current time
   //console.log("Previous Time:", this.previousTime); // Log previous time
-
-    var delta = t - this.previousTime; // Calculate delta time
-    this.checkkeyes(delta);
+  const currentTime = Date.now();
+  const verticalPosition = amplitude * Math.sin(frequency * currentTime + phase);
+  var delta = t - this.previousTime; // Calculate delta time
+  this.checkkeyes(delta);
 
   this.previousTime = t;
+  this.bee.y = verticalPosition;
 }
 
 //Check if keyes are pressed

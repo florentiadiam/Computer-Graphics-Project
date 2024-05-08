@@ -58,10 +58,10 @@ export class MyBee extends CGFobject {
 
     display(){
         
-this.x=0   // x position
-this.y=0  //y position
-this.z=0 //z position
-this.angle=0 //YY angle
+    this.x=0   // x position
+    this.y=0  //y position
+    this.z=0 //z position
+    this.angle=0 //YY angle
 
 
         //Head
@@ -131,6 +131,14 @@ this.angle=0 //YY angle
          
         this.scene.gl.blendFunc(this.scene.gl.SRC_ALPHA, this.scene.gl.ONE_MINUS_SRC_ALPHA);
         this.scene.gl.enable(this.scene.gl.BLEND);
+
+        // Calculate wing rotation angle    
+        const currentTime = Date.now();
+        const wingRotationSpeed = 0.5; 
+        const wingRotationAmplitude = Math.PI / 8; 
+        const wingRotationAngle = wingRotationAmplitude * Math.sin(wingRotationSpeed * currentTime);
+
+        this.scene.rotate(wingRotationAngle, 0, 1, 0); // Rotate around the pivot point
         this.wings.display();
         
         this.scene.popMatrix();
