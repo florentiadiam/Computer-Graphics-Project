@@ -137,7 +137,7 @@ export class MyBee extends CGFobject {
         const wingRotationSpeed = 0.5; 
         const wingRotationAmplitude = Math.PI / 8; 
         const wingRotationAngle = wingRotationAmplitude * Math.sin(wingRotationSpeed * currentTime);
-
+        
         this.scene.rotate(wingRotationAngle, 0, 1, 0); // Rotate around the pivot point
         this.wings.display();
         

@@ -14,7 +14,7 @@ import { MySphere } from "./MySphere.js";
 export class MyScene extends CGFscene {
   constructor() {
     super();
-
+    this.setUpdatePeriod(16);
     this.previousPosition = { x: 0, z: 0 }; // Assuming initial position is (0, 0)
     this.previousAngle = 0; // Assuming initial position is (0, 0)
     this.angle = 0; // Initial angle
@@ -164,7 +164,7 @@ update(t) {
   const amplitude = 1; 
   const frequency = 2 * Math.PI / 1000;  //1000ms=1s
   const phase = Math.PI / 2; 
-  this.setUpdatePeriod(16);
+
   //console.log("t:", t); // Log current time
   //console.log("Previous Time:", this.previousTime); // Log previous time
   const currentTime = Date.now();
