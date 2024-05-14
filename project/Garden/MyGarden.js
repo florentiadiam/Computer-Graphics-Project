@@ -74,6 +74,9 @@ export class MyGarden extends CGFobject {
             this.flower.display();
             this.scene.popMatrix();
         }
+        this.x=0;
+        this.y=0;
+        this.z=0;
     }
 }
 
