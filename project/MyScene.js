@@ -4,6 +4,7 @@ import { MyGarden } from "./Garden/MyGarden.js";
 import { MyHive } from "./MyHive.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
+import { MyPollen } from "./MyPollen.js";
 import { MySphere } from "./MySphere.js";
 import { MyRockSet } from "./Rocks/MyRockSet.js";
 
