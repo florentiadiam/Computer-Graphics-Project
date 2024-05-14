@@ -1,10 +1,10 @@
 import { CGFappearance, CGFaxis, CGFcamera, CGFlight, CGFscene, CGFtexture } from "../lib/CGF.js";
 import { MyFlower } from "./Garden/MyFlower.js";
 import { MyGarden } from "./Garden/MyGarden.js";
+import { MyPollen } from "./Garden/MyPollen.js";
 import { MyHive } from "./MyHive.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
-import { MyPollen } from "./MyPollen.js";
 import { MySphere } from "./MySphere.js";
 import { MyRockSet } from "./Rocks/MyRockSet.js";
 import { MyBee } from "./bee/MyBee.js";
@@ -315,26 +315,26 @@ update(t) {
       this.pushMatrix();
 
     
-  this.pushMatrix();
-  this.terainMaterial.apply();
-  this.scale(30, 30, 30);
-  this.rotate(-Math.PI / 2.0, 1, 0, 0);
-  this.translate(0,0,-0.25);
-  this.plane.display();
-  this.popMatrix();
+  // this.pushMatrix();
+  // this.terainMaterial.apply();
+  // this.scale(30, 30, 30);
+  // this.rotate(-Math.PI / 2.0, 1, 0, 0);
+  // this.translate(0,0,-0.25);
+  // this.plane.display();
+  // this.popMatrix();
 
-  //rocks display
-   this.pushMatrix()
-   this.translate(8.5,-7.5,8);
-   this.rockset.display() 
-   this.popMatrix()
+  // //rocks display
+  //  this.pushMatrix()
+  //  this.translate(8.5,-7.5,8);
+  //  this.rockset.display() 
+  //  this.popMatrix()
   
-   //Hive display
-   this.pushMatrix();
-   this.translate(9,-2.5,8)
-   this.rotate(Math.PI,0,1,0)
-   this.hive.display();
-   this.popMatrix()
+  //  //Hive display
+  //  this.pushMatrix();
+  //  this.translate(9,-2.5,8)
+  //  this.rotate(Math.PI,0,1,0)
+  //  this.hive.display();
+  //  this.popMatrix()
 
   //garden display
    this.pushMatrix()
@@ -344,18 +344,18 @@ update(t) {
    this.popMatrix();
    this.popMatrix();
 
-  //bee dsplay
-  this.pushMatrix();
-  //updating coordinates of bee
-  this.translate(this.bee.x,this.bee.y,this.bee.z)
-  this.rotate(this.bee.angle, 0, 1, 0); // Rotate around YY axis
-  this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
-  this.bee.display();
-  this.popMatrix();
+  // //bee dsplay
+  // this.pushMatrix();
+  // //updating coordinates of bee
+  // this.translate(this.bee.x,this.bee.y,this.bee.z)
+  // this.rotate(this.bee.angle, 0, 1, 0); // Rotate around YY axis
+  // this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+  // this.bee.display();
+  // this.popMatrix();
 
-  this.pushMatrix();
-  //this.pollen.display()
-  this.popMatrix();
+  // this.pushMatrix();
+  // //this.pollen.display()
+  // this.popMatrix();
 
   }
 }
