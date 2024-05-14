@@ -1,6 +1,9 @@
 import { CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFtexture } from "../lib/CGF.js";
+import { MyFlower } from "./Garden/MyFlower.js";
+import { MyHive } from "./MyHive.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
+import { MyPollen } from "./MyPollen.js";
 import { MySphere } from "./MySphere.js";
 import { MyRockSet } from "./Rocks/MyRockSet.js";
 
@@ -37,7 +40,9 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this,30);
     this.sphere=new MySphere(this,50,50,false);
     this.rockset = new MyRockSet(this);
-
+    this.pollen = new MyPollen(this);
+    this.flower = new MyFlower(this, 2, 5,2,2,2,1,1,1,1,1,1,1);
+    this.hive = new MyHive(this);
 
     //Objects connected to MyInterface
     this.selectedObject = 1;
@@ -101,13 +106,16 @@ export class MyScene extends CGFscene {
     // Draw axis
     if (this.displayAxis) this.axis.display();
   
-    this.pushMatrix();
-    this.scale(100,100,100);
-    this.panorama.display();
-    this.popMatrix();
+    // this.pushMatrix();
+    // this.scale(100,100,100);
+    // this.panorama.display();
+    // this.popMatrix();
 
 
-    this.rockset.display();
-   
+    // this.rockset.display();
+    
+    // this.pollen.display();
+    this.hive.display();
+    //this.flower.display();
   }
 }
