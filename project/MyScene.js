@@ -299,7 +299,7 @@ update(t) {
     // Initialize Model-View matrix as identity (no transformation
     this.updateProjectionMatrix();
     this.loadIdentity();
-    
+
     // Apply transformations corresponding to the camera position relative to the origin
     this.applyViewMatrix();
 
@@ -341,7 +341,8 @@ update(t) {
   this.popMatrix();
 
   this.pushMatrix();
-  //this.pollen.display()
+  this.translate(this.pollen.x,this.pollen.y,this.pollen.z)
+  this.pollen.display()
   this.popMatrix();
 
   }
