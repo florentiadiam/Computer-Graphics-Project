@@ -330,10 +330,10 @@ this.popMatrix();
   //this.rock.display();
   //this.rockset.display();
 
-      this.pushMatrix();
-    this.scale(200,200,200);
-    this.panorama.display();
-    this.popMatrix();
+//       this.pushMatrix();
+//     this.scale(200,200,200);
+//     this.panorama.display();
+//     this.popMatrix();
 
   this.pushMatrix();
   //this.scale(5,5,5);

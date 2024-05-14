@@ -11,12 +11,13 @@ export class MyRockSet extends CGFobject {
         this.RockScale = [];
         this.RockPos_x = [];
         this.RockPos_y = [];
-        this.numRocks = Math.random() * (20 - 5) + 5;
+        this.numRocks = 300;
+        //this.numRocks = Math.random() * (20 - 5) + 5;
         for (var i = 0; i <= this.numRocks; i++) {
             this.RockScale.push(Math.random() * (1 - 0.5) + 0.5);
             this.RockAngle.push(Math.random() * (Math.PI / 4 + Math.PI / 4)-Math.PI / 4);
-            this.RockPos_x.push(Math.random()*(15+15)-15)
-            this.RockPos_y.push(Math.random()*(15+15)-15)
+            this.RockPos_x.push(Math.random()*(5+5)-5)
+            this.RockPos_y.push(Math.random()*(5+5)-5)
         }
         this.plane = new MyPlane(this.scene,30);
         this.initMaterials();
@@ -48,7 +49,7 @@ export class MyRockSet extends CGFobject {
         this.plane.display();
         this.scene.popMatrix();
 
-        for (let i = 0; i < this.numRocks; i++) {
+        for (let i = 0; i < 100; i++) {
             this.scene.pushMatrix();
             this.rockMaterial.apply();
             this.scene.translate(this.RockPos_x[i],0.4,this.RockPos_y[i]);
@@ -58,5 +59,29 @@ export class MyRockSet extends CGFobject {
             this.rock.display();
             this.scene.popMatrix();
         }
+
+        for (let j=100; j< 200; j++){
+            this.scene.pushMatrix();
+            this.rockMaterial.apply();
+            this.scene.translate(this.RockPos_x[j]/2,1.4,this.RockPos_y[j]/2);
+            this.scene.scale(this.RockScale[j], this.RockScale[j], this.RockScale[j]);
+            this.scene.rotate(this.RockAngle[j], 0, 0, 1);
+            this.rock = new MyRock(this.scene, 10, 10, false);
+            this.rock.display();
+            this.scene.popMatrix();
+        }
+
+        for (let z=200; z< 300; z++){
+            this.scene.pushMatrix();
+            this.rockMaterial.apply();
+            this.scene.translate(this.RockPos_x[z]/4,2.4,this.RockPos_y[z]/4);
+            this.scene.scale(this.RockScale[z], this.RockScale[z], this.RockScale[z]);
+            this.scene.rotate(this.RockAngle[z], 0, 0, 1);
+            this.rock = new MyRock(this.scene, 10, 10, false);
+            this.rock.display();
+            this.scene.popMatrix();
+        }
+
+
     }
 }
