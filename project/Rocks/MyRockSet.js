@@ -42,12 +42,12 @@ export class MyRockSet extends CGFobject {
     }
 
     display() {
-        this.scene.pushMatrix();
-        this.terainMaterial.apply();
-        this.scene.scale(30, 30, 30);
-        this.scene.rotate(-Math.PI / 2.0, 1, 0, 0);
-        this.plane.display();
-        this.scene.popMatrix();
+        // this.scene.pushMatrix();
+        // this.terainMaterial.apply();
+        // this.scene.scale(30, 30, 30);
+        // this.scene.rotate(-Math.PI / 2.0, 1, 0, 0);
+        // this.plane.display();
+        // this.scene.popMatrix();
 
         for (let i = 0; i < 100; i++) {
             this.scene.pushMatrix();
