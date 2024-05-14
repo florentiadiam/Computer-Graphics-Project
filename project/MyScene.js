@@ -24,6 +24,7 @@ export class MyScene extends CGFscene {
     this.velocity = [Math.cos(this.angle), Math.sin(this.angle)]; // Initial velocity vector
     this.speedFactor = 0; // Initial speed factor
     this.scaleFactor = 0; // Initial speed factor
+    
 }
 initLights() {
   // Light 0 
@@ -298,6 +299,7 @@ update(t) {
     // Initialize Model-View matrix as identity (no transformation
     this.updateProjectionMatrix();
     this.loadIdentity();
+    
     // Apply transformations corresponding to the camera position relative to the origin
     this.applyViewMatrix();
 
@@ -306,44 +308,41 @@ update(t) {
 
       this.pushMatrix();
 
-      this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
+    
 
-  
-
+  //rocks display
+   this.pushMatrix()
+   this.translate(0,-7.5,0)
    this.rockset.display() 
+   this.popMatrix()
+  
+   //Hive display
    this.pushMatrix();
-   this.translate(10,2.1,10)
+   this.translate(10,-5.2,10)
    this.rotate(Math.PI,0,1,0)
    this.hive.display();
    this.popMatrix()
 
+  //garden display
    this.pushMatrix()
-   this.translate(0,3.5,0)
+   this.translate(0,-3.5,0)
    this.scale(0.37,0.37,0.37)
-
    this.garden.display();
    this.popMatrix();
-this.popMatrix();
+   this.popMatrix();
 
-
-
-  //this.rock.display();
-  //this.rockset.display();
-
-//       this.pushMatrix();
-//     this.scale(200,200,200);
-//     this.panorama.display();
-//     this.popMatrix();
-
+  //bee dsplay
   this.pushMatrix();
-  //this.scale(5,5,5);
-  //console.log("Bee Translation:", this.bee.x, this.bee.y, this.bee.z);
+  //updating coordinates of bee
   this.translate(this.bee.x,this.bee.y,this.bee.z)
   this.rotate(this.bee.angle, 0, 1, 0); // Rotate around YY axis
   this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
   this.bee.display();
-  //this.sphere.display();
- this.popMatrix();
+  this.popMatrix();
+
+  this.pushMatrix();
+  //this.pollen.display()
+  this.popMatrix();
 
   }
 }
