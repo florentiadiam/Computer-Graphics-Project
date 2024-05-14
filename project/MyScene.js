@@ -7,6 +7,7 @@ import { MyPlane } from "./MyPlane.js";
 import { MyPollen } from "./MyPollen.js";
 import { MySphere } from "./MySphere.js";
 import { MyRockSet } from "./Rocks/MyRockSet.js";
+import { MyBee } from "./bee/MyBee.js";
 
 /**
  * MyScene
@@ -15,32 +16,99 @@ import { MyRockSet } from "./Rocks/MyRockSet.js";
 export class MyScene extends CGFscene {
   constructor() {
     super();
-  }
-  initLights() {
-    // Light 0 
-    this.lights[0].setPosition(15, 0, 5, 1);
-    this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
-    this.lights[0].enable();
-    this.lights[0].update();
-
-    // Light 1
-    this.lights[1] = new CGFlight(this, 1); 
-    this.lights[1].setPosition(10, 10, 10, 1); 
-    this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0); 
-    this.lights[1].setLinearAttenuation(0.2); 
-    this.lights[1].enable(); 
-    this.lights[1].update(); 
-
-    // Light 2 
-    this.lights[2] = new CGFlight(this, 2);
-    this.lights[2].setPosition(0, 15, 0, 1);
-    this.lights[2].setDiffuse(1.0, 1.0, 1.0, 1.0);
-    this.lights[2].enable();
-    this.lights[2].update();
+    this.setUpdatePeriod(16);
+    this.previousPosition = { x: 0, z: 0 }; // Assuming initial position is (0, 0)
+    this.previousAngle = 0; // Assuming initial position is (0, 0)
+    this.angle = 0; // Initial angle
+    this.speed = 0; // Initial speed
+    this.velocity = [Math.cos(this.angle), Math.sin(this.angle)]; // Initial velocity vector
+    this.speedFactor = 0; // Initial speed factor
+    this.scaleFactor = 0; // Initial speed factor
 }
+initLights() {
+  // Light 0 
+  this.lights[0].setPosition(15, 0, 5, 1);
+  this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
+  this.lights[0].enable();
+  this.lights[0].update();
+
+  // Light 1
+  this.lights[1] = new CGFlight(this, 1); 
+  this.lights[1].setPosition(10, 10, 10, 1); 
+  this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0); 
+  this.lights[1].setLinearAttenuation(0.2); 
+  this.lights[1].enable(); 
+  this.lights[1].update(); 
+
+  // Light 2 
+  this.lights[2] = new CGFlight(this, 2);
+  this.lights[2].setPosition(0, 15, 0, 1);
+  this.lights[2].setDiffuse(1.0, 1.0, 1.0, 1.0);
+  this.lights[2].enable();
+  this.lights[2].update();
+}
+  
+
+turn(delta) {
+  this.delta=delta
+
+  const rotationAngle = this.speedFactor * this.delta;
+  this.bee.angle += rotationAngle * (Math.PI / 180);
+ 
+  // Normalize the angle to keep it within 0 to 2*PI range
+  while (this.bee.angle < 0) {
+      this.bee.angle += 2 * Math.PI;
+  }
+
+  // Update velocity vector while maintaining direction
+  const norm = Math.sqrt(this.velocity[0] ** 2 + this.velocity[1] ** 2);
+  this.velocity = [
+      Math.cos(this.bee.angle) * norm,
+      Math.sin(this.bee.angle) * norm
+  ];
+}
+// Method to accelerate the bee
+accelerate(delta) {
+  this.delta=delta;
+  // Define acceleration and deceleration constants
+  const acceleration = 0.1*this.speedFactor;
+  const deceleration = 0.05*this.speedFactor; 
+
+  // Accelerate
+  if(this.delta>0){
+    this.speed += acceleration * this.delta;
+  }else 
+  {
+    // Decelerate
+    this.speed += deceleration * this.delta;
+  }
+
+  //if speed goes negative go to 0,0,0
+  if (this.speed < 0) {
+    this.speed = 0;
+  }
+  
+  // Clamp speed to prevent it from becoming negative
+  this.speed = Math.max(0, this.speed);
+
+  // Update position based on speed
+  this.bee.x += this.speed;
+
+  // Update norm of velocity vector while maintaining direction
+  const norm = Math.sqrt(this.velocity[0] ** 2 + this.velocity[1] ** 2);
+  if (norm !== 0) {
+      this.velocity = [
+          (this.velocity[0] / norm) * this.speed,
+          (this.velocity[1] / norm) * this.speed
+      ];
+  }
+}
+
   init(application) {
     super.init(application);
-    
+    this.speedFactor=1
+    this.previousTime=0;
+
     this.initCameras();
     this.initLights();
 
@@ -52,6 +120,7 @@ export class MyScene extends CGFscene {
     this.gl.enable(this.gl.CULL_FACE);
     this.gl.depthFunc(this.gl.LEQUAL);
 
+  
     this.enableTextures(true);
     this.texturePanorama = new CGFtexture(this, 'images/panorama4.jpg');
 
@@ -67,6 +136,7 @@ export class MyScene extends CGFscene {
     this.flower = new MyFlower(this, 2, 5,2,2,2,1,1,1,1,1,1,1);
     this.hive = new MyHive(this);
     this.garden=new MyGarden(this,10)
+    this.bee = new MyBee(this);
 
     //Objects connected to MyInterface
     this.selectedObject = 1;
@@ -111,15 +181,120 @@ export class MyScene extends CGFscene {
     }
 }
 
+
+
+update(t) {
+  const amplitude = 1; 
+  const frequency = 2 * Math.PI / 1000;  //1000ms=1s
+  const phase = Math.PI / 2; 
+
+  //console.log("t:", t); // Log current time
+  //console.log("Previous Time:", this.previousTime); // Log previous time
+  const currentTime = Date.now();
+  const verticalPosition = amplitude * Math.sin(frequency * currentTime + phase);
+  var delta = t - this.previousTime; // Calculate delta time
+  this.checkkeyes(delta);
+
+  this.previousTime = t;
+  this.bee.y = verticalPosition;
+}
+
+//Check if keyes are pressed
+  checkkeyes(delta){
+    //console.log("Delta:", delta);
+    //console.log("Bee before translation - X:", this.bee.x, "Y:", this.bee.y, "Z:", this.bee.z);
+    this.delta=delta;
+
+    var text="Keys pressed: ";
+    var keysPressed=false;
+
+    //Accelerate forward if W is pressed
+    if (this.gui.isKeyPressed("KeyW")) {
+      text+=" W ";
+      keysPressed=true;
+      console.log("Bee Translation with W:",this.bee.x)
+      this.previousPosition = { x: this.bee.x, z: this.bee.z };
+      this.previousAngle= this.bee.angle
+      this.accelerate(delta); // Accelerate when "W" is pressed  
+    } 
+
+//Brake if S is pressed
+    if (this.gui.isKeyPressed("KeyS"))        {
+      text+=" S ";
+      keysPressed=true;
+      console.log("Bee Translation with A:", this.bee.x);
+      this.previousPosition = { x: this.bee.x, z: this.bee.z };
+      this.previousAngle= this.bee.angle
+      this.accelerate(-delta);
+    }
+    
+    //Left Rotation if A is pressed
+    if (this.gui.isKeyPressed("KeyA"))        {
+      text+=" A ";
+      keysPressed=true;
+      console.log("Bee left Rotation with A:", this.bee.angle);
+      this.previousPosition = { x: this.bee.x, z: this.bee.z };
+      this.previousAngle= this.bee.angle
+      this.turn(delta);
+
+    }
+
+   //Right Rotation  if D is pressed   
+    if (this.gui.isKeyPressed("KeyD"))        {
+      text+=" D ";
+      keysPressed=true;
+      console.log("Bee Right Rotation with D:", this.bee.angle);
+      this.previousPosition = { x: this.bee.x, z: this.bee.z };
+      this.previousAngle= this.bee.angle
+      this.turn(-delta);
+
+    }
+
+       //Reset bee is R is pressed    
+       if (this.gui.isKeyPressed("KeyR"))        {
+        text+=" R ";
+        keysPressed=true;
+        this.accelerate.speed=0;
+      }
+
+      //If a key is not pressed mantain the previous position of the bee
+     if (!keysPressed) {
+      // Restore previous position if no keys are pressed
+      this.bee.x = this.previousPosition.x;
+      this.bee.z = this.previousPosition.z;
+      this.bee.angle= this.previousAngle;
+  } else 
+  {
+      // Update previous position if keys are pressed
+      this.previousPosition = { x: this.bee.x, z: this.bee.z };
+      this.previousAngle=this.bee.angle;
+  }
+
+        if (keysPressed)
+        console.log(text);
+
+  }
+
+  updateSpeedFactor(value) {
+    this.speedFactor = value;
+}
+  
   display() {
     for (let i = 0; i < this.lights.length; i++) {
       this.lights[i].enable();
       this.lights[i].update();
   }
+   
+    var currentTime = Date.now();
+
+    // Call the update function with the current time
+    this.update(currentTime);
+    
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene
     this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
     this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
+
     // Initialize Model-View matrix as identity (no transformation
     this.updateProjectionMatrix();
     this.loadIdentity();
@@ -148,5 +323,27 @@ export class MyScene extends CGFscene {
 
    this.garden.display();
    this.popMatrix();
+this.popMatrix();
+
+
+
+  //this.rock.display();
+  //this.rockset.display();
+
+      this.pushMatrix();
+    this.scale(200,200,200);
+    this.panorama.display();
+    this.popMatrix();
+
+  this.pushMatrix();
+  //this.scale(5,5,5);
+  //console.log("Bee Translation:", this.bee.x, this.bee.y, this.bee.z);
+  this.translate(this.bee.x,this.bee.y,this.bee.z)
+  this.rotate(this.bee.angle, 0, 1, 0); // Rotate around YY axis
+  this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+  this.bee.display();
+  //this.sphere.display();
+ this.popMatrix();
+
   }
 }
