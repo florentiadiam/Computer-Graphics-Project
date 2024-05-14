@@ -157,6 +157,12 @@ accelerate(delta) {
     this.appearance1.setTexture(this.texture1);
     this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
 
+    this.grassTexture = new CGFtexture(this, "images/grass.jpg");
+    this.terainMaterial = new CGFappearance(this);
+    this.terainMaterial.setTexture(this.grassTexture);
+    this.terainMaterial.setTextureWrap('REPEAT', 'REPEAT');
+  
+
   }
 
   initCameras() {
@@ -309,16 +315,23 @@ update(t) {
       this.pushMatrix();
 
     
+  this.pushMatrix();
+  this.terainMaterial.apply();
+  this.scale(30, 30, 30);
+  this.rotate(-Math.PI / 2.0, 1, 0, 0);
+  this.translate(0,0,-0.25);
+  this.plane.display();
+  this.popMatrix();
 
   //rocks display
    this.pushMatrix()
-   this.translate(0,-7.5,0)
+   this.translate(8.5,-7.5,8);
    this.rockset.display() 
    this.popMatrix()
   
    //Hive display
    this.pushMatrix();
-   this.translate(10,-5.2,10)
+   this.translate(9,-2.5,8)
    this.rotate(Math.PI,0,1,0)
    this.hive.display();
    this.popMatrix()
