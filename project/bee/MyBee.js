@@ -13,7 +13,9 @@ export class MyBee extends CGFobject {
         this.sting = new MyStem(this.scene,50,6);
         this.initMaterials();
     }
+    update
     initMaterials() {
+
         this.blackcolor = new CGFappearance(this.scene);
         this.blackcolor.setAmbient(0, 0, 0, 1.0); 
         this.blackcolor.setDiffuse(0, 0, 0, 1.0); 
@@ -50,19 +52,18 @@ export class MyBee extends CGFobject {
          this.appearance2.setSpecular(0.1, 0.1, 0.1, 1.0);
          this.appearance2.setShininess(5.0);
 
-         // Set the texture for wings
-         this.appearance3 = new CGFappearance(this.scene);
-         this.beewingstexture = new CGFtexture(this.scene, "images/wingscolor.png");
-         this.appearance3.setTexture(this.beewingstexture);
-         this.appearance3.setTextureWrap('REPEAT', 'REPEAT');
-         this.appearance3.setAmbient(1, 1, 1, 1.0);
-         this.appearance3.setDiffuse(1, 1, 1, 1.0);
-         this.appearance3.setSpecular(0.1, 0.1, 0.1, 1.0);
-         this.appearance3.setShininess(5.0);
+        
      
     }
 
     display(){
+        
+    this.x=0   // x position
+    this.y=0  //y position
+    this.z=0 //z position
+    this.angle=0 //YY angle
+
+
         //Head
         this.scene.pushMatrix();
         this.appearance1.apply();
@@ -124,14 +125,24 @@ export class MyBee extends CGFobject {
         this.sting.display();
         this.scene.popMatrix();
 
+
         //wings
         this.scene.pushMatrix();
-         //this.appearance3.apply()
-        // this.gl.enable(this.gl.BLEND);
-        // this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
-        // this.gl.colorMask(true, true, true, true); // Enable writing to alpha channel
-        // his.gl.uniform4f(uColorLocation, r, g, b, a); // Set color with alpha
+         
+        this.scene.gl.blendFunc(this.scene.gl.SRC_ALPHA, this.scene.gl.ONE_MINUS_SRC_ALPHA);
+        this.scene.gl.enable(this.scene.gl.BLEND);
+
+        // Calculate wing rotation angle    
+        const currentTime = Date.now();
+        const wingRotationSpeed = 0.5; 
+        const wingRotationAmplitude = Math.PI / 8; 
+        const wingRotationAngle = wingRotationAmplitude * Math.sin(wingRotationSpeed * currentTime);
+        
+        this.scene.rotate(wingRotationAngle, 0, 1, 0); // Rotate around the pivot point
         this.wings.display();
+        
         this.scene.popMatrix();
+        this.scene.gl.disable(this.scene.gl.BLEND)
+
     }
 }
