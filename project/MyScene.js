@@ -1,11 +1,7 @@
 import { CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFtexture } from "../lib/CGF.js";
-import { MyFlower } from "./Garden/MyFlower.js";
-import { MyHive } from "./MyHive.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
-import { MyPollen } from "./MyPollen.js";
 import { MySphere } from "./MySphere.js";
-import { MyRockSet } from "./Rocks/MyRockSet.js";
 
 /**
  * MyScene
@@ -40,9 +36,7 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this,30);
     this.sphere=new MySphere(this,50,50,false);
     this.rockset = new MyRockSet(this);
-    this.pollen = new MyPollen(this);
-    this.flower = new MyFlower(this, 2, 5,2,2,2,1,1,1,1,1,1,1);
-    this.hive = new MyHive(this);
+
 
     //Objects connected to MyInterface
     this.selectedObject = 1;
@@ -105,17 +99,51 @@ export class MyScene extends CGFscene {
 
     // Draw axis
     if (this.displayAxis) this.axis.display();
+
+      this.pushMatrix();
+
+      this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
+
   
-    // this.pushMatrix();
-    // this.scale(100,100,100);
-    // this.panorama.display();
-    // this.popMatrix();
 
+this.popMatrix();
 
-    // this.rockset.display();
+    // ---- BEGIN Primitive drawing section
+
+   /* this.pushMatrix();
+    this.appearance.apply();
+    this.translate(0,-100,0);
+    this.scale(400,400,400);
+    this.rotate(-Math.PI/2.0,1,0,0);
+    this.plane.display();
+    this.popMatrix();
+    */
+ if(this.objects[this.selectedObject]==this.sphere){
+
+   this.pushMatrix();
+   this.appearance1.apply();
+   this.scale(10,10,10);
+   this.sphere.display();
+
+  if (this.displayNormals)  
+    this.objects[this.selectedObject].enableNormalViz();
+  else
+      this.objects[this.selectedObject].disableNormalViz();
     
-    // this.pollen.display();
-    this.hive.display();
-    //this.flower.display();
+  this.objects[this.selectedObject].display();
+
+  this.popMatrix();
+    }
+    // ---- END Primitive drawing section
+    
+// if(this.objects[this.selectedObject]==this.panorama){
+//    this.pushMatrix();
+//    this.scale(200,200,200);
+//    this.panorama.display();
+//    this.popMatrix();
+// }
+   //this.rock.display();
+   this.rockset.display();
+   
   }
 }
