@@ -8,6 +8,7 @@ import { MyPollen } from "./MyPollen.js";
 import { MySphere } from "./MySphere.js";
 import { MyRockSet } from "./Rocks/MyRockSet.js";
 import { MyBee } from "./bee/MyBee.js";
+import { MyRock } from "./Rocks/MyRock.js";
 
 /**
  * MyScene
@@ -26,6 +27,7 @@ export class MyScene extends CGFscene {
     this.scaleFactor = 0; // Initial speed factor
     
 }
+//Setting lights for the scene
 initLights() {
   // Light 0 
   this.lights[0].setPosition(15, 0, 5, 1);
@@ -49,7 +51,7 @@ initLights() {
   this.lights[2].update();
 }
   
-
+//Method to turn the bee
 turn(delta) {
   this.delta=delta
 
@@ -68,6 +70,7 @@ turn(delta) {
       Math.sin(this.bee.angle) * norm
   ];
 }
+
 // Method to accelerate the bee
 accelerate(delta) {
   this.delta=delta;
@@ -138,6 +141,7 @@ accelerate(delta) {
     this.hive = new MyHive(this);
     this.garden=new MyGarden(this,10)
     this.bee = new MyBee(this);
+    this.rock = new MyRock(this,5,5,5);
 
     //Objects connected to MyInterface
     this.selectedObject = 1;
@@ -353,10 +357,8 @@ update(t) {
   this.bee.display();
   this.popMatrix();
 
-  this.pushMatrix();
-  this.translate(this.pollen.x,this.pollen.y,this.pollen.z)
-  this.pollen.display()
-  this.popMatrix();
+
+
 
   }
 }
