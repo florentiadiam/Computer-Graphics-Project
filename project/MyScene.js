@@ -1,7 +1,11 @@
-import { CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFtexture } from "../lib/CGF.js";
+import { CGFappearance, CGFaxis, CGFcamera, CGFlight, CGFscene, CGFtexture } from "../lib/CGF.js";
+import { MyFlower } from "./Garden/MyFlower.js";
+import { MyGarden } from "./Garden/MyGarden.js";
+import { MyHive } from "./MyHive.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
+import { MyRockSet } from "./Rocks/MyRockSet.js";
 
 /**
  * MyScene
@@ -11,6 +15,28 @@ export class MyScene extends CGFscene {
   constructor() {
     super();
   }
+  initLights() {
+    // Light 0 
+    this.lights[0].setPosition(15, 0, 5, 1);
+    this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
+    this.lights[0].enable();
+    this.lights[0].update();
+
+    // Light 1
+    this.lights[1] = new CGFlight(this, 1); 
+    this.lights[1].setPosition(10, 10, 10, 1); 
+    this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0); 
+    this.lights[1].setLinearAttenuation(0.2); 
+    this.lights[1].enable(); 
+    this.lights[1].update(); 
+
+    // Light 2 
+    this.lights[2] = new CGFlight(this, 2);
+    this.lights[2].setPosition(0, 15, 0, 1);
+    this.lights[2].setDiffuse(1.0, 1.0, 1.0, 1.0);
+    this.lights[2].enable();
+    this.lights[2].update();
+}
   init(application) {
     super.init(application);
     
@@ -36,7 +62,10 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this,30);
     this.sphere=new MySphere(this,50,50,false);
     this.rockset = new MyRockSet(this);
-
+    this.pollen = new MyPollen(this);
+    this.flower = new MyFlower(this, 2, 5,2,2,2,1,1,1,1,1,1,1);
+    this.hive = new MyHive(this);
+    this.garden=new MyGarden(this,10)
 
     //Objects connected to MyInterface
     this.selectedObject = 1;
@@ -57,12 +86,7 @@ export class MyScene extends CGFscene {
     this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
 
   }
-  initLights() {
-    this.lights[0].setPosition(15, 0, 5, 1);
-    this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
-    this.lights[0].enable();
-    this.lights[0].update();
-  }
+
   initCameras() {
     this.camera = new CGFcamera(
       1.0,
@@ -87,6 +111,10 @@ export class MyScene extends CGFscene {
 }
 
   display() {
+    for (let i = 0; i < this.lights.length; i++) {
+      this.lights[i].enable();
+      this.lights[i].update();
+  }
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene
     this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
@@ -106,44 +134,18 @@ export class MyScene extends CGFscene {
 
   
 
-this.popMatrix();
-
-    // ---- BEGIN Primitive drawing section
-
-   /* this.pushMatrix();
-    this.appearance.apply();
-    this.translate(0,-100,0);
-    this.scale(400,400,400);
-    this.rotate(-Math.PI/2.0,1,0,0);
-    this.plane.display();
-    this.popMatrix();
-    */
- if(this.objects[this.selectedObject]==this.sphere){
-
+   this.rockset.display() 
    this.pushMatrix();
-   this.appearance1.apply();
-   this.scale(10,10,10);
-   this.sphere.display();
+   this.translate(10,2.1,10)
+   this.rotate(Math.PI,0,1,0)
+   this.hive.display();
+   this.popMatrix()
 
-  if (this.displayNormals)  
-    this.objects[this.selectedObject].enableNormalViz();
-  else
-      this.objects[this.selectedObject].disableNormalViz();
-    
-  this.objects[this.selectedObject].display();
+   this.pushMatrix()
+   this.translate(0,3.5,0)
+   this.scale(0.37,0.37,0.37)
 
-  this.popMatrix();
-    }
-    // ---- END Primitive drawing section
-    
-// if(this.objects[this.selectedObject]==this.panorama){
-//    this.pushMatrix();
-//    this.scale(200,200,200);
-//    this.panorama.display();
-//    this.popMatrix();
-// }
-   //this.rock.display();
-   this.rockset.display();
-   
+   this.garden.display();
+   this.popMatrix();
   }
 }

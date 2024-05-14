@@ -53,6 +53,7 @@ export class MyGarden extends CGFobject {
 	}
 
     display(){
+        /*
         this.scene.pushMatrix();
         this.scene.translate(0, -10, 0);
         this.scene.scale(80, 80, 80);
@@ -60,6 +61,7 @@ export class MyGarden extends CGFobject {
         this.groundMaterial1.apply();
         this.plane.display();
         this.scene.popMatrix();
+        */
 
         for (let i = 0; i < this.numofFlowers; i++) {
             this.scene.pushMatrix();
