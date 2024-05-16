@@ -53,16 +53,10 @@ initLights() {
   
 //Method to turn the bee
 turn(delta) {
-  this.delta=delta
 
-  const rotationAngle = this.speedFactor * this.delta;
+  const rotationAngle = this.speedFactor * delta;
   this.bee.angle += rotationAngle * (Math.PI / 180);
  
-  // Normalize the angle to keep it within 0 to 2*PI range
-  while (this.bee.angle < 0) {
-      this.bee.angle += 2 * Math.PI;
-  }
-
   // Update velocity vector while maintaining direction
   const norm = Math.sqrt(this.velocity[0] ** 2 + this.velocity[1] ** 2);
   this.velocity = [
@@ -126,7 +120,7 @@ accelerate(delta) {
 
   
     this.enableTextures(true);
-    this.texturePanorama = new CGFtexture(this, 'images/panorama4.jpg');
+    this.texturePanorama = new CGFtexture(this, 'images/panorama.jpg');
 
     //Initialize scene objects
     this.objects = [this.axis,this.panorama, this.sphere];
@@ -139,7 +133,7 @@ accelerate(delta) {
     this.pollen = new MyPollen(this);
     this.flower = new MyFlower(this, 2, 5,2,2,2,1,1,1,1,1,1,1);
     this.hive = new MyHive(this);
-    this.garden=new MyGarden(this,10)
+    this.garden=new MyGarden(this,20)
     this.bee = new MyBee(this);
     this.rock = new MyRock(this,5,5,5);
 
@@ -201,9 +195,10 @@ update(t) {
 
   //console.log("t:", t); // Log current time
   //console.log("Previous Time:", this.previousTime); // Log previous time
-  const currentTime = Date.now();
+  const currentTime = t
   const verticalPosition = amplitude * Math.sin(frequency * currentTime + phase);
   var delta = t - this.previousTime; // Calculate delta time
+
   this.checkkeyes(delta);
 
   this.previousTime = t;
@@ -214,7 +209,6 @@ update(t) {
   checkkeyes(delta){
     //console.log("Delta:", delta);
     //console.log("Bee before translation - X:", this.bee.x, "Y:", this.bee.y, "Z:", this.bee.z);
-    this.delta=delta;
 
     var text="Keys pressed: ";
     var keysPressed=false;
@@ -352,12 +346,16 @@ update(t) {
   this.pushMatrix();
   //updating coordinates of bee
   this.translate(this.bee.x,this.bee.y,this.bee.z)
+  console.log(this.bee.angle)
   this.rotate(this.bee.angle, 0, 1, 0); // Rotate around YY axis
   this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
   this.bee.display();
   this.popMatrix();
 
-///vejnfeiunfouie
+this.pushMatrix();
+this.scale(100,100,100);
+this.panorama.display();
+this.popMatrix();
 
 
   }

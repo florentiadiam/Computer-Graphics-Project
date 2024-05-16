@@ -13,6 +13,9 @@ export class MyBee extends CGFobject {
         this.legs = new MyLegs(this.scene);
         this.sting = new MyStem(this.scene, 50, 6)
         this.initMaterials();
+        this.angle=0 //YY angle
+     
+
     }
     update
     initMaterials() {
@@ -58,13 +61,11 @@ export class MyBee extends CGFobject {
     }
 
     display(){
+
+        this.x=0   // x position
+        this.y=0  //y position
+        this.z=0 //z position
         
-    this.x=0   // x position
-    this.y=0  //y position
-    this.z=0 //z position
-    this.angle=0 //YY angle
-
-
         //Head
         this.scene.pushMatrix();
         this.appearance1.apply();

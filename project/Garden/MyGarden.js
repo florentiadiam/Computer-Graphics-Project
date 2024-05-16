@@ -27,6 +27,7 @@ export class MyGarden extends CGFobject {
         this.petalAngle1 = [];
         this.petalAngle2 = [];
         this.stemSize = [];
+        this.flowers=
         this.stemRadius =[];
         for (let i = 0; i < numofFlowers; i++) {
             this.pos_x.push(Math.random() * (45 + 45) - 45);
