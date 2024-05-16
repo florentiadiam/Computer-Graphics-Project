@@ -120,7 +120,7 @@ accelerate(delta) {
 
   
     this.enableTextures(true);
-    this.texturePanorama = new CGFtexture(this, 'images/panorama.jpg');
+    this.texturePanorama = new CGFtexture(this, 'images/panoramaa.jpg');
 
     //Initialize scene objects
     this.objects = [this.axis,this.panorama, this.sphere];
@@ -133,7 +133,7 @@ accelerate(delta) {
     this.pollen = new MyPollen(this);
     this.flower = new MyFlower(this, 2, 5,2,2,2,1,1,1,1,1,1,1);
     this.hive = new MyHive(this);
-    this.garden=new MyGarden(this,20)
+    this.garden=new MyGarden(this,100)
     this.bee = new MyBee(this);
     this.rock = new MyRock(this,5,5,5);
 
@@ -142,18 +142,6 @@ accelerate(delta) {
     this.displayAxis = true;
     this.displayNormals = false;
     this.scaleFactor = 1;
-
-   
-
-    this.texture = new CGFtexture(this, "images/terrain.jpg");
-    this.appearance = new CGFappearance(this);
-    this.appearance.setTexture(this.texture);
-    this.appearance.setTextureWrap('REPEAT', 'REPEAT');
-
-    this.texture1 = new CGFtexture(this, "images/earth.png");
-    this.appearance1 = new CGFappearance(this);
-    this.appearance1.setTexture(this.texture1);
-    this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
 
     this.grassTexture = new CGFtexture(this, "images/grass.jpg");
     this.terainMaterial = new CGFappearance(this);
@@ -315,28 +303,29 @@ update(t) {
     
   this.pushMatrix();
   this.terainMaterial.apply();
-  this.scale(30, 30, 30);
+  this.scale(85, 30, 85);
   this.rotate(-Math.PI / 2.0, 1, 0, 0);
-  this.translate(0,0,-0.25);
+  this.translate(0,0,-0.6);
   this.plane.display();
   this.popMatrix();
 
   //rocks display
    this.pushMatrix()
-   this.translate(8.5,-7.5,8);
+   this.translate(-5.5,-18,4);
    this.rockset.display() 
    this.popMatrix()
   
    //Hive display
    this.pushMatrix();
-   this.translate(9,-2.5,8)
-   this.rotate(Math.PI,0,1,0)
+   this.translate(-5.5,-13,4)
+   this.rotate(Math.PI/2,0,1,0)
    this.hive.display();
    this.popMatrix()
 
   //garden display
    this.pushMatrix()
-   this.translate(0,-3.5,0)
+   this.translate(0,-14,0)
+   this.rotate(Math.PI/2,0,1,0)
    this.scale(0.37,0.37,0.37)
    this.garden.display();
    this.popMatrix();
@@ -353,7 +342,7 @@ update(t) {
   this.popMatrix();
 
 this.pushMatrix();
-this.scale(100,100,100);
+this.scale(45,45,45);
 this.panorama.display();
 this.popMatrix();
 

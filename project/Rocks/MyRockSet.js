@@ -13,7 +13,7 @@ export class MyRockSet extends CGFobject {
         this.RockPos_y = [];
         this.rock =  new MyRock(this.scene, 10, 10, false);
         this.numRocks = 300;
-        //this.numRocks = Math.random() * (20 - 5) + 5;
+ 
         for (var i = 0; i <= this.numRocks; i++) {
             this.RockScale.push(Math.random() * (1 - 0.5) + 0.5);
             this.RockAngle.push(Math.random() * (Math.PI / 4 + Math.PI / 4)-Math.PI / 4);
@@ -29,26 +29,12 @@ export class MyRockSet extends CGFobject {
         this.rockMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
         this.rockMaterial.setSpecular(0.1, 0.1, 0.1, 1);
         this.rockMaterial.setShininess(10.0);
-        this.rockMaterial.loadTexture("images/rock.jpg");
+        this.rockMaterial.loadTexture("images/rocks.jpg");
         this.rockMaterial.setTextureWrap('REPEAT', 'REPEAT');
-
-        this.terainMaterial = new CGFappearance(this.scene);
-        this.terainMaterial.setAmbient(0.1, 0.1, 0.1, 1);
-        this.terainMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.terainMaterial.setSpecular(0.1, 0.1, 0.1, 1);
-        this.terainMaterial.setShininess(10.0);
-        this.terainMaterial.loadTexture("images/grass.jpg");
-        this.terainMaterial.setTextureWrap('REPEAT', 'REPEAT');
 
     }
 
     display() {
-        // this.scene.pushMatrix();
-        // this.terainMaterial.apply();
-        // this.scene.scale(30, 30, 30);
-        // this.scene.rotate(-Math.PI / 2.0, 1, 0, 0);
-        // this.plane.display();
-        // this.scene.popMatrix();
 
         for (let i = 0; i < 100; i++) {
             this.scene.pushMatrix();

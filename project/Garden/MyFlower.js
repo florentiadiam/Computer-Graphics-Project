@@ -102,6 +102,7 @@ export class MyFlower extends CGFobject {
         this.scene.scale(this.circle_radius,this.circle_radius,this.circle_radius)
         this.circleMaterials[this.circle_color].apply();
         this.receptacle.display();
+        
         this.scene.popMatrix();
         
 
