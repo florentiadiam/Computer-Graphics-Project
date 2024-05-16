@@ -11,7 +11,7 @@ export class MyRockSet extends CGFobject {
         this.RockScale = [];
         this.RockPos_x = [];
         this.RockPos_y = [];
-        this.rock =  new MyRock(this.scene, 10, 10, false);
+        this.rock =  new MyRock(this.scene, 10, 10, true);
         this.numRocks = 300;
  
         for (var i = 0; i <= this.numRocks; i++) {

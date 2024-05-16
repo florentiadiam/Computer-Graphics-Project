@@ -27,30 +27,40 @@ export class MyScene extends CGFscene {
     this.scaleFactor = 0; // Initial speed factor
     
 }
-//Setting lights for the scene
+
 initLights() {
-  // Light 0 
-  this.lights[0].setPosition(15, 0, 5, 1);
-  this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
+  // Light 0 (Main light)
+  this.lights[0] = new CGFlight(this, 0);
+  this.lights[0].setPosition(50, 50, 50, 1); 
+  this.lights[0].setDiffuse(1.5, 1.3, 1.0, 1.0); 
+  this.lights[0].setSpecular(1.5, 1.3, 1.0, 1.0); 
+  this.lights[0].setLinearAttenuation(0.0); 
+  this.lights[0].setQuadraticAttenuation(0.0001); 
   this.lights[0].enable();
   this.lights[0].update();
 
-  // Light 1
+  // Light 1 (Fill light)
   this.lights[1] = new CGFlight(this, 1); 
-  this.lights[1].setPosition(10, 10, 10, 1); 
-  this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0); 
-  this.lights[1].setLinearAttenuation(0.2); 
+  this.lights[1].setPosition(0, 20, 20, 1); 
+  //this.lights[1].setDiffuse(0.6, 0.8, 1.0, 1.0); 
+  this.lights[1].setSpecular(0.6, 0.8, 1.0, 1.0);
+  this.lights[1].setLinearAttenuation(0.1); 
+  this.lights[1].setQuadraticAttenuation(0.01); 
   this.lights[1].enable(); 
   this.lights[1].update(); 
 
-  // Light 2 
+  // Light 2 (Spotlight)
   this.lights[2] = new CGFlight(this, 2);
-  this.lights[2].setPosition(0, 15, 0, 1);
-  this.lights[2].setDiffuse(1.0, 1.0, 1.0, 1.0);
+  this.lights[2].setPosition(5, 5, 5, 1);
+  this.lights[2].setDiffuse(1.2, 0.7, 0.6, 1.0); 
+  this.lights[2].setSpecular(1.2, 0.7, 0.6, 1.0); 
+  this.lights[2].setLinearAttenuation(0.3); 
+  this.lights[2].setQuadraticAttenuation(0.1); 
   this.lights[2].enable();
   this.lights[2].update();
 }
-  
+
+
 //Method to turn the bee
 turn(delta) {
 
@@ -90,7 +100,7 @@ accelerate(delta) {
   this.speed = Math.max(0, this.speed);
 
   // Update position based on speed
-  this.bee.x += this.speed;
+  this.bee.z += this.speed;
 
   // Update norm of velocity vector while maintaining direction
   const norm = Math.sqrt(this.velocity[0] ** 2 + this.velocity[1] ** 2);
@@ -104,7 +114,7 @@ accelerate(delta) {
 
   init(application) {
     super.init(application);
-    this.speedFactor=1
+    this.speedFactor=0.3
     this.previousTime=0;
 
     this.initCameras();
@@ -141,7 +151,7 @@ accelerate(delta) {
     this.selectedObject = 1;
     this.displayAxis = true;
     this.displayNormals = false;
-    this.scaleFactor = 1;
+    this.scaleFactor = 0.5;
 
     this.grassTexture = new CGFtexture(this, "images/grass.jpg");
     this.terainMaterial = new CGFappearance(this);
@@ -334,7 +344,7 @@ update(t) {
   //bee dsplay
   this.pushMatrix();
   //updating coordinates of bee
-  this.translate(this.bee.x,this.bee.y,this.bee.z)
+  this.translate(this.bee.x,this.bee.y-11,this.bee.z)
   console.log(this.bee.angle)
   this.rotate(this.bee.angle, 0, 1, 0); // Rotate around YY axis
   this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);

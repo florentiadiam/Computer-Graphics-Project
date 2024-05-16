@@ -3,6 +3,7 @@ import { MyLeaf } from './MyLeaf.js';
 import { MyPetal } from './MyPetal.js';
 import { MyReceptacle } from './MyReceptacle.js';
 import { MyStem } from './MyStem.js';
+import { MyPollen } from '../MyPollen.js';
 
 /**
  * MyPetal
@@ -30,6 +31,7 @@ export class MyFlower extends CGFobject {
         this.stem = new MyStem(this.scene,20,10);
         this.receptacle = new MyReceptacle(this.scene,100,10);
         this.leaf = new MyLeaf(this.scene, 1, 0, 0);
+        this.pollen=new MyPollen(this.scene)
         this.initMaterials();
 	}
 
@@ -94,6 +96,7 @@ export class MyFlower extends CGFobject {
 
         this.circleMaterials=[this.circleMaterial1, this.circleMaterial2, this.circleMaterial3];
 
+   
     }
 	
 	display() {
@@ -102,7 +105,8 @@ export class MyFlower extends CGFobject {
         this.scene.scale(this.circle_radius,this.circle_radius,this.circle_radius)
         this.circleMaterials[this.circle_color].apply();
         this.receptacle.display();
-        
+        this.scene.translate(0,0,1)
+        this.pollen.display()
         this.scene.popMatrix();
         
 

@@ -18,6 +18,7 @@ export class MyPollen extends CGFobject {
 	}
 
     initMaterials() {
+        
         this.texturepollen = new CGFtexture(this.scene, "images/pollentexture.jpg");
         this.appearancepollen = new CGFappearance(this.scene);
         this.appearancepollen.setTexture(this.texturepollen);
@@ -27,8 +28,8 @@ export class MyPollen extends CGFobject {
 	display() {
      
         this.scene.pushMatrix();
-        this.scene.scale(0.5,0.8,0.5);
         this.appearancepollen.apply();
+        this.scene.scale(0.5,0.8,0.5);
         this.pollen.display();
         this.scene.popMatrix();
     }
