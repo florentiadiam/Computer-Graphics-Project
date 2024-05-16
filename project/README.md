@@ -17,7 +17,7 @@
 ![Screenshot 4](screenshots/project-t01g08-3.png)
 
 ### Bee
-![Screenshot 4](screenshots/project-t01g08-4.png)
+![Screenshot 5](screenshots/project-t01g08-4.png)
 
 ### Controlling the bee
-![Screenshot 4](screenshots/project-t01g08-5.png)
+![Screenshot 6](screenshots/project-t01g08-5.png)
