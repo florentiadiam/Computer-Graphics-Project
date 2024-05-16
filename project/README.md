@@ -4,11 +4,14 @@
 
 ## Project Notes
 
+### Sphere
+![Screenshot 1](screenshots/spherephoto.png)
+
 ### Panorama
-![Screenshot 1](screenshots/project-t01g08-1.png)
+![Screenshot 2](screenshots/project-t01g08-1.png)
 
 ### Flower Garden
-![Screenshot 2](screenshots/project-t01g08-2.png)
+![Screenshot 3](screenshots/project-t01g08-2.png)
 
 ### Rocks
-![Screenshot 3](screenshots/project-t01g08-3.png)
+![Screenshot 4](screenshots/project-t01g08-3.png)
