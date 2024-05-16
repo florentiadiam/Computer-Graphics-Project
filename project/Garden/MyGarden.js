@@ -1,7 +1,6 @@
 import { CGFappearance, CGFobject, CGFtexture } from '../../lib/CGF.js';
 import { MyPlane } from '../MyPlane.js';
 import { MyFlower } from './MyFlower.js';
-import { MyPollen } from '../MyPollen.js';
 /**
 * MyGarden
 * @constructor
@@ -27,8 +26,8 @@ export class MyGarden extends CGFobject {
         this.petalAngle1 = [];
         this.petalAngle2 = [];
         this.stemSize = [];
-        this.flowers=
         this.stemRadius =[];
+        this.flowers = [];
         for (let i = 0; i < numofFlowers; i++) {
             this.pos_x.push(Math.random() * (150 + 150) - 150);
             this.pos_y.push(Math.random() * (150 + 150) - 150);
@@ -45,9 +44,14 @@ export class MyGarden extends CGFobject {
             this.stemSize.push(Math.floor(Math.random()* (15 - 1) + 1))
             this.stemRadius.push(Math.random()* (1.5 - 0.5) + 0.5)
         }
+
+        for(let i = 0; i<numofFlowers; i++){
+            this.flower = new MyFlower(this.scene, this.petalRadius[i], this.petalNumber[i], this.circleRadius[i], this.stemRadius[i], this.stemSize[i], this.petalColor[i], this.stemColor[i], this.circleColor[i], -Math.PI / 6, this.petalAngle1[i], this.petalAngle2[i], this.leafColor[i]);
+            this.flowers.push(this.flower);
+        }
+
         this.plane = new MyPlane(this.scene,30);
 
-        
         this.groundMaterial = new CGFtexture(this.scene, "images/ground.jpg");
         this.groundMaterial1 = new CGFappearance(this.scene);
         this.groundMaterial1.setTexture(this.groundMaterial);
@@ -63,9 +67,8 @@ export class MyGarden extends CGFobject {
             this.scene.scale(this.flowerSize[i], this.flowerSize[i], this.flowerSize[i])
             this.scene.translate(0, this.stemSize[i]+6,0);
             this.scene.translate(this.pos_x[i], 0, this.pos_y[i]);
-            this.flower = new MyFlower(this.scene, this.petalRadius[i], this.petalNumber[i], this.circleRadius[i], this.stemRadius[i], this.stemSize[i], this.petalColor[i], this.stemColor[i], this.circleColor[i], -Math.PI / 6, this.petalAngle1[i], this.petalAngle2[i], this.leafColor[i]);
-            this.flower.display();
-            this.flower.getCentre();
+            this.flowers[i].display();
+            this.flowers[i].getCentre();
             this.scene.popMatrix();
         }
         this.x=0;

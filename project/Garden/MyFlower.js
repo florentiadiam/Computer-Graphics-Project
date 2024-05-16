@@ -96,8 +96,6 @@ export class MyFlower extends CGFobject {
 
         this.circleMaterials=[this.circleMaterial1, this.circleMaterial2, this.circleMaterial3];
 
-     
-
     }
 	
 	display() {
@@ -106,7 +104,8 @@ export class MyFlower extends CGFobject {
         this.scene.scale(this.circle_radius,this.circle_radius,this.circle_radius)
         this.circleMaterials[this.circle_color].apply();
         this.receptacle.display();
-        
+        this.scene.translate(0,0,1)
+        this.pollen.display()
         this.scene.popMatrix();
         
 
