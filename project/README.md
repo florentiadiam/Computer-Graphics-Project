@@ -15,3 +15,9 @@
 
 ### Rocks
 ![Screenshot 4](screenshots/project-t01g08-3.png)
+
+### Bee
+![Screenshot 4](screenshots/project-t01g08-4.png)
+
+### Controlling the bee
+![Screenshot 4](screenshots/project-t01g08-5.png)
