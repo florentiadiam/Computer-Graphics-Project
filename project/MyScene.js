@@ -47,7 +47,7 @@ export class MyScene extends CGFscene {
 
    
 
-    this.texture = new CGFtexture(this, "images/terrain.jpg");
+    this.texture = new CGFtexture(this, "images/grass.jpg");
     this.appearance = new CGFappearance(this);
     this.appearance.setTexture(this.texture);
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');
@@ -106,6 +106,13 @@ export class MyScene extends CGFscene {
     this.panorama.display();
     this.popMatrix();
 
+
+    this.pushMatrix();
+    this.scale(10,10,10);
+    this.rotate(-Math.PI/2,1,0,0);
+    this.appearance.apply();
+    this.plane.display();
+    this.popMatrix();
 
     this.rockset.display();
    

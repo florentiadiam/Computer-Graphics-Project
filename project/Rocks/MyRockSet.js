@@ -29,7 +29,7 @@ export class MyRockSet extends CGFobject {
         this.rockMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
         this.rockMaterial.setSpecular(0.1, 0.1, 0.1, 1);
         this.rockMaterial.setShininess(10.0);
-        this.rockMaterial.loadTexture("images/rocks.jpg");
+        this.rockMaterial.loadTexture("images/rock.jpg");
         this.rockMaterial.setTextureWrap('REPEAT', 'REPEAT');
 
     }

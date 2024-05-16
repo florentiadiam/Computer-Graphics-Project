@@ -32,7 +32,7 @@ export class MyRock extends CGFobject {
                 var Y1 = y1
                 var Z1 = x2*x1
 
-                       // Perturb the vertices along their normals to create slight irregularities
+              // Perturb the vertices along their normals to create slight irregularities
               var perturbation = 0.2; // Adjust the perturbation factor as needed
               var normalFactor = 1 + (Math.random() - 0.5) * perturbation; // Random factor to perturb along normal
               
