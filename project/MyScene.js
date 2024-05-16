@@ -261,6 +261,7 @@ update(t) {
         text+=" R ";
         keysPressed=true;
         this.accelerate.speed=0;
+        this.bee.angle=0;
       }
 
       //If a key is not pressed mantain the previous position of the bee
