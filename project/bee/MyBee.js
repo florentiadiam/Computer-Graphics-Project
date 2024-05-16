@@ -7,6 +7,7 @@ import { MyWings } from './MyWings.js';
 export class MyBee extends CGFobject {
     constructor(scene) {
         super(scene);
+        this.angle=0 //YY angle
         this.sphere = new MySphere(this.scene, 50, 10, false);
         this.wings = new MyWings(this.scene);
         this.legs = new MyLegs(this.scene);
@@ -61,7 +62,7 @@ export class MyBee extends CGFobject {
     this.x=0   // x position
     this.y=0  //y position
     this.z=0 //z position
-    this.angle=0 //YY angle
+    
 
 
         //Head
