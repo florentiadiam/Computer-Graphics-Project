@@ -1,8 +1,10 @@
 import { CGFappearance, CGFobject } from '../../lib/CGF.js';
+import { MyPollen } from '../MyPollen.js';
 import { MyLeaf } from './MyLeaf.js';
 import { MyPetal } from './MyPetal.js';
 import { MyReceptacle } from './MyReceptacle.js';
 import { MyStem } from './MyStem.js';
+
 
 /**
  * MyPetal
@@ -12,8 +14,7 @@ import { MyStem } from './MyStem.js';
 export class MyFlower extends CGFobject {
 	constructor(scene,petal_r, petal_num, circle_radius, stem_radius, stem_size, petal_color,
                 stem_color, circle_color, petal_angle1, petal_angle2, stem_angle, leaf_color) {
-		super(scene,petal_r, petal_num, circle_radius, stem_radius, stem_size, petal_color,
-                stem_color, circle_color,  petal_angle1, petal_angle2, stem_angle, leaf_color);
+		super(scene);
         this.petal_r = petal_r;
         this.petal_num = petal_num;
         this.circle_radius = circle_radius;
@@ -30,6 +31,7 @@ export class MyFlower extends CGFobject {
         this.stem = new MyStem(this.scene,20,10);
         this.receptacle = new MyReceptacle(this.scene,100,10);
         this.leaf = new MyLeaf(this.scene, 1, 0, 0);
+        this.pollen = new MyPollen(this.scene);
         this.initMaterials();
 	}
 
@@ -94,6 +96,8 @@ export class MyFlower extends CGFobject {
 
         this.circleMaterials=[this.circleMaterial1, this.circleMaterial2, this.circleMaterial3];
 
+     
+
     }
 	
 	display() {
@@ -151,6 +155,24 @@ export class MyFlower extends CGFobject {
             this.petal.display();
             this.scene.popMatrix();
         }
+        //pollen
+        this.scene.pushMatrix();
+        this.scene.translate(0,0,-this.circle_radius);
+        this.pollen.display();
+        this.scene.popMatrix();
+
+      
 	}
+
+    getCentre(centrex,centrey,centrez){
+    this.centrex=centrex
+    this.centrey=centrey
+    this.centrez=centrez
+    centrex=0
+    centrey=0
+     centrez = -this.circle_radius; // Centre z-coordinate based on the radius
+        
+    }
+    
 
 }

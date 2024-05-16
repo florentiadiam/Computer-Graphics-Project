@@ -6,9 +6,9 @@ import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
 import { MyPollen } from "./MyPollen.js";
 import { MySphere } from "./MySphere.js";
+import { MyRock } from "./Rocks/MyRock.js";
 import { MyRockSet } from "./Rocks/MyRockSet.js";
 import { MyBee } from "./bee/MyBee.js";
-import { MyRock } from "./Rocks/MyRock.js";
 
 /**
  * MyScene
@@ -108,6 +108,28 @@ accelerate(delta) {
   }
 }
 
+BeeDescend(delta){
+  this.delta=delta;
+  const acceleration = 0.1*this.speedFactor;
+
+
+  // Update speed with acceleration
+  this.speed += acceleration * this.delta;
+
+  // Update position with speed
+  this.bee.z += this.speed * this.delta;
+
+
+  // Check if the bee has reached or passed the flower
+  if (this.bee.z >= this.flower.getCentre()) {
+    this.bee.z = this.flower.getCentre(); // Snap to flower position
+    this.speed = 0; // Stop the movement
+  }
+  // Log current state for debugging
+  console.log("Bee Position:", this.bee.z);
+  console.log("Speed:", this.speed);
+}
+
   init(application) {
     super.init(application);
     this.speedFactor=1
@@ -193,7 +215,6 @@ accelerate(delta) {
 }
 
 
-
 update(t) {
   const amplitude = 1; 
   const frequency = 2 * Math.PI / 1000;  //1000ms=1s
@@ -208,6 +229,8 @@ update(t) {
 
   this.previousTime = t;
   this.bee.y = verticalPosition;
+
+  
 }
 
 //Check if keyes are pressed
@@ -268,6 +291,12 @@ update(t) {
         this.accelerate.speed=0;
       }
 
+       //Reset bee is R is pressed    
+       if (this.gui.isKeyPressed("KeyF"))        {
+        text+=" F ";
+        keysPressed=true;
+        this.BeeDescend(delta);
+      }
       //If a key is not pressed mantain the previous position of the bee
      if (!keysPressed) {
       // Restore previous position if no keys are pressed

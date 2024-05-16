@@ -1,8 +1,8 @@
 import { CGFappearance, CGFobject, CGFtexture } from '../../lib/CGF.js';
 import { MyStem } from '../Garden/MyStem.js';
+import { MyPollen } from '../MyPollen.js';
 import { MySphere } from '../MySphere.js';
 import { MyLegs } from './MyLegs.js';
-
 import { MyWings } from './MyWings.js';
 
 export class MyBee extends CGFobject {
@@ -12,9 +12,12 @@ export class MyBee extends CGFobject {
         this.wings = new MyWings(this.scene);
         this.legs = new MyLegs(this.scene);
         this.sting = new MyStem(this.scene, 50, 6)
+        this.pollen = new MyPollen(this.scene)
         this.initMaterials();
     }
     update
+
+
     initMaterials() {
 
         this.blackcolor = new CGFappearance(this.scene);
@@ -79,9 +82,6 @@ export class MyBee extends CGFobject {
         this.appearance.apply();
         this.sphere.display();
         this.scene.popMatrix();
-
- 
-    
 
         //Legs1
         this.scene.pushMatrix();

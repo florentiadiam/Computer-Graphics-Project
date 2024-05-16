@@ -73,6 +73,7 @@ export class MyGarden extends CGFobject {
             this.scene.translate(this.pos_x[i], 0, this.pos_y[i]);
             this.flower = new MyFlower(this.scene, this.petalRadius[i], this.petalNumber[i], this.circleRadius[i], this.stemRadius[i], this.stemSize[i], this.petalColor[i], this.stemColor[i], this.circleColor[i], -Math.PI / 6, this.petalAngle1[i], this.petalAngle2[i], this.leafColor[i]);
             this.flower.display();
+            this.flower.getCentre();
             this.scene.popMatrix();
         }
         this.x=0;
