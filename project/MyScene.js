@@ -1,4 +1,4 @@
-import { CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFtexture } from "../lib/CGF.js";
+import { CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFtexture,CGFlight } from "../lib/CGF.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
@@ -59,10 +59,26 @@ export class MyScene extends CGFscene {
 
   }
   initLights() {
+    // Light 0 
     this.lights[0].setPosition(15, 0, 5, 1);
     this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
     this.lights[0].enable();
     this.lights[0].update();
+
+    // Light 1
+    this.lights[1] = new CGFlight(this, 1); 
+    this.lights[1].setPosition(10, 10, 10, 1); 
+    this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0); 
+    this.lights[1].setLinearAttenuation(0.2); 
+    this.lights[1].enable(); 
+    this.lights[1].update(); 
+
+    // Light 2 
+    this.lights[2] = new CGFlight(this, 2);
+    this.lights[2].setPosition(0, 15, 0, 1);
+    this.lights[2].setDiffuse(1.0, 1.0, 1.0, 1.0);
+    this.lights[2].enable();
+    this.lights[2].update();
   }
   initCameras() {
     this.camera = new CGFcamera(

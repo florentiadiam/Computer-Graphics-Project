@@ -11,4 +11,4 @@
 ![Screenshot 2](screenshots/project-t01g08-2.png)
 
 ### Rocks
-![Screenshot 3](screenshots/project-t01g08-2.png)
+![Screenshot 3](screenshots/project-t01g08-3.png)
