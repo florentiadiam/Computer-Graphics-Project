@@ -63,9 +63,10 @@ initLights() {
 
 //Method to turn the bee
 turn(delta) {
-
-  const rotationAngle = this.speedFactor * delta;
+this.delta=delta;
+  const rotationAngle = this.speedFactor * this.delta;
   this.bee.angle += rotationAngle * (Math.PI / 180);
+  
  
   // Update velocity vector while maintaining direction
   const norm = Math.sqrt(this.velocity[0] ** 2 + this.velocity[1] ** 2);
@@ -238,6 +239,7 @@ update(t) {
       console.log("Bee left Rotation with A:", this.bee.angle);
       this.previousPosition = { x: this.bee.x, z: this.bee.z };
       this.previousAngle= this.bee.angle
+     this.accelerate(0);
       this.turn(delta);
 
     }
@@ -249,6 +251,7 @@ update(t) {
       console.log("Bee Right Rotation with D:", this.bee.angle);
       this.previousPosition = { x: this.bee.x, z: this.bee.z };
       this.previousAngle= this.bee.angle
+      this.accelerate(0);
       this.turn(-delta);
 
     }
