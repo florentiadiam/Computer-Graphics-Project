@@ -18,15 +18,15 @@ export class MyFlower extends CGFobject {
         this.petal_r = petal_r;
         this.petal_num = petal_num;
         this.circle_radius = circle_radius;
-        this.stem_radius = stem_radius; //TODO: Must change leafs according to the stem radius
-        this.stem_size = stem_size; //TODO: Work on the leaves
+        this.stem_radius = stem_radius; 
+        this.stem_size = stem_size; 
         this.petal_color = petal_color;
         this.stem_color = stem_color;
         this.circle_color = circle_color;
-        this.petal_angle1 = petal_angle1; //TODO: This needs work
-        this.petal_angle2 = petal_angle2; //TODO: This needs work
+        this.petal_angle1 = petal_angle1; 
+        this.petal_angle2 = petal_angle2; 
         this.leaf_color = leaf_color;
-        this.stem_angle = stem_angle; //TODO: Do this if you have time not that important
+        this.stem_angle = stem_angle; 
         this.petal = new MyPetal(this.scene, this.petal_angle1);
         this.stem = new MyStem(this.scene,20,10);
         this.receptacle = new MyReceptacle(this.scene,100,10);
@@ -88,7 +88,7 @@ export class MyFlower extends CGFobject {
         this.circleMaterial2.setSpecular(0.1, 0.1, 0.1, 1.0);
         this.circleMaterial2.setShininess(5.0);
 
-        this.circleMaterial3 = new CGFappearance(this.scene); // TODO: Look at thr colors something is wromg
+        this.circleMaterial3 = new CGFappearance(this.scene); 
         this.circleMaterial3.setAmbient(0.4, 0.96, 0.44, 1.0);
         this.circleMaterial3.setDiffuse(0.1, 0.1, 0.1, 1.0);
         this.circleMaterial3.setSpecular(0.1, 0.1, 0.1, 1.0);
