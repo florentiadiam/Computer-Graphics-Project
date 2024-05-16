@@ -53,16 +53,10 @@ initLights() {
   
 //Method to turn the bee
 turn(delta) {
-  this.delta=delta
 
-  const rotationAngle = this.speedFactor * this.delta;
+  const rotationAngle = this.speedFactor * delta;
   this.bee.angle += rotationAngle * (Math.PI / 180);
  
-  // Normalize the angle to keep it within 0 to 2*PI range
-  while (this.bee.angle < 0) {
-      this.bee.angle += 2 * Math.PI;
-  }
-
   // Update velocity vector while maintaining direction
   const norm = Math.sqrt(this.velocity[0] ** 2 + this.velocity[1] ** 2);
   this.velocity = [
@@ -148,7 +142,7 @@ BeeDescend(delta){
 
   
     this.enableTextures(true);
-    this.texturePanorama = new CGFtexture(this, 'images/panorama4.jpg');
+    this.texturePanorama = new CGFtexture(this, 'images/panoramaa.jpg');
 
     //Initialize scene objects
     this.objects = [this.axis,this.panorama, this.sphere];
@@ -161,7 +155,7 @@ BeeDescend(delta){
     this.pollen = new MyPollen(this);
     this.flower = new MyFlower(this, 2, 5,2,2,2,1,1,1,1,1,1,1);
     this.hive = new MyHive(this);
-    this.garden=new MyGarden(this,10)
+    this.garden=new MyGarden(this,100)
     this.bee = new MyBee(this);
     this.rock = new MyRock(this,5,5,5);
 
@@ -170,18 +164,6 @@ BeeDescend(delta){
     this.displayAxis = true;
     this.displayNormals = false;
     this.scaleFactor = 1;
-
-   
-
-    this.texture = new CGFtexture(this, "images/terrain.jpg");
-    this.appearance = new CGFappearance(this);
-    this.appearance.setTexture(this.texture);
-    this.appearance.setTextureWrap('REPEAT', 'REPEAT');
-
-    this.texture1 = new CGFtexture(this, "images/earth.png");
-    this.appearance1 = new CGFappearance(this);
-    this.appearance1.setTexture(this.texture1);
-    this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
 
     this.grassTexture = new CGFtexture(this, "images/grass.jpg");
     this.terainMaterial = new CGFappearance(this);
@@ -222,9 +204,10 @@ update(t) {
 
   //console.log("t:", t); // Log current time
   //console.log("Previous Time:", this.previousTime); // Log previous time
-  const currentTime = Date.now();
+  const currentTime = t
   const verticalPosition = amplitude * Math.sin(frequency * currentTime + phase);
   var delta = t - this.previousTime; // Calculate delta time
+
   this.checkkeyes(delta);
 
   this.previousTime = t;
@@ -237,7 +220,6 @@ update(t) {
   checkkeyes(delta){
     //console.log("Delta:", delta);
     //console.log("Bee before translation - X:", this.bee.x, "Y:", this.bee.y, "Z:", this.bee.z);
-    this.delta=delta;
 
     var text="Keys pressed: ";
     var keysPressed=false;
@@ -350,28 +332,29 @@ update(t) {
     
   this.pushMatrix();
   this.terainMaterial.apply();
-  this.scale(30, 30, 30);
+  this.scale(85, 30, 85);
   this.rotate(-Math.PI / 2.0, 1, 0, 0);
-  this.translate(0,0,-0.25);
+  this.translate(0,0,-0.6);
   this.plane.display();
   this.popMatrix();
 
   //rocks display
    this.pushMatrix()
-   this.translate(8.5,-7.5,8);
+   this.translate(-5.5,-18,4);
    this.rockset.display() 
    this.popMatrix()
   
    //Hive display
    this.pushMatrix();
-   this.translate(9,-2.5,8)
-   this.rotate(Math.PI,0,1,0)
+   this.translate(-5.5,-13,4)
+   this.rotate(Math.PI/2,0,1,0)
    this.hive.display();
    this.popMatrix()
 
   //garden display
    this.pushMatrix()
-   this.translate(0,-3.5,0)
+   this.translate(0,-14,0)
+   this.rotate(Math.PI/2,0,1,0)
    this.scale(0.37,0.37,0.37)
    this.garden.display();
    this.popMatrix();
@@ -381,12 +364,16 @@ update(t) {
   this.pushMatrix();
   //updating coordinates of bee
   this.translate(this.bee.x,this.bee.y,this.bee.z)
+  console.log(this.bee.angle)
   this.rotate(this.bee.angle, 0, 1, 0); // Rotate around YY axis
   this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
   this.bee.display();
   this.popMatrix();
 
-///vejnfeiunfouie
+this.pushMatrix();
+this.scale(45,45,45);
+this.panorama.display();
+this.popMatrix();
 
 
   }

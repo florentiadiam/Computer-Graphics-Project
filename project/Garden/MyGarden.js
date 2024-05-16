@@ -27,10 +27,11 @@ export class MyGarden extends CGFobject {
         this.petalAngle1 = [];
         this.petalAngle2 = [];
         this.stemSize = [];
+        this.flowers=
         this.stemRadius =[];
         for (let i = 0; i < numofFlowers; i++) {
-            this.pos_x.push(Math.random() * (45 + 45) - 45);
-            this.pos_y.push(Math.random() * (45 + 45) - 45);
+            this.pos_x.push(Math.random() * (150 + 150) - 150);
+            this.pos_y.push(Math.random() * (150 + 150) - 150);
             this.flowerSize.push(Math.random() * (7 -3) + 3);
             this.petalColor.push(Math.floor(Math.random() * 3));
             this.stemColor.push(Math.floor(Math.random() * 3));
@@ -54,15 +55,6 @@ export class MyGarden extends CGFobject {
 	}
 
     display(){
-        /*
-        this.scene.pushMatrix();
-        this.scene.translate(0, -10, 0);
-        this.scene.scale(80, 80, 80);
-        this.scene.rotate(-Math.PI / 2.0, 1, 0, 0);
-        this.groundMaterial1.apply();
-        this.plane.display();
-        this.scene.popMatrix();
-        */
 
         for (let i = 0; i < this.numofFlowers; i++) {
             this.scene.pushMatrix();
