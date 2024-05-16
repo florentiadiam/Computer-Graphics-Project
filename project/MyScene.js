@@ -114,7 +114,7 @@ accelerate(delta) {
 
   init(application) {
     super.init(application);
-    this.speedFactor=0.3
+    this.speedFactor=0.1
     this.previousTime=0;
 
     this.initCameras();
@@ -130,7 +130,7 @@ accelerate(delta) {
 
   
     this.enableTextures(true);
-    this.texturePanorama = new CGFtexture(this, 'images/panoramaa.jpg');
+    this.texturePanorama = new CGFtexture(this, 'images/panorama8.png');
 
     //Initialize scene objects
     this.objects = [this.axis,this.panorama, this.sphere];
