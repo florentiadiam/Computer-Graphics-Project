@@ -12,9 +12,9 @@ export class MyPollen extends CGFobject {
 		super(scene);
         this.initMaterials();
         this.pollen = new MySphere(this.scene,50,50,false);
-        this.x=[];
-        this.y=[];
-        this.z=[];
+        this.x=0
+        this.z=0
+        this.y=0
 	}
 
     initMaterials() {

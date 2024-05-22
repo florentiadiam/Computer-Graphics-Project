@@ -156,23 +156,21 @@ export class MyFlower extends CGFobject {
             this.scene.popMatrix();
         }
         //pollen
-        this.scene.pushMatrix();
-        this.scene.translate(0,0,-this.circle_radius);
-        this.pollen.display();
-        this.scene.popMatrix();
+        // this.scene.pushMatrix();
+        // this.scene.translate(0,0,-this.circle_radius+2);
+        // this.pollen.display();
+        // this.scene.popMatrix();
 
       
 	}
 
-    getCentre(centrex,centrey,centrez){
-    this.centrex=centrex
-    this.centrey=centrey
-    this.centrez=centrez
-    centrex=0
-    centrey=0
-     centrez = -this.circle_radius; // Centre z-coordinate based on the radius
+    getCentrePollen(){
+       
+     this.pollen.x = this.circle_radius; 
+     this.pollen.y = this.circle_radius; 
+     this.pollen.z = this.circle_radius; 
         
-    }
+     }
     
 
 }
