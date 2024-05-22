@@ -31,8 +31,8 @@ export class MyGarden extends CGFobject {
         this.stemRadius =[];
         this.flowers = [];
         for (let i = 0; i < numofFlowers; i++) {
-            this.pos_x.push(Math.random() * (100 + 100) - 100);
-            this.pos_z.push(Math.random() * (100 + 100) - 100);
+            this.pos_x.push(Math.random() * (80 + 80) - 80);
+            this.pos_z.push(Math.random() * (80 + 80) - 80);
             this.flowerSize.push(Math.random() * (7 -3) + 3);
             this.petalColor.push(Math.floor(Math.random() * 3));
             this.stemColor.push(Math.floor(Math.random() * 3));

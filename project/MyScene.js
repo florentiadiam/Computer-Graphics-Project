@@ -104,7 +104,7 @@ initLights() {
     this.garden=new MyGarden(this,this.numofFlowers)
     this.bee = new MyBee(this);
     this.leaf= new MyLeaves(this, 50);
-    this.grass = new MyGrass(this,500);
+    this.grass = new MyGrass(this,1000);
 
     //Objects connected to MyInterface
     this.selectedObject = 1;
@@ -201,6 +201,8 @@ update(t) {
   this.checkkeyes(delta);
 
   this.previousTime = t;
+
+  this.grassmovement.setUniformsValues({ timeFactor: t / 100 % 100, frequency:0.4});
   
   if(this.move){
     this.bee.y = verticalPosition;
@@ -582,6 +584,7 @@ BeeToHive(delta) {
 
     //grass display
     this.pushMatrix();
+    this.translate(0,-18,0)
     this.setActiveShader(this.grassmovement);
     this.appearanceLeaf.apply()
     this.grass.display();

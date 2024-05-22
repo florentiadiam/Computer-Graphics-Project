@@ -17,8 +17,8 @@ export class MyGrass extends CGFobject {
         this.pos_z = [];
         this.leaves = [];
         for (let i = 0; i < this.numofleaves; i++) {
-            this.pos_x.push(Math.random() * (10 + 10) - 10);
-            this.pos_z.push(Math.random() * (10 + 10) - 10);
+            this.pos_x.push(Math.random() * (30 + 30) - 30);
+            this.pos_z.push(Math.random() * (30 + 30) - 30);
             this.leaf = new MyLeaves(this.scene)
             this.leaves.push(this.leaf)
         }

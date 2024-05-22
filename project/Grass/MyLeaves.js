@@ -17,10 +17,10 @@ export class MyLeaves extends CGFobject {
         this.normals = [];
         this.texCoords = [];
         for(let i=0; i<=4; i+=0.5){
-            this.vertices.push(-0.3, -0+i, 0);
-            this.vertices.push(-0.3, 0.5+i, 0);
-            this.vertices.push(0.3, -0+i, 0);
-            this.vertices.push(0.3, 0.5+i, 0);
+            this.vertices.push(-0.2, -0+i, 0);
+            this.vertices.push(-0.2, 0.5+i, 0);
+            this.vertices.push(0.2, -0+i, 0);
+            this.vertices.push(0.2, 0.5+i, 0);
         }
         for(let j=0; j<=12;j+=4){
             this.indices.push(1+j, 0+j, 2+j)
@@ -30,10 +30,10 @@ export class MyLeaves extends CGFobject {
         }
 
         for(let z=0; z<=4; z+=0.5){
-            this.normals.push(-0.3, -0+z, 1);
-            this.normals.push(-0.3, 0.5+z, 1);
-            this.normals.push(0.3, -0+z, 1);
-            this.normals.push(0.3, 0.5+z, 1);
+            this.normals.push(-0.2, -0+z, 1);
+            this.normals.push(-0.2, 0.5+z, 1);
+            this.normals.push(0.2, -0+z, 1);
+            this.normals.push(0.2, 0.5+z, 1);
         }
 
         for (let i = 0; i <= 4; i+=0.5) {
