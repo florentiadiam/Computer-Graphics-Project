@@ -1,5 +1,5 @@
 import { CGFappearance, CGFobject, CGFtexture } from '../../lib/CGF.js';
-import { MyPollen } from '../MyPollen.js';
+import { MyPollen } from '../Garden/MyPollen.js';
 import { MySphere } from '../MySphere.js';
 import { MyStem } from '../Garden/MyStem.js';
 import { MyLegs } from './MyLegs.js';

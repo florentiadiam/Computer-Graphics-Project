@@ -1,14 +1,14 @@
-import { CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFtexture,CGFlight } from "../lib/CGF.js";
-import { MyFlower } from "./Garden/MyFlower.js";
+import { CGFappearance, CGFaxis, CGFcamera, CGFlight, CGFscene, CGFshader, CGFtexture } from "../lib/CGF.js";
 import { MyGarden } from "./Garden/MyGarden.js";
+import { MyPollen } from "./Garden/MyPollen.js";
+import { MyLeaves } from "./Grass/MyLeaves.js";
 import { MyHive } from "./MyHive.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
-import { MyPollen } from "./MyPollen.js";
 import { MySphere } from "./MySphere.js";
-import { MyRock } from "./Rocks/MyRock.js";
 import { MyRockSet } from "./Rocks/MyRockSet.js";
 import { MyBee } from "./bee/MyBee.js";
+import { MyGrass } from './Grass/MyGrass.js'
 
 
 /**
@@ -28,6 +28,7 @@ export class MyScene extends CGFscene {
     this.scaleFactor = 0; // Initial speed factor
     this.numofFlowers = 100; //Number of Flowers
     this.move=true; //Movement of the bee
+    this.showshaderCode=false;
     
     
 }
@@ -99,11 +100,11 @@ initLights() {
     this.rockset = new MyRockSet(this);
     this.pollen = new MyPollen(this);
     this.pollen1 = new MyPollen(this);
-    this.flower = new MyFlower(this, 2, 5,2,2,2,1,1,1,1,1,1,1);
     this.hive = new MyHive(this);
     this.garden=new MyGarden(this,this.numofFlowers)
     this.bee = new MyBee(this);
-    this.rock = new MyRock(this,5,5,5);
+    this.leaf= new MyLeaves(this, 50);
+    this.grass = new MyGrass(this,500);
 
     //Objects connected to MyInterface
     this.selectedObject = 1;
@@ -125,8 +126,19 @@ initLights() {
     this.terainMaterial = new CGFappearance(this);
     this.terainMaterial.setTexture(this.grassTexture);
     this.terainMaterial.setTextureWrap('REPEAT', 'REPEAT');
-  
 
+    this.textureLeaf = new CGFtexture(this, "images/grasstex.jpg");
+		this.appearanceLeaf = new CGFappearance(this);
+    this.appearanceLeaf.setTexture(this.textureLeaf);
+		this.appearanceLeaf.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.grassmovement = new CGFshader(this.gl, "Grass/grass.vert", "Grass/grass.frag");
+  
+    this.grassmovement.setUniformsValues({ timeFactor: 0 });
+
+		// set the scene update period 
+		// (to invoke the update() method every 50ms or as close as possible to that )
+		this.setUpdatePeriod(50);
   }
 
 
@@ -512,7 +524,8 @@ BeeToHive(delta) {
 
     // Draw axis
     if (this.displayAxis) this.axis.display();
-    
+
+      //ground display
       this.pushMatrix();
       this.terainMaterial.apply();
       this.scale(85, 30, 85);
@@ -551,6 +564,7 @@ BeeToHive(delta) {
       this.bee.display();
       this.popMatrix();
 
+      //panorama display
       this.pushMatrix();
       this.scale(45,45,45);
       this.panorama.display();
@@ -564,5 +578,14 @@ BeeToHive(delta) {
         this.pollen1.display()
         this.popMatrix();
       }
+
+      //grass display
+      this.setDefaultAppearance();
+      this.pushMatrix();
+      this.setActiveShader(this.grassmovement);
+      this.appearanceLeaf.apply()
+      this.grass.display();
+      this.popMatrix();
+      this.setActiveShader(this.defaultShader);
   }
 }

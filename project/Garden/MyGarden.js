@@ -1,6 +1,8 @@
 import { CGFappearance, CGFobject, CGFtexture } from '../../lib/CGF.js';
 import { MyPlane } from '../MyPlane.js';
 import { MyFlower } from './MyFlower.js';
+import { MyPollen } from './MyPollen.js';
+
 /**
 * MyGarden
 * @constructor
@@ -51,6 +53,8 @@ export class MyGarden extends CGFobject {
         }
 
         this.plane = new MyPlane(this.scene,30);
+        this.pollen = new MyPollen(this.scene);
+    
 
         this.groundMaterial = new CGFtexture(this.scene, "images/ground.jpg");
         this.groundMaterial1 = new CGFappearance(this.scene);
@@ -67,8 +71,14 @@ export class MyGarden extends CGFobject {
             this.scene.scale(this.flowerSize[i], this.flowerSize[i], this.flowerSize[i])
             this.scene.translate(0, this.stemSize[i]+6,0);
             this.flowers[i].display();
-            //this.flowers[i].getCentre();
             this.scene.popMatrix();
+
+            this.scene.pushMatrix();
+            this.scene.translate(0,-10.2+this.stemSize[i]-this.circleRadius[i],0.5);
+            this.scene.scale(0.5,0.5,0.5);
+            this.pollen.display();
+            this.scene.popMatrix();
+
         }
     }
 }
