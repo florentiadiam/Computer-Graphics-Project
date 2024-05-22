@@ -3,7 +3,7 @@ import { MySphere } from '../MySphere.js';
 
 
 /**
- * MyPetal
+ * MyPollen
  * @constructor
  * @param scene - Reference to MyScene object
  */
@@ -26,7 +26,6 @@ export class MyPollen extends CGFobject {
     }
 	
 	display() {
-     
         this.scene.pushMatrix();
         this.appearancepollen.apply();
         this.scene.scale(0.5,0.8,0.5);

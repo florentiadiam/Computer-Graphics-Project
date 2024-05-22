@@ -1,4 +1,4 @@
-import { CGFappearance, CGFobject, CGFtexture } from '../../lib/CGF.js';
+import {CGFobject} from '../../lib/CGF.js';
 import { MyPlane } from '../MyPlane.js';
 import { MyFlower } from './MyFlower.js';
 import { MyPollen } from './MyPollen.js';
@@ -8,8 +8,6 @@ import { MyPollen } from './MyPollen.js';
 * @constructor
  * @param scene - Reference to MyScene object
 */
-
-//Math.random() * (max - min) + min;
 
 export class MyGarden extends CGFobject {
 	constructor(scene, numofFlowers) {
@@ -30,6 +28,7 @@ export class MyGarden extends CGFobject {
         this.stemSize = [];
         this.stemRadius =[];
         this.flowers = [];
+        //Getting Random Values for many characteristics of flower
         for (let i = 0; i < numofFlowers; i++) {
             this.pos_x.push(Math.random() * (80 + 80) - 80);
             this.pos_z.push(Math.random() * (80 + 80) - 80);
@@ -47,23 +46,16 @@ export class MyGarden extends CGFobject {
             this.stemRadius.push(Math.random()* (1.5 - 0.5) + 0.5)
         }
 
+        // Initializing the flowers
         for(let i = 0; i<numofFlowers; i++){
             this.flower = new MyFlower(this.scene, this.petalRadius[i], this.petalNumber[i], this.circleRadius[i], this.stemRadius[i], this.stemSize[i], this.petalColor[i], this.stemColor[i], this.circleColor[i], -Math.PI / 6, this.petalAngle1[i], this.petalAngle2[i], this.leafColor[i]);
             this.flowers.push(this.flower);
         }
-
         this.plane = new MyPlane(this.scene,30);
         this.pollen = new MyPollen(this.scene);
-    
-
-        this.groundMaterial = new CGFtexture(this.scene, "images/ground.jpg");
-        this.groundMaterial1 = new CGFappearance(this.scene);
-        this.groundMaterial1.setTexture(this.groundMaterial);
-        this.groundMaterial1.setTextureWrap('REPEAT', 'REPEAT');
 	}
 
     display(){
-
         for (let i = 0; i < this.numofFlowers-1; i++) {
             this.scene.pushMatrix();
             this.scene.translate(this.pos_x[i], 0, this.pos_z[i]);
@@ -78,7 +70,6 @@ export class MyGarden extends CGFobject {
             this.scene.scale(0.5,0.5,0.5);
             this.pollen.display();
             this.scene.popMatrix();
-
         }
     }
 }

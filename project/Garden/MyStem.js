@@ -47,16 +47,16 @@ export class MyStem extends CGFobject {
 
     for(let k=0;k<this.stacks;k++){
         const count=this.slices*k;
-             for(let j=0;j<this.slices;j++){
+            for(let j=0;j<this.slices;j++){
             // Indices for the side faces
                 this.indices.push(count+j, count+j+1,count+j+this.slices);
                 this.indices.push(count+j+1,count+j+this.slices+1,count+j+this.slices);    
-               }
+            }
     }
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }
-         /**
+        /**
      * Called when user interacts with GUI to change object's complexity.
      * @param {integer} complexity - changes number of slices
      */

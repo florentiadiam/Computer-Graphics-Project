@@ -2,12 +2,10 @@ import { CGFappearance, CGFobject, CGFtexture } from '../../lib/CGF.js';
 import {MyLeaves} from './MyLeaves.js'
 
 /**
-* MyGarden
+* MyGrass
 * @constructor
  * @param scene - Reference to MyScene object
 */
-
-//Math.random() * (max - min) + min;
 
 export class MyGrass extends CGFobject {
 	constructor(scene, numofleaves) {
@@ -22,11 +20,6 @@ export class MyGrass extends CGFobject {
             this.leaf = new MyLeaves(this.scene)
             this.leaves.push(this.leaf)
         }
-
-        this.groundMaterial = new CGFtexture(this.scene, "images/ground.jpg");
-        this.groundMaterial1 = new CGFappearance(this.scene);
-        this.groundMaterial1.setTexture(this.groundMaterial);
-        this.groundMaterial1.setTextureWrap('REPEAT', 'REPEAT');
 	}
 
     display(){

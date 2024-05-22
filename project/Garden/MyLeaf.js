@@ -2,7 +2,7 @@ import { CGFobject } from '../../lib/CGF.js';
 import { MyTriangle } from '../MyTriangle.js';
 import { MyStem } from './MyStem.js';
 /**
- * MyPetal
+ * MyLeaf
  * @constructor
  * @param scene - Reference to MyScene object
  */

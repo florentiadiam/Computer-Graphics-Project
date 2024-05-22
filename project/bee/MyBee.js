@@ -18,7 +18,7 @@ export class MyBee extends CGFobject {
         this.angle=0 //YY angle
         this.x=0   // x position
         this.y=0  //y position
-        this.z=0 
+        this.z=0  //z position
     }
     update
 
@@ -50,15 +50,15 @@ export class MyBee extends CGFobject {
         this.appearance1.setSpecular(0.1, 0.1, 0.1, 1.0);
         this.appearance1.setShininess(5.0);
 
-         // Set the texture for eyes
-         this.appearance2 = new CGFappearance(this.scene);
-         this.beeeyestexture = new CGFtexture(this.scene, "images/beeeyes2.jpg");
-         this.appearance2.setTexture(this.beeeyestexture);
-         this.appearance2.setTextureWrap('REPEAT', 'REPEAT');
-         this.appearance2.setAmbient(1, 1, 1, 1.0);
-         this.appearance2.setDiffuse(1, 1, 1, 1.0);
-         this.appearance2.setSpecular(0.1, 0.1, 0.1, 1.0);
-         this.appearance2.setShininess(5.0);
+        // Set the texture for eyes
+        this.appearance2 = new CGFappearance(this.scene);
+        this.beeeyestexture = new CGFtexture(this.scene, "images/beeeyes2.jpg");
+        this.appearance2.setTexture(this.beeeyestexture);
+        this.appearance2.setTextureWrap('REPEAT', 'REPEAT');
+        this.appearance2.setAmbient(1, 1, 1, 1.0);
+        this.appearance2.setDiffuse(1, 1, 1, 1.0);
+        this.appearance2.setSpecular(0.1, 0.1, 0.1, 1.0);
+        this.appearance2.setShininess(5.0);
 
         
      
@@ -129,7 +129,7 @@ export class MyBee extends CGFobject {
         this.scene.gl.blendFunc(this.scene.gl.SRC_ALPHA, this.scene.gl.ONE_MINUS_SRC_ALPHA);
         this.scene.gl.enable(this.scene.gl.BLEND);
 
-        // Calculate wing rotation angle    
+        // Calculate wing rotation angle
         const currentTime = Date.now();
         const wingRotationSpeed = 0.5; 
         const wingRotationAmplitude = Math.PI / 8; 

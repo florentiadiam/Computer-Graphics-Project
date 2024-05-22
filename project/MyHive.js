@@ -4,7 +4,7 @@ import { MyUnitCubeQuad } from './MyUnitCubeQuad.js';
 
 
 /**
- * MyPetal
+ * MyHive
  * @constructor
  * @param scene - Reference to MyScene object
  */
@@ -85,7 +85,7 @@ export class MyHive extends CGFobject {
         this.cube.display();
         this.scene.popMatrix();
 
-        //skepi
+        //Roof
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI/6,0,0,1);
         this.scene.scale(3.5,0.2,4);

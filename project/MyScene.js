@@ -1,7 +1,6 @@
 import { CGFappearance, CGFaxis, CGFcamera, CGFlight, CGFscene, CGFshader, CGFtexture } from "../lib/CGF.js";
 import { MyGarden } from "./Garden/MyGarden.js";
 import { MyPollen } from "./Garden/MyPollen.js";
-import { MyLeaves } from "./Grass/MyLeaves.js";
 import { MyHive } from "./MyHive.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
@@ -88,29 +87,26 @@ initLights() {
 
   
     this.enableTextures(true);
-    this.texturePanorama = new CGFtexture(this, 'images/panorama8.png');
 
-    //Initialize scene objects
-    this.objects = [this.axis,this.panorama, this.sphere];
-    this.objectIDs = { 'Axis': 0 , 'Panorama': 1, 'Sphere': 2};
-    this.axis = new CGFaxis(this);
-    this.panorama = new MyPanorama(this,this.texturePanorama)
-    this.plane = new MyPlane(this,30);
-    this.sphere=new MySphere(this,50,50,false);
-    this.rockset = new MyRockSet(this);
-    this.pollen = new MyPollen(this);
-    this.pollen1 = new MyPollen(this);
-    this.hive = new MyHive(this);
-    this.garden=new MyGarden(this,this.numofFlowers)
-    this.bee = new MyBee(this);
-    this.leaf= new MyLeaves(this, 50);
-    this.grass = new MyGrass(this,1000);
-
+   
+    this.objects = [this.sphere, this.rockset, this.bee, this.grass,this.garden, this.hive];
+    this.objectIDs = { 
+      'Sphere': 0,
+      'Rockset': 1,
+      'Bee': 2,
+      'Grass': 3,
+      'Garden': 4,
+      'Everything': 5
+    };
     //Objects connected to MyInterface
-    this.selectedObject = 1;
-    this.displayAxis = true;
+    this.selectedObject = 5;
+    this.displayAxis = false;
     this.displayNormals = false;
     this.scaleFactor = 0.5;
+    
+    
+    //Textures
+    this.texturePanorama = new CGFtexture(this, 'images/panorama8.png');
 
     this.texture = new CGFtexture(this, "images/grass.jpg");
     this.appearance = new CGFappearance(this);
@@ -136,8 +132,21 @@ initLights() {
   
     this.grassmovement.setUniformsValues({ timeFactor: 0 });
 
+     //Initialize scene objects
+    this.axis = new CGFaxis(this);
+    this.panorama = new MyPanorama(this,this.texturePanorama)
+    this.plane = new MyPlane(this,30);
+    this.sphere=new MySphere(this,50,50,false);
+    this.rockset = new MyRockSet(this);
+    this.pollen = new MyPollen(this);
+    this.pollen1 = new MyPollen(this);
+    this.hive = new MyHive(this);
+    this.garden=new MyGarden(this,this.numofFlowers)
+    this.bee = new MyBee(this);
+    this.grass = new MyGrass(this,1000);
+
+
 		// set the scene update period 
-		// (to invoke the update() method every 50ms or as close as possible to that )
 		this.setUpdatePeriod(50);
   }
 
@@ -527,68 +536,139 @@ BeeToHive(delta) {
     // Draw axis
     if (this.displayAxis) this.axis.display();
 
-    this.setDefaultAppearance();
-    //ground display
-    this.pushMatrix();
-    this.terainMaterial.apply();
-    this.scale(85, 30, 85);
-    this.rotate(-Math.PI / 2.0, 1, 0, 0);
-    this.translate(0,0,-0.6);
-    this.plane.display();
-    this.popMatrix();
-
-    //rocks display
-    this.pushMatrix()
-    this.translate(-5.5,-18,4);
-    this.rockset.display() 
-    this.popMatrix()
-    
-    //Hive display
-    this.pushMatrix();
-    this.translate(-5.5,-13,4)
-    this.rotate(Math.PI/2,0,1,0)
-    this.hive.display();
-    this.popMatrix()
-
-    //garden display
-    this.pushMatrix()
-    this.translate(0,-18,0)
-    this.rotate(Math.PI/2,0,1,0)
-    this.scale(0.37,0.37,0.37)
-    this.garden.display();
-    this.popMatrix();
-
-    //bee dsplay
-    this.pushMatrix();
-    //updating coordinates of bee
-    this.translate(this.bee.x,this.bee.y-5,this.bee.z)
-    this.rotate(this.bee.angle, 0, 1, 0); // Rotate around YY axis
-    this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
-    this.bee.display();
-    this.popMatrix();
-
-    //panorama display
-    this.pushMatrix();
-    this.scale(45,45,45);
-    this.panorama.display();
-    this.popMatrix();
-
-    if(this.isPollen==true){
+    if(this.selectedObject==0){
       this.pushMatrix();
-      this.translate(this.bee.x+0.3,this.bee.y-5.5,this.bee.z+0.8)
-      this.rotate(this.bee.angle, 0, 1, 0); 
-      this.scale(1,0.5,1)
-      this.pollen1.display()
+      this.appearance1.apply();
+      this.sphere.display();
       this.popMatrix();
     }
 
-    //grass display
-    this.pushMatrix();
-    this.translate(0,-18,0)
-    this.setActiveShader(this.grassmovement);
-    this.appearanceLeaf.apply()
-    this.grass.display();
-    this.popMatrix();
-    this.setActiveShader(this.defaultShader);
+    if(this.selectedObject==1){
+      //ground display
+      this.pushMatrix();
+      this.terainMaterial.apply();
+      this.scale(15, 15, 15);
+      this.rotate(-Math.PI / 2.0, 1, 0, 0);
+      this.plane.display();
+      this.popMatrix();
+      
+      //rocks display
+      this.pushMatrix()
+      this.rockset.display() 
+      this.popMatrix()
+    }
+
+    if(this.selectedObject==2){      
+      //bee dsplay
+      this.pushMatrix();
+      //updating coordinates of bee
+      this.translate(this.bee.x,this.bee.y,this.bee.z)
+      this.rotate(this.bee.angle, 0, 1, 0); // Rotate around YY axis
+      this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+      this.bee.display();
+      this.popMatrix();
+    }
+
+    if(this.selectedObject==3){
+      //ground display
+      this.pushMatrix();
+      this.terainMaterial.apply();
+      this.scale(60, 60, 60);
+      this.rotate(-Math.PI / 2.0, 1, 0, 0);
+      this.plane.display();
+      this.popMatrix();
+
+      this.setDefaultAppearance();
+      //grass display
+      this.pushMatrix();
+      this.setActiveShader(this.grassmovement);
+      this.appearanceLeaf.apply()
+      this.grass.display();
+      this.popMatrix();
+      this.setActiveShader(this.defaultShader);
+    }
+
+    if(this.selectedObject==4){
+      //ground display
+      this.pushMatrix();
+      this.terainMaterial.apply();
+      this.scale(60, 60, 60);
+      this.rotate(-Math.PI / 2.0, 1, 0, 0);
+      this.plane.display();
+      this.popMatrix();
+
+      //garden display
+      this.pushMatrix()
+      this.rotate(Math.PI/2,0,1,0)
+      this.scale(0.37,0.37,0.37)
+      this.garden.display();
+      this.popMatrix();
+    }
+
+    if(this.selectedObject==5){
+      this.setDefaultAppearance();
+      //ground display
+      this.pushMatrix();
+      this.terainMaterial.apply();
+      this.scale(85, 30, 85);
+      this.rotate(-Math.PI / 2.0, 1, 0, 0);
+      this.translate(0,0,-0.6);
+      this.plane.display();
+      this.popMatrix();
+
+      //rocks display
+      this.pushMatrix()
+      this.translate(-5.5,-18,4);
+      this.rockset.display() 
+      this.popMatrix()
+      
+      //Hive display
+      this.pushMatrix();
+      this.translate(-5.5,-13,4)
+      this.rotate(Math.PI/2,0,1,0)
+      this.hive.display();
+      this.popMatrix()
+
+      //garden display
+      this.pushMatrix()
+      this.translate(0,-18,0)
+      this.rotate(Math.PI/2,0,1,0)
+      this.scale(0.37,0.37,0.37)
+      this.garden.display();
+      this.popMatrix();
+
+      //bee dsplay
+      this.pushMatrix();
+      //updating coordinates of bee
+      this.translate(this.bee.x,this.bee.y-5,this.bee.z)
+      this.rotate(this.bee.angle, 0, 1, 0); // Rotate around YY axis
+      this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+      this.bee.display();
+      this.popMatrix();
+
+      //panorama display
+      this.pushMatrix();
+      this.scale(45,45,45);
+      this.panorama.display();
+      this.popMatrix();
+
+      if(this.isPollen==true){
+        this.pushMatrix();
+        this.translate(this.bee.x+0.3,this.bee.y-5.5,this.bee.z+0.8)
+        this.rotate(this.bee.angle, 0, 1, 0); 
+        this.scale(1,0.5,1)
+        this.pollen1.display()
+        this.popMatrix();
+      }
+
+      //grass display
+      this.pushMatrix();
+      this.translate(0,-18,0)
+      this.setActiveShader(this.grassmovement);
+      this.appearanceLeaf.apply()
+      this.grass.display();
+      this.popMatrix();
+      this.setActiveShader(this.defaultShader);
+    }
   }
 }

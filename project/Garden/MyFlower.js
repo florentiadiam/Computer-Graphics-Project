@@ -7,7 +7,7 @@ import { MyStem } from './MyStem.js';
 
 
 /**
- * MyPetal
+ * MyFlower
  * @constructor
  * @param scene - Reference to MyScene object
  */
@@ -36,6 +36,7 @@ export class MyFlower extends CGFobject {
 	}
 
     initMaterials() {
+        //textures for petals
         this.petalMaterial_red = new CGFappearance(this.scene);
         this.petalMaterial_red.setAmbient(1, 0, 0, 1.0);
         this.petalMaterial_red.setDiffuse(0.1, 0.1, 0.1, 1.0);
@@ -55,7 +56,8 @@ export class MyFlower extends CGFobject {
         this.petalMaterial_blue.setShininess(5.0);
 
         this.petalMaterials= [this.petalMaterial_red, this.petalMaterial_pink, this.petalMaterial_blue];
-
+        
+        //Textures for stem
         this.stemMaterial1 = new CGFappearance(this.scene);
         this.stemMaterial1.setAmbient(0, 1, 0, 1.0);
         this.stemMaterial1.setDiffuse(0.1, 0.1, 0.1, 1.0);
@@ -76,6 +78,7 @@ export class MyFlower extends CGFobject {
 
         this.stemMaterials= [this.stemMaterial1, this.stemMaterial2, this.stemMaterial3];
         
+        //Textures for receptacle
         this.circleMaterial1 = new CGFappearance(this.scene);
         this.circleMaterial1.setAmbient(0.94, 1, 0, 1.0);
         this.circleMaterial1.setDiffuse(0.1, 0.1, 0.1, 1.0);
@@ -95,7 +98,6 @@ export class MyFlower extends CGFobject {
         this.circleMaterial3.setShininess(5.0);
 
         this.circleMaterials=[this.circleMaterial1, this.circleMaterial2, this.circleMaterial3];
-
     }
 	
 	display() {
@@ -108,7 +110,6 @@ export class MyFlower extends CGFobject {
         this.pollen.display()
         this.scene.popMatrix();
         
-
         //Stem
         this.scene.pushMatrix();
         this.scene.scale(this.stem_radius, 1, this.stem_radius);
@@ -117,6 +118,7 @@ export class MyFlower extends CGFobject {
         this.stem.display();
         this.scene.popMatrix();
         
+        //Leaves
         for(let j=0; j<=this.stem_size; j++){
             this.scene.pushMatrix();
             this.scene.scale(this.stem_radius, 1, this.stem_radius);
@@ -155,43 +157,5 @@ export class MyFlower extends CGFobject {
             this.petal.display();
             this.scene.popMatrix();
         }
-        //pollen
-        // this.scene.pushMatrix();
-        // this.scene.translate(0,0,-this.circle_radius+2);
-        // this.pollen.display();
-        // this.scene.popMatrix();
-
-      
 	}
-
-    getCentrePollen(){
-       
-     this.pollen.x = this.circle_radius; 
-     this.pollen.y = this.circle_radius; 
-     this.pollen.z = this.circle_radius; 
-        
-     }
-    
- // NearestFlower(){
-  //   //calculating the displacement dx from the pollen to the b
-  //  let dx=this.flower.getCentrePollen.x-this.bee.x
-  //  let dy=this.flower.getCentrePollen.y-this.bee.y
-  //  let dz=this.flower.getCentrePollen.z-this.bee.z
-    
-  //  console.log("dx in myBee:", dx);
-  //   //calculating the distance according to Pythagorean theorem
-  
-  //   let d=Math.sqrt(dx^2+dy^2+dz^2)
-  
-  //   //initalizing the distances
-  //   let nearestflower 
-  //   let nearestdistance=Infinity 
-  
-  //   //if closest distance is bigger than the distance of the nearest flower then nearest distance is equal to distance and nearest flower equals to pollen
-  //   if(nearestdistance>nearestflower){
-  //       nearestdistance=d
-  //       nearestflower=this.flower.getCentrePollen
-  //   }
-  //   return nearestflower
-  // }
 }
