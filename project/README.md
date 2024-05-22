@@ -1,9 +1,12 @@
 # CG 2023/2024
-
 ## Group T01G08
+| Name                                       | Number    | E-Mail                   |
+| ----------------                           | --------- | ------------------       |
+| Florentia-Styliani Diamantopoulou          | 202311353 | up202311353@edu.fe.up.pt | 
+| Maria Mitkou                               | 202311354 | up202311354@edu.fe.up.pt | 
 
+----
 ## Project Notes
-
 ### Sphere
 ![Screenshot 1](screenshots/spherephoto.png)
 
