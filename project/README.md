@@ -24,3 +24,6 @@
 
 ### Animating the bee
 ![Screenshot 7](screenshots/project-t01g08-6.png)
+
+### Grass 
+![Screenshot 8](screenshots/project-t01g08-7.png)
