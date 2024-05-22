@@ -15,6 +15,9 @@ export class MyBee extends CGFobject {
         this.pollen = new MyPollen(this.scene)
         this.initMaterials();
         this.angle=0 //YY angle
+        this.x=0   // x position
+        this.y=0  //y position
+        this.z=0 
      
 
     }
@@ -65,9 +68,7 @@ export class MyBee extends CGFobject {
 
     display(){
 
-        this.x=0   // x position
-        this.y=0  //y position
-        this.z=0 //z position
+      
         
         //Head
         this.scene.pushMatrix();
@@ -147,4 +148,8 @@ export class MyBee extends CGFobject {
         this.scene.gl.disable(this.scene.gl.BLEND)
 
     }
+
+   
+
+
 }

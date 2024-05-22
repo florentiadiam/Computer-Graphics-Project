@@ -60,7 +60,7 @@ export class MyGarden extends CGFobject {
 
     display(){
 
-        for (let i = 0; i < this.numofFlowers; i++) {
+        for (let i = 0; i < this.numofFlowers-1; i++) {
             this.scene.pushMatrix();
             this.scene.translate(0,-10,0);
             this.scene.scale(0.1, 0.1, 0.1);
@@ -68,12 +68,21 @@ export class MyGarden extends CGFobject {
             this.scene.translate(0, this.stemSize[i]+6,0);
             this.scene.translate(this.pos_x[i], 0, this.pos_y[i]);
             this.flowers[i].display();
-            this.flowers[i].getCentre();
+            //this.flowers[i].getCentre();
             this.scene.popMatrix();
         }
-        this.x=0;
-        this.y=0;
-        this.z=0;
+            this.scene.pushMatrix();
+            this.scene.translate(0,-10,0);
+            this.scene.translate(0, this.stemSize[this.numofFlowers-1]+6,0);
+            this.scene.translate(-50, 0, 25);
+            this.scene.scale(0.1, 0.1, 0.1);
+            this.scene.scale(20,20,20)
+            this.flowers[this.numofFlowers-1].display();
+            //this.flowers[i].getCentre();
+            this.scene.popMatrix();
+        //this.x=0;
+       /// this.y=0;
+        //this.z=0;
     }
 }
 
