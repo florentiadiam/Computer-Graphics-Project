@@ -1,7 +1,12 @@
 import { CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFtexture,CGFlight } from "../lib/CGF.js";
+import { MyFlower } from "./Garden/MyFlower.js";
+import { MyGarden } from "./Garden/MyGarden.js";
+import { MyHive } from "./MyHive.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
+import { MyPollen } from "./MyPollen.js";
 import { MySphere } from "./MySphere.js";
+import { MyRock } from "./Rocks/MyRock.js";
 import { MyRockSet } from "./Rocks/MyRockSet.js";
 import { MyBee } from "./bee/MyBee.js";
 
@@ -21,69 +26,53 @@ export class MyScene extends CGFscene {
     this.velocity = [Math.cos(this.angle), Math.sin(this.angle)]; // Initial velocity vector
     this.speedFactor = 0; // Initial speed factor
     this.scaleFactor = 0; // Initial speed factor
-}
+    this.numofFlowers = 100; //Number of Flowers
+    this.move=true; //Movement of the bee
     
-  
-
-turn(delta) {
-  this.delta=delta
-
-  const rotationAngle = this.speedFactor * this.delta;
-  this.bee.angle += rotationAngle * (Math.PI / 180);
- 
-  // Normalize the angle to keep it within 0 to 2*PI range
-  while (this.bee.angle < 0) {
-      this.bee.angle += 2 * Math.PI;
-  }
-
-  // Update velocity vector while maintaining direction
-  const norm = Math.sqrt(this.velocity[0] ** 2 + this.velocity[1] ** 2);
-  this.velocity = [
-      Math.cos(this.bee.angle) * norm,
-      Math.sin(this.bee.angle) * norm
-  ];
+    
 }
-// Method to accelerate the bee
-accelerate(delta) {
-  this.delta=delta;
-  // Define acceleration and deceleration constants
-  const acceleration = 0.1*this.speedFactor;
-  const deceleration = 0.05*this.speedFactor; 
 
-  // Accelerate
-  if(this.delta>0){
-    this.speed += acceleration * this.delta;
-  }else 
-  {
-    // Decelerate
-    this.speed += deceleration * this.delta;
-  }
+initLights() {
+  // Light 0 (Main light)
+  this.lights[0] = new CGFlight(this, 0);
+  this.lights[0].setPosition(50, 50, 50, 1); 
+  this.lights[0].setDiffuse(1.5, 1.3, 1.0, 1.0); 
+  this.lights[0].setSpecular(1.5, 1.3, 1.0, 1.0); 
+  this.lights[0].setLinearAttenuation(0.0); 
+  this.lights[0].setQuadraticAttenuation(0.0001); 
+  this.lights[0].enable();
+  this.lights[0].update();
 
-  //if speed goes negative go to 0,0,0
-  if (this.speed < 0) {
-    this.speed = 0;
-  }
-  
-  // Clamp speed to prevent it from becoming negative
-  this.speed = Math.max(0, this.speed);
+  // Light 1 (Fill light)
+  this.lights[1] = new CGFlight(this, 1); 
+  this.lights[1].setPosition(0, 20, 20, 1); 
+  this.lights[1].setSpecular(0.6, 0.8, 1.0, 1.0);
+  this.lights[1].setLinearAttenuation(0.1); 
+  this.lights[1].setQuadraticAttenuation(0.01); 
+  this.lights[1].enable(); 
+  this.lights[1].update(); 
 
-  // Update position based on speed
-  this.bee.x += this.speed;
-
-  // Update norm of velocity vector while maintaining direction
-  const norm = Math.sqrt(this.velocity[0] ** 2 + this.velocity[1] ** 2);
-  if (norm !== 0) {
-      this.velocity = [
-          (this.velocity[0] / norm) * this.speed,
-          (this.velocity[1] / norm) * this.speed
-      ];
-  }
+  // Light 2 (Spotlight)
+  this.lights[2] = new CGFlight(this, 2);
+  this.lights[2].setPosition(5, 5, 5, 1);
+  this.lights[2].setDiffuse(1.2, 0.7, 0.6, 1.0); 
+  this.lights[2].setSpecular(1.2, 0.7, 0.6, 1.0); 
+  this.lights[2].setLinearAttenuation(0.3); 
+  this.lights[2].setQuadraticAttenuation(0.1); 
+  this.lights[2].enable();
+  this.lights[2].update();
 }
+
+
 
   init(application) {
     super.init(application);
-    this.speedFactor=1
+    this.speedFactor=0.1
     this.previousTime=0;
+    this.isDescending =false;
+    this.isInitialHeight =false;
+    this.isHiveHeight =false;
+    this.isPollen=false
 
     this.initCameras();
     this.initLights();
@@ -98,7 +87,7 @@ accelerate(delta) {
 
   
     this.enableTextures(true);
-    this.texturePanorama = new CGFtexture(this, 'images/panorama4.jpg');
+    this.texturePanorama = new CGFtexture(this, 'images/panorama8.png');
 
     //Initialize scene objects
     this.objects = [this.axis,this.panorama, this.sphere];
@@ -108,16 +97,19 @@ accelerate(delta) {
     this.plane = new MyPlane(this,30);
     this.sphere=new MySphere(this,50,50,false);
     this.rockset = new MyRockSet(this);
+    this.pollen = new MyPollen(this);
+    this.pollen1 = new MyPollen(this);
+    this.flower = new MyFlower(this, 2, 5,2,2,2,1,1,1,1,1,1,1);
+    this.hive = new MyHive(this);
+    this.garden=new MyGarden(this,this.numofFlowers)
     this.bee = new MyBee(this);
-
+    this.rock = new MyRock(this,5,5,5);
 
     //Objects connected to MyInterface
     this.selectedObject = 1;
     this.displayAxis = true;
     this.displayNormals = false;
-    this.scaleFactor = 1;
-
-   
+    this.scaleFactor = 0.5;
 
     this.texture = new CGFtexture(this, "images/grass.jpg");
     this.appearance = new CGFappearance(this);
@@ -129,7 +121,15 @@ accelerate(delta) {
     this.appearance1.setTexture(this.texture1);
     this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
 
+    this.grassTexture = new CGFtexture(this, "images/grass.jpg");
+    this.terainMaterial = new CGFappearance(this);
+    this.terainMaterial.setTexture(this.grassTexture);
+    this.terainMaterial.setTextureWrap('REPEAT', 'REPEAT');
+  
+
   }
+
+
   initLights() {
     // Light 0 
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -152,6 +152,7 @@ accelerate(delta) {
     this.lights[2].enable();
     this.lights[2].update();
   }
+
   initCameras() {
     this.camera = new CGFcamera(
       1.0,
@@ -176,29 +177,181 @@ accelerate(delta) {
 }
 
 
-
 update(t) {
   const amplitude = 1; 
   const frequency = 2 * Math.PI / 1000;  //1000ms=1s
   const phase = Math.PI / 2; 
 
-  //console.log("t:", t); // Log current time
-  //console.log("Previous Time:", this.previousTime); // Log previous time
-  const currentTime = Date.now();
+  const currentTime = t
   const verticalPosition = amplitude * Math.sin(frequency * currentTime + phase);
   var delta = t - this.previousTime; // Calculate delta time
+
   this.checkkeyes(delta);
 
   this.previousTime = t;
-  this.bee.y = verticalPosition;
+  
+  if(this.move){
+    this.bee.y = verticalPosition;
+  }  
 }
+
+
+//Method to turn the bee
+turn(delta) {
+  this.delta=delta;
+    const rotationAngle = this.speedFactor * this.delta;
+    this.bee.angle += rotationAngle * (Math.PI / 180);
+    
+   
+    // Update velocity vector while maintaining direction
+    const norm = Math.sqrt(this.velocity[0] ** 2 + this.velocity[1] ** 2);
+    this.velocity = [
+        Math.cos(this.bee.angle) * norm,
+        Math.sin(this.bee.angle) * norm
+    ];
+  }
+  
+  // Method to accelerate the bee
+  accelerate(delta) {
+    this.delta=delta;
+    // Define acceleration and deceleration constants
+    const acceleration = 0.007*this.speedFactor;
+    const deceleration = 0.007*this.speedFactor; 
+  
+    // Accelerate
+    if(this.delta>0){
+      this.speed += acceleration * this.delta;
+    }else 
+    {
+      // Decelerate
+      this.speed += deceleration * this.delta;
+    }
+  
+    //if speed goes negative go to 0,0,0
+    if (this.speed < 0) {
+      this.speed = 0;
+    }
+    
+    // Clamp speed to prevent it from becoming negative
+    this.speed = Math.max(0, this.speed);
+  
+    // Update position based on speed
+    this.bee.z += this.speed;
+  
+    // Update norm of velocity vector while maintaining direction
+    const norm = Math.sqrt(this.velocity[0] ** 2 + this.velocity[1] ** 2);
+    if (norm !== 0) {
+        this.velocity = [
+            (this.velocity[0] / norm) * this.speed,
+            (this.velocity[1] / norm) * this.speed
+        ];
+    }
+  }
+  
+  //First animation move bee goes to the flower
+  BeeDescend(delta){
+    this.delta=delta;
+    const acceleration = 0.001*this.speedFactor;
+    // Update speed with acceleration
+    this.speed += acceleration * this.delta;
+
+    // Update speed with acceleration
+    this.speed += acceleration * this.delta;
+
+    //Get the position of a flower
+    let FlowerPosx =this.garden.pos_z[3]*0.37; 
+    let FlowerPosy=(-30+(this.garden.stemSize[3])*this.garden.flowerSize[3]*0.1)*0.37;
+    let FlowerPosz = -this.garden.pos_x[3]*0.37;
+
+    //Distance Flower from bee
+    let dx=FlowerPosx-this.bee.x
+    let dy=FlowerPosy-this.bee.y
+    let dz=FlowerPosz-this.bee.z
+
+    //Angle so the bee face the flower
+    this.bee.angle = Math.atan2(dx,dz)
+    
+    let d=Math.sqrt(dx*dx+dy*dy+dz*dz) //distance to the flower 
+    if (d>0.8){
+      this.bee.x+=this.speed*dx*0.1
+      this.bee.y+=this.speed*dy*0.1
+      this.bee.z+=this.speed*dz*0.1
+      this.isDescending=true;
+    }
+    else{
+      this.bee.x=FlowerPosx
+      this.bee.y=FlowerPosy
+      this.bee.z=FlowerPosz
+      this.isPollen=true
+
+      this.isDescending=false;
+    }
+  }
+
+  BeeInitalHeight(delta) {
+    this.delta=delta;
+    const acceleration = 0.01*this.speedFactor;
+    this.speed += acceleration * this.delta;
+
+    let Height0y = 0;
+
+    let dx=0-this.bee.x
+    let dy=Height0y-this.bee.y
+    let dz=0-this.bee.z
+
+    this.bee.angle =  Math.atan2(dx,dz)
+  
+
+    if (Math.abs(dx) > acceleration && Math.abs(dy) > acceleration && Math.abs(dz) > acceleration) {
+      this.bee.x += dx * this.speed * acceleration * 20;
+      this.bee.y += dy * this.speed * acceleration * 20;
+      this.bee.z += dz* this.speed * acceleration * 20;
+      this.isInitialHeight =true;
+    }else{
+      this.bee.x=0
+      this.bee.y = Height0y;
+      this.bee.z=0
+      this.isInitialHeight =false;
+    }
+      
+    return 0;
+}
+
+BeeToHive(delta) {
+  this.delta=delta;
+  const acceleration = 0.05*this.speedFactor;
+  this.speed += acceleration * this.delta;
+
+  let hivex=-3
+  let hivey=-6  //13
+  let hivez=4
+  const dx = hivex - this.bee.x;
+  const dy = hivey - this.bee.y;
+  const dz = hivez - this.bee.z;
+
+  this.bee.angle = Math.atan2(dx, dz);
+
+  const d = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+  if (d > 0.8) {
+      this.bee.x += dx * this.speed * acceleration;
+      this.bee.y +=dy*this.speed*acceleration;
+      this.bee.z += dz * this.speed * acceleration;
+    
+      this.isHiveHeight=true
+  } else {
+      this.bee.x = hivex;
+      this.bee.y = hivey;
+      this.bee.z = hivez;
+      this.isHiveHeight=false
+      this.isPollen=false
+  }
+}
+    
+      
 
 //Check if keyes are pressed
   checkkeyes(delta){
-    //console.log("Delta:", delta);
-    //console.log("Bee before translation - X:", this.bee.x, "Y:", this.bee.y, "Z:", this.bee.z);
-    this.delta=delta;
-
     var text="Keys pressed: ";
     var keysPressed=false;
 
@@ -210,9 +363,10 @@ update(t) {
       this.previousPosition = { x: this.bee.x, z: this.bee.z };
       this.previousAngle= this.bee.angle
       this.accelerate(delta); // Accelerate when "W" is pressed  
+      this.move=true;
     } 
 
-//Brake if S is pressed
+    //Brake if S is pressed
     if (this.gui.isKeyPressed("KeyS"))        {
       text+=" S ";
       keysPressed=true;
@@ -220,6 +374,7 @@ update(t) {
       this.previousPosition = { x: this.bee.x, z: this.bee.z };
       this.previousAngle= this.bee.angle
       this.accelerate(-delta);
+      this.move=true;
     }
     
     //Left Rotation if A is pressed
@@ -229,51 +384,114 @@ update(t) {
       console.log("Bee left Rotation with A:", this.bee.angle);
       this.previousPosition = { x: this.bee.x, z: this.bee.z };
       this.previousAngle= this.bee.angle
+     this.accelerate(0);
       this.turn(delta);
+      this.move=true;
 
     }
 
-   //Right Rotation  if D is pressed   
+    //Right Rotation  if D is pressed   
     if (this.gui.isKeyPressed("KeyD"))        {
       text+=" D ";
       keysPressed=true;
       console.log("Bee Right Rotation with D:", this.bee.angle);
       this.previousPosition = { x: this.bee.x, z: this.bee.z };
       this.previousAngle= this.bee.angle
+      this.accelerate(0);
       this.turn(-delta);
+      this.move=true;
 
     }
 
-       //Reset bee is R is pressed    
+       //Reset bee if R is pressed
        if (this.gui.isKeyPressed("KeyR"))        {
         text+=" R ";
         keysPressed=true;
+        this.bee.x=0;
+        this.bee.y=0
+        this.bee.z=0
         this.accelerate.speed=0;
+        this.bee.angle=0;
+        this.move=true;
+      }
+
+       //First animation if F is pressed
+       if (this.gui.isKeyPressed("KeyF"))        {
+        text+=" F ";
+        keysPressed=true;
+        this.previousPosition = { x: this.bee.x, z: this.bee.z };
+        this.previousAngle= this.bee.angle
+        this.BeeDescend(delta)
+        this.move=false;
+      }
+
+      if (this.gui.isKeyPressed("KeyP"))        {
+        text+=" P ";
+        keysPressed=true;
+        this.previousPosition = { x: this.bee.x, z: this.bee.z };
+        this.previousAngle= this.bee.angle
+        this.BeeInitalHeight(delta)
+        this.move=false;
+      }
+      if (this.gui.isKeyPressed("KeyO"))        {
+        text+=" O ";
+        keysPressed=true;
+        this.previousPosition = { x: this.bee.x, z: this.bee.z };
+        this.previousAngle= this.bee.angle
+        this.BeeToHive(delta)
+        this.move=false;
       }
 
       //If a key is not pressed mantain the previous position of the bee
-     if (!keysPressed) {
-      // Restore previous position if no keys are pressed
-      this.bee.x = this.previousPosition.x;
-      this.bee.z = this.previousPosition.z;
-      this.bee.angle= this.previousAngle;
-  } else 
-  {
-      // Update previous position if keys are pressed
-      this.previousPosition = { x: this.bee.x, z: this.bee.z };
-      this.previousAngle=this.bee.angle;
-  }
+      if (!keysPressed) {
+        // Restore previous position if no keys are pressed
+        this.previousPosition = { x: this.bee.x, z: this.bee.z };
+        this.previousAngle=this.bee.angle;
+        //this.move=true;
 
-        if (keysPressed)
-        console.log(text);
+        //if the bee is descending then beedescend
+        if(this.isDescending ){
+          this.previousPosition = { x: this.bee.x, z: this.bee.z };
+          this.previousAngle=this.bee.angle;
+          this.BeeDescend(delta)
+          this.move=false;
+        }
+        else if(this.isInitialHeight){
+          this.previousPosition = { x: this.bee.x, z: this.bee.z };
+          this.previousAngle=this.bee.angle;
+          this.BeeInitalHeight(delta)
+          this.move=false;
+        }
+        else if(this.isHiveHeight){
+          this.previousPosition = { x: this.bee.x, z: this.bee.z };
+          this.previousAngle=this.bee.angle;
+          this.BeeToHive(delta)
+          this.move=false;
+        }
+        else{
+          this.bee.x = this.previousPosition.x;
+          this.bee.z = this.previousPosition.z;
+          this.bee.angle= this.previousAngle;
+        }
 
+        // Update previous position if keys are pressed
+        this.previousPosition = { x: this.bee.x, z: this.bee.z };
+        this.previousAngle=this.bee.angle;
+      }
+
+      if (keysPressed)
+      console.log(text);
   }
 
   updateSpeedFactor(value) {
     this.speedFactor = value;
-}
+  }
   
   display() {
+    for (let i = 0; i < this.lights.length; i++) {
+      this.lights[i].enable();
+      this.lights[i].update();
+    }
    
     var currentTime = Date.now();
 
@@ -288,37 +506,63 @@ update(t) {
     // Initialize Model-View matrix as identity (no transformation
     this.updateProjectionMatrix();
     this.loadIdentity();
+
     // Apply transformations corresponding to the camera position relative to the origin
     this.applyViewMatrix();
 
     // Draw axis
     if (this.displayAxis) this.axis.display();
-  
-    this.pushMatrix();
-    this.scale(100,100,100);
-    this.panorama.display();
-    this.popMatrix();
+    
+      this.pushMatrix();
+      this.terainMaterial.apply();
+      this.scale(85, 30, 85);
+      this.rotate(-Math.PI / 2.0, 1, 0, 0);
+      this.translate(0,0,-0.6);
+      this.plane.display();
+      this.popMatrix();
 
+      //rocks display
+      this.pushMatrix()
+      this.translate(-5.5,-18,4);
+      this.rockset.display() 
+      this.popMatrix()
+      
+      //Hive display
+      this.pushMatrix();
+      this.translate(-5.5,-13,4)
+      this.rotate(Math.PI/2,0,1,0)
+      this.hive.display();
+      this.popMatrix()
 
+      //garden display
+      this.pushMatrix()
+      this.translate(0,-18,0)
+      this.rotate(Math.PI/2,0,1,0)
+      this.scale(0.37,0.37,0.37)
+      this.garden.display();
+      this.popMatrix();
 
-
-  //this.rock.display();
-  //this.rockset.display();
+      //bee dsplay
+      this.pushMatrix();
+      //updating coordinates of bee
+      this.translate(this.bee.x,this.bee.y-5,this.bee.z)
+      this.rotate(this.bee.angle, 0, 1, 0); // Rotate around YY axis
+      this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+      this.bee.display();
+      this.popMatrix();
 
       this.pushMatrix();
-    this.scale(200,200,200);
-    this.panorama.display();
-    this.popMatrix();
+      this.scale(45,45,45);
+      this.panorama.display();
+      this.popMatrix();
 
-  this.pushMatrix();
-  //this.scale(5,5,5);
-  //console.log("Bee Translation:", this.bee.x, this.bee.y, this.bee.z);
-  this.translate(this.bee.x,this.bee.y,this.bee.z)
-  this.rotate(this.bee.angle, 0, 1, 0); // Rotate around YY axis
-  this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
-  this.bee.display();
-  //this.sphere.display();
- this.popMatrix();
-
+      if(this.isPollen==true){
+        this.pushMatrix();
+        this.translate(this.bee.x+0.3,this.bee.y-5.5,this.bee.z+0.8)
+        this.rotate(this.bee.angle, 0, 1, 0); 
+        this.scale(1,0.5,1)
+        this.pollen1.display()
+        this.popMatrix();
+      }
   }
 }

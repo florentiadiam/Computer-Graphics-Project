@@ -1,8 +1,10 @@
 import { CGFappearance, CGFobject } from '../../lib/CGF.js';
+import { MyPollen } from '../MyPollen.js';
 import { MyLeaf } from './MyLeaf.js';
 import { MyPetal } from './MyPetal.js';
 import { MyReceptacle } from './MyReceptacle.js';
 import { MyStem } from './MyStem.js';
+
 
 /**
  * MyPetal
@@ -12,24 +14,24 @@ import { MyStem } from './MyStem.js';
 export class MyFlower extends CGFobject {
 	constructor(scene,petal_r, petal_num, circle_radius, stem_radius, stem_size, petal_color,
                 stem_color, circle_color, petal_angle1, petal_angle2, stem_angle, leaf_color) {
-		super(scene,petal_r, petal_num, circle_radius, stem_radius, stem_size, petal_color,
-                stem_color, circle_color,  petal_angle1, petal_angle2, stem_angle, leaf_color);
+		super(scene);
         this.petal_r = petal_r;
         this.petal_num = petal_num;
         this.circle_radius = circle_radius;
-        this.stem_radius = stem_radius; //TODO: Must change leafs according to the stem radius
-        this.stem_size = stem_size; //TODO: Work on the leaves
+        this.stem_radius = stem_radius; 
+        this.stem_size = stem_size; 
         this.petal_color = petal_color;
         this.stem_color = stem_color;
         this.circle_color = circle_color;
-        this.petal_angle1 = petal_angle1; //TODO: This needs work
-        this.petal_angle2 = petal_angle2; //TODO: This needs work
+        this.petal_angle1 = petal_angle1; 
+        this.petal_angle2 = petal_angle2; 
         this.leaf_color = leaf_color;
-        this.stem_angle = stem_angle; //TODO: Do this if you have time not that important
+        this.stem_angle = stem_angle; 
         this.petal = new MyPetal(this.scene, this.petal_angle1);
         this.stem = new MyStem(this.scene,20,10);
         this.receptacle = new MyReceptacle(this.scene,100,10);
         this.leaf = new MyLeaf(this.scene, 1, 0, 0);
+        this.pollen = new MyPollen(this.scene);
         this.initMaterials();
 	}
 
@@ -86,7 +88,7 @@ export class MyFlower extends CGFobject {
         this.circleMaterial2.setSpecular(0.1, 0.1, 0.1, 1.0);
         this.circleMaterial2.setShininess(5.0);
 
-        this.circleMaterial3 = new CGFappearance(this.scene); // TODO: Look at thr colors something is wromg
+        this.circleMaterial3 = new CGFappearance(this.scene); 
         this.circleMaterial3.setAmbient(0.4, 0.96, 0.44, 1.0);
         this.circleMaterial3.setDiffuse(0.1, 0.1, 0.1, 1.0);
         this.circleMaterial3.setSpecular(0.1, 0.1, 0.1, 1.0);
@@ -102,6 +104,8 @@ export class MyFlower extends CGFobject {
         this.scene.scale(this.circle_radius,this.circle_radius,this.circle_radius)
         this.circleMaterials[this.circle_color].apply();
         this.receptacle.display();
+        this.scene.translate(0,0,1)
+        this.pollen.display()
         this.scene.popMatrix();
         
 
@@ -151,6 +155,43 @@ export class MyFlower extends CGFobject {
             this.petal.display();
             this.scene.popMatrix();
         }
+        //pollen
+        // this.scene.pushMatrix();
+        // this.scene.translate(0,0,-this.circle_radius+2);
+        // this.pollen.display();
+        // this.scene.popMatrix();
+
+      
 	}
 
+    getCentrePollen(){
+       
+     this.pollen.x = this.circle_radius; 
+     this.pollen.y = this.circle_radius; 
+     this.pollen.z = this.circle_radius; 
+        
+     }
+    
+ // NearestFlower(){
+  //   //calculating the displacement dx from the pollen to the b
+  //  let dx=this.flower.getCentrePollen.x-this.bee.x
+  //  let dy=this.flower.getCentrePollen.y-this.bee.y
+  //  let dz=this.flower.getCentrePollen.z-this.bee.z
+    
+  //  console.log("dx in myBee:", dx);
+  //   //calculating the distance according to Pythagorean theorem
+  
+  //   let d=Math.sqrt(dx^2+dy^2+dz^2)
+  
+  //   //initalizing the distances
+  //   let nearestflower 
+  //   let nearestdistance=Infinity 
+  
+  //   //if closest distance is bigger than the distance of the nearest flower then nearest distance is equal to distance and nearest flower equals to pollen
+  //   if(nearestdistance>nearestflower){
+  //       nearestdistance=d
+  //       nearestflower=this.flower.getCentrePollen
+  //   }
+  //   return nearestflower
+  // }
 }

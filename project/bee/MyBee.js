@@ -1,4 +1,5 @@
 import { CGFappearance, CGFobject, CGFtexture } from '../../lib/CGF.js';
+import { MyPollen } from '../MyPollen.js';
 import { MySphere } from '../MySphere.js';
 import { MyStem } from '../Garden/MyStem.js';
 import { MyLegs } from './MyLegs.js';
@@ -11,10 +12,16 @@ export class MyBee extends CGFobject {
         this.sphere = new MySphere(this.scene, 50, 10, false);
         this.wings = new MyWings(this.scene);
         this.legs = new MyLegs(this.scene);
-        this.sting = new MyStem(this.scene,50,6);
+        this.sting = new MyStem(this.scene, 50, 6)
+        this.pollen = new MyPollen(this.scene)
         this.initMaterials();
+        this.angle=0 //YY angle
+        this.x=0   // x position
+        this.y=0  //y position
+        this.z=0 
     }
     update
+
     initMaterials() {
 
         this.blackcolor = new CGFappearance(this.scene);
@@ -58,13 +65,6 @@ export class MyBee extends CGFobject {
     }
 
     display(){
-        
-    this.x=0   // x position
-    this.y=0  //y position
-    this.z=0 //z position
-    
-
-
         //Head
         this.scene.pushMatrix();
         this.appearance1.apply();
@@ -79,9 +79,6 @@ export class MyBee extends CGFobject {
         this.appearance.apply();
         this.sphere.display();
         this.scene.popMatrix();
-
- 
-    
 
         //Legs1
         this.scene.pushMatrix();
@@ -129,7 +126,6 @@ export class MyBee extends CGFobject {
 
         //wings
         this.scene.pushMatrix();
-         
         this.scene.gl.blendFunc(this.scene.gl.SRC_ALPHA, this.scene.gl.ONE_MINUS_SRC_ALPHA);
         this.scene.gl.enable(this.scene.gl.BLEND);
 

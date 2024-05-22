@@ -21,3 +21,6 @@
 
 ### Controlling the bee
 ![Screenshot 6](screenshots/project-t01g08-5.png)
+
+### Animating the bee
+![Screenshot 7](screenshots/project-t01g08-6.png)

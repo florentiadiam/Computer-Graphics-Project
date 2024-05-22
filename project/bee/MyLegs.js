@@ -4,7 +4,7 @@ import { MyStem } from '../Garden/MyStem.js';
 export class MyLegs extends CGFobject {
     constructor(scene) {
         super(scene);
-        this.legs = new MyStem(this.scene, 50, 20);
+        this.legs = new MyStem(this.scene, 50,20);
     }
 
     display(){
