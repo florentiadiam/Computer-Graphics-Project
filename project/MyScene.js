@@ -9,6 +9,7 @@ import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
 import { MyRockSet } from "./Rocks/MyRockSet.js";
 import { MyBee } from "./bee/MyBee.js";
+import { MyGrass } from './Grass/MyGrass.js'
 
 /**
  * MyScene
@@ -26,6 +27,7 @@ export class MyScene extends CGFscene {
     this.speedFactor = 0; // Initial speed factor
     this.scaleFactor = 0; // Initial speed factor
     this.showshaderCode=false;
+    
     
 }
 initLights() {
@@ -141,6 +143,7 @@ accelerate(delta) {
     this.garden=new MyGarden(this,10)
     this.bee = new MyBee(this);
     this.leaf= new MyLeaves(this, 50);
+    this.grass = new MyGrass(this,500);
 
     //Objects connected to MyInterface
     this.selectedObject = 1;
@@ -329,10 +332,17 @@ update(t) {
 
     this.setDefaultAppearance();
 
+    this.pushMatrix();
+    this.scale(23,23,23);
+    this.rotate(-Math.PI/2,1,0,0)
+    this.terainMaterial.apply();
+    this.plane.display();
+    this.popMatrix();
+
   this.pushMatrix();
   this.setActiveShader(this.grassmovement);
   this.appearanceLeaf.apply()
-  this.leaf.display();
+  this.grass.display();
   this.popMatrix();
   
   this.setActiveShader(this.defaultShader);
