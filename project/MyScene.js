@@ -25,6 +25,7 @@ export class MyScene extends CGFscene {
     this.velocity = [Math.cos(this.angle), Math.sin(this.angle)]; // Initial velocity vector
     this.speedFactor = 0; // Initial speed factor
     this.scaleFactor = 0; // Initial speed factor
+    //this.bee.display(isPollen)
     
 }
 
@@ -67,6 +68,7 @@ initLights() {
     this.isDescending =false;
     this.isInitialHeight =false;
     this.isHiveHeight =false;
+    this.isPollen=false
 
     this.initCameras();
     this.initLights();
@@ -248,6 +250,8 @@ turn(delta) {
         this.bee.x=nearestx
         this.bee.y=nearesty
         this.bee.z=nearestz
+        this.isPollen=true
+  
         this.isDescending=false;
       }
   
@@ -314,18 +318,20 @@ BeeToHive(delta) {
       this.bee.angle = Math.atan2(dx, dz);
 
       const d = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
       //console.log("Distance:", d);
       if (d > 0.8) {
           this.bee.x += dx * this.speed * acceleration;
           this.bee.y +=dy*this.speed*acceleration;
           this.bee.z += dz * this.speed * acceleration;
-          this.pollen1.display()
+       
           this.isHiveHeight=true
       } else {
           this.bee.x = hivex;
           this.bee.y = hivey;
           this.bee.z = hivez;
           this.isHiveHeight=false
+          this.isPollen=false
       }
     }
     
@@ -534,6 +540,17 @@ this.pushMatrix();
 this.scale(45,45,45);
 this.panorama.display();
 this.popMatrix();
+
+if(this.isPollen==true){
+  this.pushMatrix();
+  this.translate(this.bee.x+0.3,this.bee.y-5.5,this.bee.z+0.8)
+  this.rotate(this.bee.angle, 0, 1, 0); 
+  this.scale(1,0.5,1)
+  //console.log(this.bee.x)
+  this.pollen1.display()
+
+ this.popMatrix();
+}
 
 
   }
