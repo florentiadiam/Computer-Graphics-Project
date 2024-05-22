@@ -473,7 +473,7 @@ BeeToHive(delta) {
         this.bee.z = this.previousPosition.z;
         this.bee.angle= this.previousAngle;
       }
-      
+
       // Update previous position if keys are pressed
       this.previousPosition = { x: this.bee.x, z: this.bee.z };
       this.previousAngle=this.bee.angle;
