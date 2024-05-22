@@ -525,67 +525,67 @@ BeeToHive(delta) {
     // Draw axis
     if (this.displayAxis) this.axis.display();
 
-      //ground display
+    this.setDefaultAppearance();
+    //ground display
+    this.pushMatrix();
+    this.terainMaterial.apply();
+    this.scale(85, 30, 85);
+    this.rotate(-Math.PI / 2.0, 1, 0, 0);
+    this.translate(0,0,-0.6);
+    this.plane.display();
+    this.popMatrix();
+
+    //rocks display
+    this.pushMatrix()
+    this.translate(-5.5,-18,4);
+    this.rockset.display() 
+    this.popMatrix()
+    
+    //Hive display
+    this.pushMatrix();
+    this.translate(-5.5,-13,4)
+    this.rotate(Math.PI/2,0,1,0)
+    this.hive.display();
+    this.popMatrix()
+
+    //garden display
+    this.pushMatrix()
+    this.translate(0,-18,0)
+    this.rotate(Math.PI/2,0,1,0)
+    this.scale(0.37,0.37,0.37)
+    this.garden.display();
+    this.popMatrix();
+
+    //bee dsplay
+    this.pushMatrix();
+    //updating coordinates of bee
+    this.translate(this.bee.x,this.bee.y-5,this.bee.z)
+    this.rotate(this.bee.angle, 0, 1, 0); // Rotate around YY axis
+    this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+    this.bee.display();
+    this.popMatrix();
+
+    //panorama display
+    this.pushMatrix();
+    this.scale(45,45,45);
+    this.panorama.display();
+    this.popMatrix();
+
+    if(this.isPollen==true){
       this.pushMatrix();
-      this.terainMaterial.apply();
-      this.scale(85, 30, 85);
-      this.rotate(-Math.PI / 2.0, 1, 0, 0);
-      this.translate(0,0,-0.6);
-      this.plane.display();
+      this.translate(this.bee.x+0.3,this.bee.y-5.5,this.bee.z+0.8)
+      this.rotate(this.bee.angle, 0, 1, 0); 
+      this.scale(1,0.5,1)
+      this.pollen1.display()
       this.popMatrix();
+    }
 
-      //rocks display
-      this.pushMatrix()
-      this.translate(-5.5,-18,4);
-      this.rockset.display() 
-      this.popMatrix()
-      
-      //Hive display
-      this.pushMatrix();
-      this.translate(-5.5,-13,4)
-      this.rotate(Math.PI/2,0,1,0)
-      this.hive.display();
-      this.popMatrix()
-
-      //garden display
-      this.pushMatrix()
-      this.translate(0,-18,0)
-      this.rotate(Math.PI/2,0,1,0)
-      this.scale(0.37,0.37,0.37)
-      this.garden.display();
-      this.popMatrix();
-
-      //bee dsplay
-      this.pushMatrix();
-      //updating coordinates of bee
-      this.translate(this.bee.x,this.bee.y-5,this.bee.z)
-      this.rotate(this.bee.angle, 0, 1, 0); // Rotate around YY axis
-      this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
-      this.bee.display();
-      this.popMatrix();
-
-      //panorama display
-      this.pushMatrix();
-      this.scale(45,45,45);
-      this.panorama.display();
-      this.popMatrix();
-
-      if(this.isPollen==true){
-        this.pushMatrix();
-        this.translate(this.bee.x+0.3,this.bee.y-5.5,this.bee.z+0.8)
-        this.rotate(this.bee.angle, 0, 1, 0); 
-        this.scale(1,0.5,1)
-        this.pollen1.display()
-        this.popMatrix();
-      }
-
-      //grass display
-      this.setDefaultAppearance();
-      this.pushMatrix();
-      this.setActiveShader(this.grassmovement);
-      this.appearanceLeaf.apply()
-      this.grass.display();
-      this.popMatrix();
-      this.setActiveShader(this.defaultShader);
+    //grass display
+    this.pushMatrix();
+    this.setActiveShader(this.grassmovement);
+    this.appearanceLeaf.apply()
+    this.grass.display();
+    this.popMatrix();
+    this.setActiveShader(this.defaultShader);
   }
 }
