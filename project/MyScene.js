@@ -25,6 +25,7 @@ export class MyScene extends CGFscene {
     this.velocity = [Math.cos(this.angle), Math.sin(this.angle)]; // Initial velocity vector
     this.speedFactor = 0; // Initial speed factor
     this.scaleFactor = 0; // Initial speed factor
+    this.numofFlowers = 100;
     
 }
 
@@ -113,49 +114,45 @@ accelerate(delta) {
   }
 }
 
-NearestFlower(){
-  //calculating the displacement dx from the pollen to the b
- let dx=this.flower.getCentrePollen.x-this.bee.x
- let dy=this.flower.getCentrePollen.y-this.bee.y
- let dz=this.flower.getCentrePollen.z-this.bee.z
-  
- console.log("dx in myBee:", dx);
-  //calculating the distance according to Pythagorean theorem
+RandomFlower(){
+  let randomx;
+  let randomz;
+  let randomFlower = Math.floor(Math.random()*100);
 
-  let d=Math.sqrt(dx^2+dy^2+dz^2)
-
-  //initalizing the distances
-  let nearestflower 
-  let nearestdistance=Infinity 
-
-  //if closest distance is bigger than the distance of the nearest flower then nearest distance is equal to distance and nearest flower equals to pollen
-  if(nearestdistance>nearestflower){
-      nearestdistance=d
-      nearestflower=this.flower.getCentrePollen
-  }
-  return nearestflower
+      randomx=this.garden.pos_x[randomFlower]
+      randomz=this.garden.pos_z[randomFlower];
+    
+    let pos = [randomx,randomz]
+    console.log("nearest x",randomx)
+    console.log("nearest z",randomz)
+    return pos;
 }
 
 //need to find how to retrieve the pollen coordinates 
 BeeDescend(delta){
   this.delta=delta;
   const acceleration = 0.1*this.speedFactor;
+  let position = this.RandomFlower();
+  let nx = position[0];
+  let nz =position[1];
 
+  console.log("nx:", nx);
+  console.log("nz:", nz);
 
   // Update speed with acceleration
   this.speed += acceleration * this.delta;
 
  // let nearestFlower=this.NearestFlower()
- let nearestx= 9.25
+ let nearestx = nz*0.37
  let nearesty=0
- let nearestz=18.5
- console.log("Bee Position x:", this.bee.x);
- console.log("Bee Position y:", this.bee.y);
- console.log("Bee Position z:", this.bee.z);
+ let nearestz = -nx*0.37
+ console.log("Bee Position x:", nearestx);
+ console.log("Bee Position y:", nearesty);
+ console.log("Bee Position z:", nearestz);
 
   // if(nearestFlower){
     let dx=nearestx-this.bee.x
-   let  dy=nearesty-this.bee.y
+    let dy=nearesty-this.bee.y
     let dz=nearestz-this.bee.z
 
     this.bee.angle =  Math.atan2(dx,dz)
@@ -220,7 +217,7 @@ BeeDescend(delta){
     this.pollen = new MyPollen(this);
     this.flower = new MyFlower(this, 2, 5,2,2,2,1,1,1,1,1,1,1);
     this.hive = new MyHive(this);
-    this.garden=new MyGarden(this,100)
+    this.garden=new MyGarden(this,this.numofFlowers)
     this.bee = new MyBee(this);
     this.rock = new MyRock(this,5,5,5);
 
