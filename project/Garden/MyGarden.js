@@ -29,8 +29,8 @@ export class MyGarden extends CGFobject {
         this.stemRadius =[];
         this.flowers = [];
         for (let i = 0; i < numofFlowers; i++) {
-            this.pos_x.push(Math.random() * (130 + 130) - 130);
-            this.pos_z.push(Math.random() * (130 + 130) - 130);
+            this.pos_x.push(Math.random() * (100 + 100) - 100);
+            this.pos_z.push(Math.random() * (100 + 100) - 100);
             this.flowerSize.push(Math.random() * (7 -3) + 3);
             this.petalColor.push(Math.floor(Math.random() * 3));
             this.stemColor.push(Math.floor(Math.random() * 3));
@@ -62,11 +62,10 @@ export class MyGarden extends CGFobject {
 
         for (let i = 0; i < this.numofFlowers-1; i++) {
             this.scene.pushMatrix();
-            this.scene.translate(0,-10,0);
+            this.scene.translate(this.pos_x[i], 0, this.pos_z[i]);
             this.scene.scale(0.1, 0.1, 0.1);
             this.scene.scale(this.flowerSize[i], this.flowerSize[i], this.flowerSize[i])
             this.scene.translate(0, this.stemSize[i]+6,0);
-            this.scene.translate(this.pos_x[i], 0, this.pos_z[i]);
             this.flowers[i].display();
             //this.flowers[i].getCentre();
             this.scene.popMatrix();

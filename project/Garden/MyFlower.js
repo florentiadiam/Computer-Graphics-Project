@@ -172,5 +172,26 @@ export class MyFlower extends CGFobject {
         
      }
     
-
+ // NearestFlower(){
+  //   //calculating the displacement dx from the pollen to the b
+  //  let dx=this.flower.getCentrePollen.x-this.bee.x
+  //  let dy=this.flower.getCentrePollen.y-this.bee.y
+  //  let dz=this.flower.getCentrePollen.z-this.bee.z
+    
+  //  console.log("dx in myBee:", dx);
+  //   //calculating the distance according to Pythagorean theorem
+  
+  //   let d=Math.sqrt(dx^2+dy^2+dz^2)
+  
+  //   //initalizing the distances
+  //   let nearestflower 
+  //   let nearestdistance=Infinity 
+  
+  //   //if closest distance is bigger than the distance of the nearest flower then nearest distance is equal to distance and nearest flower equals to pollen
+  //   if(nearestdistance>nearestflower){
+  //       nearestdistance=d
+  //       nearestflower=this.flower.getCentrePollen
+  //   }
+  //   return nearestflower
+  // }
 }

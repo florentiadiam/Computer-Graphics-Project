@@ -18,6 +18,7 @@ export class MyBee extends CGFobject {
         this.x=0   // x position
         this.y=0  //y position
         this.z=0 
+       
      
 
     }
@@ -68,7 +69,7 @@ export class MyBee extends CGFobject {
 
     display(){
 
-      
+
         
         //Head
         this.scene.pushMatrix();
@@ -149,7 +150,7 @@ export class MyBee extends CGFobject {
 
     }
 
-   
+  
 
 
 }
