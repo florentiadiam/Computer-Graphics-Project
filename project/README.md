@@ -22,11 +22,19 @@
 ### Bee
 ![Screenshot 5](screenshots/project-t01g08-4.png)
 
-### Controlling the bee
+### Controlling the bee with W,S,R keys
 ![Screenshot 6](screenshots/project-t01g08-5.png)
+Animation was done with the update method of CGF library and the animation speed depends on time (delta)
+W key: Bee accelerates
+S key: Bee brakes
+R key: Bee returns to its initial speed,angle,position
 
-### Animating the bee
+
+### Pollen and Hive Animation the bee with O,P,F keys
 ![Screenshot 7](screenshots/project-t01g08-6.png)
+F key: Bee descends to a flower and obtains its pollen
+P KEY: Bee returns to its inital height
+O key: Bee ascends to hive and drops the pollen
 
 ### Grass 
 ![Screenshot 8](screenshots/project-t01g08-7.png)
