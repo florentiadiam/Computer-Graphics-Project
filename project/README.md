@@ -7,6 +7,9 @@
 
 ----
 ## Project Notes
+
+Was not developped: Additional developments
+
 ### Sphere
 ![Screenshot 1](screenshots/spherephoto.png)
 
